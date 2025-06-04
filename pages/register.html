@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register - PES Tournament</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background-color: #0d0d0d;
+      color: #fff;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #1a1a1a;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
+    }
+
+    h1 {
+      text-align: center;
+      color: #ff4500;
+      margin-bottom: 1.5rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input, select, button {
+      padding: 0.75rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: none;
+    }
+
+    input, select {
+      background: #333;
+      color: #fff;
+    }
+
+    button {
+      background: #ff4500;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #e03e00;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem;
+      }
+
+      .container {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html">&larr; Back to Home</a>
+  <div class="container">
+    <h1>PES Tournament Registration</h1>
+    <form action="https://api.web3forms.com/submit" method="POST">
+  <input type="hidden" name="access_key" value="c31a9d61-842a-4048-9d56-622f6cfcac35">
+  <input type="hidden" name="redirect" value="C:\Users\Administrator\OneDrive\Documents\vs code projects\PES website\html\thankyou.html">
+  <input type="hidden" name="auto_response" value="Thanks for registering for the PES Tournament! We'll contact you soon.">
+
+  <label for="name">Name</label>
+  <input type="text" id="name" name="name" required>
+
+  <label for="email">Email</label>
+  <input type="email" id="email" name="email" required>
+
+  <label for="platform">Platform</label>
+  <select id="platform" name="platform" required>
+    <option value="">-- Select Platform --</option>
+    <option value="ps5">PS5</option>
+    <option value="ps4">PS4</option>
+    <option value="pc">PC</option>
+  </select>
+
+  <button type="submit">Submit</button>
+</form>
+
+  </div>
+</body>
+</html>
+
+
+<!--c31a9d61-842a-4048-9d56-622f6cfcac35-->
