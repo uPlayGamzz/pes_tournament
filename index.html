@@ -183,25 +183,29 @@
       flex-wrap: wrap;
       justify-content: space-between;
       margin-top: 2rem;
+      /* gap: 1rem;  note */
     }
 
     .step {
       flex: 1 1 22%;
-      /*background-color: #1a1a1a;*/
+      /* background-color: #1a1a1a; */
       padding: 1.5rem;
-      margin: 0.5rem;
       border-radius: 8px;
       text-align: center;
-      transition: transform 0.3s ease;
+      transition: transform 0.7s ease;
+      /* position: relative; 
+      overflow: hidden; */
+      
     }
 
     .step:hover {
-      transform: translateY(-5px);
+      transform: translateY(-10px);
     }
 
     .step .icon img {
       width: 60px;
       height: 60px;
+      margin-bottom: 1rem;
     }
 
     .step h3 {
@@ -210,37 +214,64 @@
     }
 
     .step {
-  position: relative;
-}
+      position: relative;
+    }
 
-.step-dropdown {
-  position: absolute;
-  bottom: -100px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 220px;
-  background-color: #2222225b;
-  color: #fff;
-  padding: 0.75rem;
-  border-radius: 8px;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 1.5s ease, transform 0.5s ease;
-  z-index: 5;
-}
 
-.step:hover .step-dropdown {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(-10px);
-}
+    .step-dropdown {
+      overflow: hidden;
+      max-height: 0;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      bottom: -100px;
+      left: 50%;
+      transform: translateX(15%);
+      width: 200px;
+      background-color: #2222225b;
+      color: #fff;
+      padding: 0 0.75rem;
+      border-radius: 8px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 1.5s ease, transform 0.5s ease;
+      z-index: 5;
+    }
 
-/* @media (max-width: 768px) {
+    .step:hover .step-dropdown {
+      max-height: 100px;
+      opacity: 1;
+      padding: 0.75rem;
+      transform: translateX(7%) translateY(-10px);
+      visibility: visible;
+      
+    }
+
+@media (max-width: 768px) {
   .step-dropdown {
     width: 90%;
     bottom: -120px;
+    transform: translateX(8%);
+    width: 200px;
   }
-} */
+}
+
+
+
+    @media (max-width: 768px) {
+      .steps {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .step {
+        flex: 1 1 100%;
+        width: 90%;
+      }
+
+      .step-dropdown {
+        text-align: center;
+      }
+    }
 
     .cta-button {
       text-align: center;
@@ -281,8 +312,8 @@
 </head>
 <body>
   <div class="preloader" id="preloader" style="opacity: 0; display: none;"></div>
-  <!-- Your existing HTML content stays unchanged -->
-<header>
+
+  <header>
     <h1>PES Tournament</h1>
     <div class="nav-toggle">
       <span></span><span></span><span></span>
@@ -374,7 +405,6 @@
           <h3>Player 2</h3>
           <p>Level: Semi-Pro</p>
         </div>
-        <!-- Add more cards as needed -->
       </div>
     </div>
   </section>
@@ -391,22 +421,20 @@
           <h3>Round 2</h3>
           <p>Winner vs Player C</p>
         </div>
-        <!-- Add more brackets -->
       </div>
     </div>
   </section>
 
-  
   <a href="#" class="scrollToTop" id="scrollToTop">
-  <img src="images/icons/scroll-to-top2.png" alt="Scroll to Top" />
+    <img src="images/icons/scroll-to-top2.png" alt="Scroll to Top" />
   </a>
-
 
   <footer>
     <div class="container">
       <p>&copy; 2025 PES Tournament. All rights reserved.</p>
     </div>
   </footer>
+
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init();
@@ -443,7 +471,6 @@
       });
     });
 
-    // Countdown Timer
     const countdown = document.getElementById('countdown');
     const eventDate = new Date("2025-08-01T18:00:00").getTime();
 
@@ -471,30 +498,28 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-window.addEventListener('load', () => {
-  const preloader = document.getElementById('preloader');
-  preloader.style.opacity = '0';
-  setTimeout(() => {
-    preloader.style.display = 'none';
-  }, 500);
-});
+    window.addEventListener('load', () => {
+      const preloader = document.getElementById('preloader');
+      preloader.style.opacity = '0';
+      setTimeout(() => {
+        preloader.style.display = 'none';
+      }, 500);
+    });
 
+    const scrollToTopBtn = document.getElementById("scrollToTop");
 
-const scrollToTopBtn = document.getElementById("scrollToTop");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        scrollToTopBtn.classList.add("active");
+      } else {
+        scrollToTopBtn.classList.remove("active");
+      }
+    });
 
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 300) {
-    scrollToTopBtn.classList.add("active");
-  } else {
-    scrollToTopBtn.classList.remove("active");
-  }
-});
-
-scrollToTopBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  window.scrollTo({ top: 0, behavior: "smooth" });
-});
-
+    scrollToTopBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
   </script>
 </body>
 </html>
