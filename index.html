@@ -167,7 +167,10 @@
     #how-to-join {
       align-items: center;
       text-align: center;
-    }
+  transition: padding-bottom 0.3s ease;
+}
+
+
 
     section {
       padding: 3rem 0;
@@ -183,6 +186,7 @@
       flex-wrap: wrap;
       justify-content: space-between;
       margin-top: 2rem;
+      overflow: visible;
       /* gap: 1rem;  note */
     }
 
@@ -193,10 +197,32 @@
       border-radius: 8px;
       text-align: center;
       transition: transform 0.7s ease;
+      transition: margin 0.4s ease;
       /* position: relative; 
       overflow: hidden; */
       
     }
+
+.step:hover {
+  margin-bottom: 5rem;
+}
+
+#how-to-join:hover {
+  height: 40rem;
+}
+
+#how-to-join .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100%; /* ensures it takes full available height */
+  height: 100%; /* may help in some edge cases */
+}
+
+#how-to-join .content {
+  flex: 1;
+}
+
 
     .step:hover {
       transform: translateY(-10px);
@@ -213,38 +239,42 @@
       margin-bottom: 0.5rem;
     }
 
-    .step {
-      position: relative;
-    }
-
-
    .step {
   position: relative;
   text-align: center;
 }
 
-.step-dropdown {
-  max-height: 0;
-  overflow: hidden;
-  font-size: 0.9rem;
-  margin-top: 0;
-  background-color: #222222cc;
-  color: #fff;
-  padding: 0 0.75rem;
-  border-radius: 8px;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 1s ease;
-}
+/* .step-dropdown {
+  
+  } */
+  .step-dropdown {
+    padding: 0 0.75rem;
+    border-radius: 8px;
+    color: #fff;
+    background-color: #222222cc;
+    font-size: 0.9rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    max-height: 0;
+    overflow: hidden;
+    /* transition: max-height 4s ease, opacity 1s ease; */
+  }
 
 
 .step:hover .step-dropdown {
   max-height: 200px;
-  margin-top: 0.75rem;
   opacity: 1;
   visibility: visible;
   padding: 0.75rem;
+  margin-top: 0.75rem;
+  pointer-events: auto;
+  /* transition: padding-bottom 0.3s ease; */
 }
+
+
+
 
 
 
@@ -356,8 +386,9 @@
     </div>
   </section>
 
-  <section id="how-to-join">
-    <div class="container fade-in" data-aos="fade-left">
+<section id="how-to-join">
+  <div class="container fade-in" data-aos="fade-left">
+    <div class="content">
       <h2>How to Join</h2>
       <div class="steps">
         <div class="step">
@@ -397,11 +428,12 @@
           </div>
         </div>
       </div>
-      <div class="cta-button">
-        <a href="pages/register.html" class="btn">Register Now</a>
-      </div>
     </div>
-  </section>
+    <div class="cta-button">
+      <a href="pages/register.html" class="btn">Register Now</a>
+    </div>
+  </div>
+</section>
 
   <section id="players" class="players">
     <div class="container fade-in" data-aos="fade-up">
