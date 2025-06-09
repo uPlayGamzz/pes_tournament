@@ -2,49 +2,356 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PES Tournament</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <link rel="stylesheet" href="libs/aos/aos.css" />
   <link rel="stylesheet" href="css/preloader.css"/>
   <link rel="stylesheet" href="css/scroll-to-top.css">
+
+  
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    body {
+  font-family: 'Orbitron', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #121212;
+  color: #fff;
+}
+
+header {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: #1f1f1f;
+  
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #1a1a1a;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  border-bottom: 1px solid #333;
+}
+
+.nav-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffcc00;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.hero {
+      height: fit-content;
+      background: url('images/stadium-night.png') no-repeat center center/cover;
+      /* display: flex; */
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 150px 16px 150px 16px;
     }
 
-    body {
-      font-family: 'Orbitron', sans-serif;
-      background-color: #0d0d0d;
-      color: #fff;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.tagline {
+  font-size: 1.2rem;
+  color: #ccc;
+}
+
+/* #countdown {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: #242424;
+} */
+
+#timer {
+  font-size: 2rem;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+#how-to-join {
+  padding: 3rem 1rem;
+  background: #181818;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 80vh;
+  position: relative;
+  align-items: center;
+  text-align: center;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.step {
+  text-align: center;
+  padding: 1rem;
+  border: 1px solid #333;
+  border-radius: 1rem;
+  background: #1f1f1f;
+  transition: transform 0.3s ease;
+}
+
+.step:hover {
+  transform: translateY(-5px);
+}
+
+.step-number {
+  font-size: 2rem;
+  color: #ffcc00;
+  margin-bottom: 0.5rem;
+}
+
+.step-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.step-description {
+  font-size: 1rem;
+  color: #bbb;
+}
+
+.cta-button-container {
+  margin-top: auto;
+  text-align: center;
+  text-decoration: none;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: #ffcc00;
+  color: #000;
+  font-weight: bold;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: background 0.3s;
+  text-decoration: none;
+}
+
+.cta-button:hover {
+  background: #977900;
+}
+
+#players {
+  padding: 3rem 1rem;
+  background: url('images/Efootball.png') no-repeat center center/cover;
+}
+
+.player-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.player-card {
+  background: #2c2c2c;
+  padding: 0 1.5rem;
+  border-radius: 1rem;
+  text-align: center;
+  width: 200px;
+  transition: transform 0.3s ease;
+}
+
+.player-card:hover {
+  transform: translateY(-5px);
+}
+
+.player-card img {
+  width: 100px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+#register {
+  padding: 3rem 1rem;
+  background: #191919;
+  text-align: center;
+}
+
+#register form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+#register input,
+#register button {
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+}
+
+#register input {
+  background: #2a2a2a;
+  color: #fff;
+}
+
+#register button {
+  background: #ffcc00;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#register button:hover {
+  background: rgb(230, 184, 0);
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #111;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .steps {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .step {
+    flex: 1;
+    margin: 0 1rem;
+  }
+}
+
+  </style>
+
+</head>
+
+<body id="body">
+<nav class="navbar" id="navbar">
+  <div class="nav-logo">
+    <img style="height: 20px; padding: 4px 3px 0px 0px;" src="images/logo/pad-logo.png" alt="">
+    uPlay
+  </div>
+  <div style="display: flex; list-style: none;">
+      <ul class="nav-list">
+        <li><a href="#body">Home</a></li>
+        <li><a href="pages/about.html">About</a></li>
+        <!-- <li><a href="pages/register.html">Register</a></li> -->
+        <!-- <li><a href="pages/updates.html">Updates</a></li>
+        <li><a href="pages/contact.html">Contact</a></li>
+        <li><a href="#countdown">Countdown</a></li> -->
+        <li><a href="#how-to-join">How to Join</a></li>
+        <li><a href="#players">Players</a></li>
+      </ul>
+        <li class="reg"><a class="cta-button" href="#register">Register</a></li>
+  </div>
+  <div class="nav-toggle">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="preloader" id="preloader" style="opacity: 0; display: none;"></div>
+
+  <header class="hero" id="header">
+    <h1 class="title">PES Tournament</h1>
+    <p class="tagline">Compete. Win. Glory Awaits.</p>
+    <div id="countdown" class="fade-in"></div>
+  </header>
+
+  <section id="how-to-join">
+    <h2>How to Join</h2>
+    <div class="steps">
+      <div class="step" data-aos="fade-up">
+        <div class="step-number">1</div>
+        <h3 class="step-title">Register</h3>
+        <p class="step-description">Fill out the form with your details to secure your spot in the tournament.</p>
+      </div>
+      <div class="step" data-aos="fade-up" data-aos-delay="100">
+        <div class="step-number">2</div>
+        <h3 class="step-title">Get Verified</h3>
+        <p class="step-description">Our team will verify your registration and confirm your participation.</p>
+      </div>
+      <div class="step" data-aos="fade-up" data-aos-delay="200">
+        <div class="step-number">3</div>
+        <h3 class="step-title">Compete</h3>
+        <p class="step-description">Show your skills on the virtual pitch and climb the ranks to victory!</p>
+      </div>
+    </div>
+    <div class="cta-button-container">
+      <a href="#register" class="cta-button">Register Now</a>
+    </div>
+  </section>
+
+  <section id="players">
+    <h2>Top Players</h2>
+    <div class="player-cards">
+      <div class="player-card" data-aos="fade-up">
+        <h3>Player One</h3>
+        <p>Rank: #1</p>
+      </div>
+      <div class="player-card" data-aos="fade-up" data-aos-delay="100">
+        <h3>Player Two</h3>
+        <p>Rank: #2</p>
+      </div>
+      <div class="player-card" data-aos="fade-up" data-aos-delay="200">
+        <h3>Player Three</h3>
+        <p>Rank: #3</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="register">
+    <h2>Register for the Tournament</h2>
+    <form action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="your-web3forms-access-key" />
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <input type="text" name="gamertag" placeholder="Gamertag" required />
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <a href="#" class="scrollToTop" id="scrollToTop">
+    <img src="images/icons/scroll-to-top3.svg" alt="Scroll to Top" />
+  </a>
+
+  <footer>
+    <p>&copy; 2025 PES Tournament. All rights reserved.</p>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+<style>
 
     .container {
       width: 90%;
       max-width: 1200px;
       margin: auto;
       padding: 40px 20px;
-    }
-
-    header {
-      background-color: #1a1a1a;
-      padding: 20px;
-      border-bottom: 2px solid #ff4500;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-      z-index: 10;
-    }
-
-    header h1 {
-      color: #ff4500;
-      font-size: 1.8rem;
     }
 
     nav ul.nav-list {
@@ -60,7 +367,20 @@
     }
 
     nav ul.nav-list li a:hover {
-      color: #ff4500;
+      color: rgb(255, 204, 0);
+    }
+
+    .reg a {
+      /* margin: 11px auto auto 12px;  */
+      padding: 5px 20px; 
+      /* color: rgb(255, 0, 0); */
+    }
+
+    @media (min-width: 768px) {
+      .reg a {
+        margin: 11px auto auto 32px; 
+        padding: 5px 20px; 
+      }
     }
 
     .nav-toggle {
@@ -71,10 +391,10 @@
     }
 
     .nav-toggle span {
-      width: 25px;
-      height: 3px;
+      width: 16px;
+      height: 1px;
       background: #fff;
-      margin: 4px 0;
+      margin: 2.5px 0;
       transition: 0.3s;
     }
 
@@ -97,7 +417,6 @@
         position: absolute;
         top: 100%;
         left: 0;
-        width: 100%;
       }
 
       nav ul.nav-list {
@@ -119,365 +438,9 @@
         transform: translateX(0);
       }
     }
-
-    #hero {
-      height: 60vh;
-      background: url('images/stadium-night.png') no-repeat center center/cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
-    .hero-overlay {
-      padding: 2rem;
-    }
-
-    .hero-overlay h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .btn {
-      background: #ff4500;
-      color: #fff;
-      padding: 0.75rem 1.5rem;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 5px;
-    }
-
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    #countdown {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 1.5rem;
-    }
-
-    #how-to-join {
-      align-items: center;
-      text-align: center;
-  transition: padding-bottom 0.3s ease;
-}
-
-
-
-    section {
-      padding: 3rem 0;
-    }
-
-    .steps-section {
-      background-color: #141414;
-      padding: 3rem 0;
-    }
-
-    .steps {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin-top: 2rem;
-      overflow: visible;
-      /* gap: 1rem;  note */
-    }
-
-    .step {
-      flex: 1 1 22%;
-      /* background-color: #1a1a1a; */
-      padding: 1.5rem;
-      border-radius: 8px;
-      text-align: center;
-      transition: transform 0.7s ease;
-      transition: margin 0.4s ease;
-      /* position: relative; 
-      overflow: hidden; */
-      
-    }
-
-.step:hover {
-  margin-bottom: 5rem;
-}
-
-#how-to-join:hover {
-  height: 40rem;
-}
-
-#how-to-join .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 100%; /* ensures it takes full available height */
-  height: 100%; /* may help in some edge cases */
-}
-
-#how-to-join .content {
-  flex: 1;
-}
-
-
-    .step:hover {
-      transform: translateY(-10px);
-    }
-
-    .step .icon img {
-      width: 60px;
-      height: 60px;
-      margin-bottom: 1rem;
-    }
-
-    .step h3 {
-      color: #ff4500;
-      margin-bottom: 0.5rem;
-    }
-
-   .step {
-  position: relative;
-  text-align: center;
-}
-
-/* .step-dropdown {
-  
-  } */
-  .step-dropdown {
-    padding: 0 0.75rem;
-    border-radius: 8px;
-    color: #fff;
-    background-color: #222222cc;
-    font-size: 0.9rem;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-    max-height: 0;
-    overflow: hidden;
-    /* transition: max-height 4s ease, opacity 1s ease; */
-  }
-
-
-.step:hover .step-dropdown {
-  max-height: 200px;
-  opacity: 1;
-  visibility: visible;
-  padding: 0.75rem;
-  margin-top: 0.75rem;
-  pointer-events: auto;
-  /* transition: padding-bottom 0.3s ease; */
-}
-
-
-
-
-
-
-
-    /* .step:hover .step-dropdown {
-      max-height: 100px;
-      opacity: 1;
-      padding: 0.75rem;
-      transform: translateX(7%) translateY(-10px);
-      visibility: visible;
-      
-    } */
-
-@media (max-width: 768px) {
-  .step-dropdown {
-    max-width: 80vw;
-  }
-}
-
-
-
-
-    @media (max-width: 768px) {
-      .steps {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .step {
-        flex: 1 1 100%;
-        width: 90%;
-      }
-
-      .step-dropdown {
-        text-align: center;
-      }
-    }
-
-    .cta-button {
-      text-align: center;
-      margin-top: 2rem;
-    }
-
-    .player-cards, .brackets {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-    }
-
-    .players {
-      background: url('images/Efootball.png') no-repeat center center/cover;
-    }
-
-    .card {
-      background: #1a1a1a;
-      border: 1px solid #333;
-      padding: 1rem;
-      border-radius: 10px;
-      width: 200px;
-      text-align: center;
-    }
-
-    .card h3 {
-      color: #ff4500;
-      margin-bottom: 0.5rem;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: #111;
-    }
   </style>
-</head>
-<body>
-  <div class="preloader" id="preloader" style="opacity: 0; display: none;"></div>
 
-  <header>
-    <h1>PES Tournament</h1>
-    <div class="nav-toggle">
-      <span></span><span></span><span></span>
-    </div>
-    <nav>
-      <ul class="nav-list">
-        <li><a href="">Home</a></li>
-        <li><a href="pages/about.html">About</a></li>
-        <li><a href="pages/register.html">Register</a></li>
-        <li><a href="pages/updates.html">Updates</a></li>
-        <li><a href="pages/contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <section id="hero">
-    <div class="container">
-      <div class="hero-overlay fade-in" data-aos="fade-up">
-        <h2>Join the Ultimate PES Battle!</h2>
-        <a href="pages/register.html" class="btn">Register Now</a>
-      </div>
-      <div id="countdown" class="fade-in"></div>
-    </div>
-  </section>
-
-  <section id="about">
-    <div class="container fade-in" data-aos="fade-right">
-      <h2>About the Tournament</h2>
-      <p>Welcome to the most exciting PES tournament of the year! Compete with top players, showcase your skills, and win amazing prizes.</p>
-    </div>
-  </section>
-
-<section id="how-to-join">
-  <div class="container fade-in" data-aos="fade-left">
-    <div class="content">
-      <h2>How to Join</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="icon">
-            <img src="images/icons/FC25.png" alt="Register Icon" loading="lazy">
-          </div>
-          <h3>Register</h3>
-          <div class="step-dropdown">
-            <p>Click on the Register button.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="icon">
-            <img src="images/icons/FC25.png" alt="Email Icon" loading="lazy">
-          </div>
-          <h3>Confirmation</h3>
-          <div class="step-dropdown">
-            <p>Wait for the confirmation email.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="icon">
-            <img src="images/icons/FC25.png" alt="Play Icon" loading="lazy">
-          </div>
-          <h3>Game Day</h3>
-          <div class="step-dropdown">
-            <p>Show up on game day and play!</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="icon">
-            <img src="images/icons/FC25.png" alt="Form Icon" loading="lazy">
-          </div>
-          <h3>Cash Out</h3>
-          <div class="step-dropdown">
-            <p>Win the tournament and go with amazing prizes</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="cta-button">
-      <a href="pages/register.html" class="btn">Register Now</a>
-    </div>
-  </div>
-</section>
-
-  <section id="players" class="players">
-    <div class="container fade-in" data-aos="fade-up">
-      <h2>Top Players</h2>
-      <div class="player-cards">
-        <div class="card">
-          <h3>Player 1</h3>
-          <p>Level: Pro</p>
-        </div>
-        <div class="card">
-          <h3>Player 2</h3>
-          <p>Level: Semi-Pro</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="brackets">
-    <div class="container fade-in" data-aos="fade-up">
-      <h2>Tournament Brackets</h2>
-      <div class="brackets">
-        <div class="card">
-          <h3>Round 1</h3>
-          <p>Player A vs Player B</p>
-        </div>
-        <div class="card">
-          <h3>Round 2</h3>
-          <p>Winner vs Player C</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <a href="#" class="scrollToTop" id="scrollToTop">
-    <img src="images/icons/scroll-to-top2.png" alt="Scroll to Top" />
-  </a>
-
-  <footer>
-    <div class="container">
-      <p>&copy; 2025 PES Tournament. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init();
 
@@ -514,7 +477,7 @@
     });
 
     const countdown = document.getElementById('countdown');
-    const eventDate = new Date("2025-08-01T18:00:00").getTime();
+    const eventDate = new Date("2025-07-01T18:00:00").getTime();
 
     function updateCountdown() {
       const now = new Date().getTime();
@@ -525,19 +488,21 @@
         return;
       }
 
-      const months = Math.floor(distance / (1000 * 60 * 60 * 24 * 30));
+      const years = Math.floor(distance / (1000 * 60 * 60 * 24 * 30 * 12));
+      const months = Math.floor((distance / (1000 * 60 * 60 * 24 * 30)) %12);
       const days = Math.floor((distance / (1000 * 60 * 60 * 24)) % 30);
       const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
       const minutes = Math.floor((distance / (1000 * 60)) % 60);
       const seconds = Math.floor((distance / 1000) % 60);
+      const miliseconds = Math.floor((distance / 1) % 1000);
 
       countdown.innerHTML = `
         <h3>Starts In:</h3>
-        <p>${months}mth ${days}d ${hours}h ${minutes}m ${seconds}s</p>
+        <p>${days}d : ${hours}h : ${minutes}m : ${seconds}s</p>
       `;
     }
 
-    setInterval(updateCountdown, 1000);
+    setInterval(updateCountdown, 1);
     updateCountdown();
 
     window.addEventListener('load', () => {
@@ -563,5 +528,6 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   </script>
+
 </body>
 </html>
