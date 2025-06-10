@@ -1,0 +1,327 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leaderboard | UPlay</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --UPlay-yellow: #ffcc00;
+      --UPlay-background-color: #1a1a1a;
+      --UPlay-text-color: white;
+      --UPlay-font: 'Orbitron', sans-serif;
+    }
+
+    body {
+      font-family: var(--UPlay-font);
+      background: #0d0d0d;
+      color: #e0e0e0;
+    }
+
+    .flex-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        background: #1a1a1a;
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        border-bottom: 1px solid #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    th,
+    td {
+      text-align: center;
+      padding: 12px;
+      border-bottom: 1px solid #222;
+      font-weight: normal;
+    }
+
+    th {
+      color: var(--UPlay-yellow);
+      font-weight: 600;
+    }
+
+    .popup {
+      background: var(--UPlay-background-color);
+      color: var(--UPlay-text-color);
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 300px;
+    }
+
+    .heading {
+      font-size: 2.25rem;
+      color: var(--UPlay-yellow);
+      font-weight: 600;
+    }
+
+    .back-button {
+      background-color: var(--UPlay-yellow);
+      color: #000;
+      transition: background-color 0.3s;
+      display: inline-block;
+      padding: 5px 20px;
+      font-weight: bold;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+      /* animation: breathe 1.3s infinite; */
+      /* box-shadow: 0 0 10px rgba(255, 204, 0, 0.6); */
+    }
+
+    .back-button:hover {
+      background-color: #e6b800;
+      transform: scale(1.05);
+      /* box-shadow: 0 0 20px rgba(255, 204, 0, 0.7);
+      animation: breathe1 4s infinite; */
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      background-color: #1a1a1a;
+      border: 1px solid #333;
+      color: white;
+    }
+
+    .search-input::placeholder {
+      color: #aaa;
+    }
+
+    .table-container {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead {
+      background-color: #111;
+    }
+
+    .hover-row:hover {
+      background-color: #222;
+    }
+
+    .pagination-btn {
+      background-color: #333;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      margin: 0 0.25rem;
+      border-radius: 0.375rem;
+      cursor: pointer;
+    }
+
+    .pagination-btn.active {
+      background-color: var(--UPlay-yellow);
+      color: black;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .modal-heading {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--UPlay-yellow);
+      font-weight: 600;
+    }
+
+    .close-btn {
+      margin-top: 1rem;
+      background-color: var(--UPlay-yellow);
+      color: black;
+      padding: 0.25rem 0.75rem;
+      border-radius: 0.375rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 640px) {
+      .popup {
+        width: 90%;
+        max-width: none;
+        padding: 16px;
+      }
+
+      .container {
+        padding: 16px;
+      }
+
+      table th,
+      table td {
+        padding: 8px;
+        font-size: 0.875rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+    <div class="flex-row">
+      <h1 class="heading">Leaderboard</h1>
+      <a href="../index.html" class="back-button">← Back to Home</a>
+    </div>
+  <div class="container">
+    <div class="mb-4">
+      <input type="text" id="searchInput" placeholder="Search by player, country or team..." class="search-input">
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Player</th>
+            <th>Country</th>
+            <th>Team</th>
+            <th>Matches</th>
+            <th>Wins</th>
+            <th>Losses</th>
+            <th>Points</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboardBody">
+          <!-- Player rows injected by JS -->
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pagination" id="pagination"></div>
+  </div>
+  <div id="playerModal" class="modal-overlay">
+    <div class="popup">
+      <h2 id="modalName" class="modal-heading"></h2>
+      <p><strong>Country:</strong> <span id="modalCountry"></span></p>
+      <p><strong>Team:</strong> <span id="modalTeam"></span></p>
+      <p><strong>Matches:</strong> <span id="modalMatches"></span></p>
+      <p><strong>Wins:</strong> <span id="modalWins"></span></p>
+      <p><strong>Losses:</strong> <span id="modalLosses"></span></p>
+      <p><strong>Points:</strong> <span id="modalPoints"></span></p>
+      <button onclick="closeModal()" class="close-btn">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const players = [
+      { name: 'Ali K', country: 'Egypt', team: 'Cairo FC', matches: 10, wins: 7, losses: 3, points: 21 },
+      { name: 'Zane R', country: 'Kenya', team: 'Nairobi Stars', matches: 12, wins: 9, losses: 3, points: 27 },
+      { name: 'Liam S', country: 'USA', team: 'NY Titans', matches: 9, wins: 6, losses: 3, points: 18 },
+      { name: 'Yuki T', country: 'Japan', team: 'Tokyo Blitz', matches: 11, wins: 8, losses: 3, points: 24 },
+      { name: 'Omar B', country: 'Morocco', team: 'Atlas Lions', matches: 8, wins: 5, losses: 3, points: 15 },
+      { name: 'Noah D', country: 'Germany', team: 'Berlin Eagles', matches: 10, wins: 6, losses: 4, points: 18 },
+      { name: 'Kai M', country: 'Brazil', team: 'Rio Warriors', matches: 14, wins: 11, losses: 3, points: 33 },
+      { name: 'Ayaan V', country: 'India', team: 'Delhi Dynamos', matches: 9, wins: 7, losses: 2, points: 21 },
+      { name: 'Tom R', country: 'UK', team: 'London Spurs', matches: 13, wins: 9, losses: 4, points: 27 },
+      { name: 'Ivan K', country: 'Russia', team: 'Moscow Bears', matches: 12, wins: 7, losses: 5, points: 21 }
+    ];
+
+    let currentPage = 1;
+    const rowsPerPage = 5;
+
+    function displayPlayers(playersList) {
+      const start = (currentPage - 1) * rowsPerPage;
+      const end = start + rowsPerPage;
+      const visiblePlayers = playersList.slice(start, end);
+
+      const tbody = document.getElementById("leaderboardBody");
+      tbody.innerHTML = "";
+      visiblePlayers.forEach((player, index) => {
+        const tr = document.createElement("tr");
+        tr.className = "hover-row";
+        tr.onclick = () => openModal(player);
+        tr.innerHTML = `
+          <td>${start + index + 1}</td>
+          <td>${player.name}</td>
+          <td>${player.country}</td>
+          <td>${player.team}</td>
+          <td>${player.matches}</td>
+          <td>${player.wins}</td>
+          <td>${player.losses}</td>
+          <td>${player.points}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updatePagination(playersList) {
+      const pageCount = Math.ceil(playersList.length / rowsPerPage);
+      const pagination = document.getElementById("pagination");
+      pagination.innerHTML = "";
+
+      for (let i = 1; i <= pageCount; i++) {
+        const btn = document.createElement("button");
+        btn.innerText = i;
+        btn.className = pagination-btn; {i === currentPage ? 'active' : ''};
+        btn.onclick = () => {
+          currentPage = i;
+          displayPlayers(filteredPlayers);
+          updatePagination(filteredPlayers);
+        };
+        pagination.appendChild(btn);
+      }
+    }
+
+    function openModal(player) {
+      document.getElementById("modalName").textContent = player.name;
+      document.getElementById("modalCountry").textContent = player.country;
+      document.getElementById("modalTeam").textContent = player.team;
+      document.getElementById("modalMatches").textContent = player.matches;
+      document.getElementById("modalWins").textContent = player.wins;
+      document.getElementById("modalLosses").textContent = player.losses;
+      document.getElementById("modalPoints").textContent = player.points;
+      document.getElementById("playerModal").classList.add("show");
+    }
+
+    function closeModal() {
+      document.getElementById("playerModal").classList.remove("show");
+    }
+
+    let filteredPlayers = [...players];
+
+    document.getElementById("searchInput").addEventListener("input", function () {
+      const value = this.value.toLowerCase();
+      filteredPlayers = players.filter(p =>
+        p.name.toLowerCase().includes(value) ||
+        p.country.toLowerCase().includes(value) ||
+        p.team.toLowerCase().includes(value)
+      );
+      currentPage = 1;
+      displayPlayers(filteredPlayers);
+      updatePagination(filteredPlayers);
+    });
+
+    displayPlayers(filteredPlayers);
+    updatePagination(filteredPlayers);
+  </script>
+</body>
+
+</html>

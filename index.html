@@ -20,6 +20,15 @@
   <!-- <link rel="stylesheet" href="libs/aos/aos.css" /> -->
 
   <style>
+
+    :root {
+      --UPlay-yellow: #ffcc00;
+      --UPlay-background-color: #1a1a1a;
+      --UPlay-text-color: white;
+      --UPlay-font: 'Orbitron', sans-serif;
+    }
+
+
     /* Base styles */
     /* html, body {
       overflow-x: hidden;
@@ -29,7 +38,7 @@
     }
 
     body {
-      font-family: 'Orbitron', sans-serif;
+      font-family: var(--UPlay-font);
       margin: 0;
       padding: 0;
       background: #121212;
@@ -57,7 +66,7 @@
     .nav-logo {
       font-size: 1.5rem;
       font-weight: bold;
-      color: #ffcc00;
+      color: var(--UPay-yellow);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -325,6 +334,18 @@
       color: rgb(255, 204, 0);
     }
 
+    nav ul.nav-list li img {
+      height: 16px;
+      width: 16px;
+      padding-left:4px;
+    }
+
+    nav ul.nav-list li img:hover {
+      height: 20px;
+      width: 20px;
+      padding-left: 0px;
+    }
+
     .reg a {
       padding: 5px 20px;
       display: inline-block;
@@ -405,6 +426,7 @@
         <li><a href="pages/about.html">About</a></li>
         <li><a href="#how-to-join">How to Join</a></li>
         <li><a href="#players">Players</a></li>
+        <li><a href="pages/leaderboard.html"><img src="images/icons/leaderboard-icon.png" alt=""></a></li>
       </ul>
       <li class="reg"><a class="cta-button" href="#register">Register</a></li>
     </div>
