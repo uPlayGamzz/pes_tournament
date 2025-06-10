@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PES Tournament</title>
+  <link sizes="32x32" rel="icon" href="images/logo/pad-logo-title.png" type="image/png">
 
   <!-- Fonts and icons -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet" />
@@ -23,6 +24,10 @@
     /* html, body {
       overflow-x: hidden;
     } */
+    #title-icon {
+      height: 1px;
+    }
+
     body {
       font-family: 'Orbitron', sans-serif;
       margin: 0;
@@ -68,7 +73,7 @@
       height: fit-content;
       background: url('images/stadium-night.png') no-repeat center center/cover;
       text-align: center;
-      padding: 150px 16px;
+      padding: 200px 16px;
     }
 
     .title {
@@ -77,7 +82,7 @@
     }
 
     .tagline {
-      font-size: 1.2rem;
+      font-size: 0.7rem;
       color: #ccc;
     }
 
@@ -150,12 +155,55 @@
       font-weight: bold;
       border-radius: 50px;
       text-decoration: none;
-      transition: background 0.3s;
+      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+      animation: breathe 1.5s ease-in-out infinite;
     }
 
-    .cta-button:hover {
-      background: #977900;
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(34, 0, 255, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(255, 204, 0, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(255, 204, 0, 0);
+      }
     }
+
+
+    .cta-button:hover {
+      /* background: #977900; */
+      /* background: #ff7300; */
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255, 204, 0, 0.7);
+      animation: breathe1 4s infinite;
+    }
+
+    @keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
+  }
+  60% {
+    background-color: #ffd83d;
+    transform: scale(1.03);
+    box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
+  }
+}
+
+@keyframes breathe1 {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 5px rgba(255, 115, 0, 0.5);
+  }
+  60% {
+    background-color: #ffd83d;
+    transform: scale(1.03);
+    box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
+  }
+}
+
 
     #players {
       padding: 3rem 1rem;
@@ -485,8 +533,8 @@
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         countdown.innerHTML = `
-        <h3>Starts In:</h3>
-        <p>${days}d : ${hours}h : ${minutes}m : ${seconds}s</p>
+        <h3 style="margin-bottom: 1px;">Starts In:</h3>
+        <p style="margin-top: 1px;">${days}d : ${hours}h : ${minutes}m : ${seconds}s</p>
       `;
       }
 
