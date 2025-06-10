@@ -71,7 +71,7 @@
 
     .hero {
       height: fit-content;
-      background: url('images/stadium-night.png') no-repeat center center/cover;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 10%, #181818 100%), url('images/stadium-night.png') no-repeat center center/cover;
       text-align: center;
       padding: 200px 16px;
     }
@@ -102,6 +102,10 @@
       position: relative;
       align-items: center;
       text-align: center;
+    }
+
+    #how-to-join h2{
+      margin: 50px auto;
     }
 
     .steps {
@@ -156,15 +160,24 @@
       border-radius: 50px;
       text-decoration: none;
       transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
-      animation: breathe 1.5s ease-in-out infinite;
+      animation: breathe 1.3s infinite;
+      box-shadow: 0 0 10px rgba(255, 204, 0, 0.6);
+    }
+
+    .cta-button:hover {
+      /* background: #977900; */
+      /* background: #ff7300; */
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 204, 0, 0.7);
+      animation: breathe1 4s infinite;
     }
 
     @keyframes pulse {
       0% {
-        box-shadow: 0 0 0 0 rgba(34, 0, 255, 0.7);
+        box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.7);
       }
       70% {
-        box-shadow: 0 0 0 10px rgba(255, 204, 0, 0);
+        box-shadow: 0 0 0 15px rgba(255, 204, 0, 0);
       }
       100% {
         box-shadow: 0 0 0 0 rgba(255, 204, 0, 0);
@@ -172,42 +185,40 @@
     }
 
 
-    .cta-button:hover {
-      /* background: #977900; */
-      /* background: #ff7300; */
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(255, 204, 0, 0.7);
-      animation: breathe1 4s infinite;
-    }
+    
 
     @keyframes breathe {
-  0%, 100% {
-    transform: scale(1);
-    box-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
-  }
-  60% {
-    background-color: #ffd83d;
-    transform: scale(1.03);
-    box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
-  }
-}
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
+      }
+      60% {
+        background-color: #ffd83d;
+        transform: scale(1.03);
+        box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
+      }
+    }
 
-@keyframes breathe1 {
-  0%, 100% {
-    transform: scale(1);
-    box-shadow: 0 0 5px rgba(255, 115, 0, 0.5);
-  }
-  60% {
-    background-color: #ffd83d;
-    transform: scale(1.03);
-    box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
-  }
-}
+    @keyframes breathe1 {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 5px rgba(255, 115, 0, 0.5);
+      }
+      60% {
+        background-color: #ffd83d;
+        transform: scale(1.03);
+        box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
+      }
+    }
 
 
     #players {
       padding: 3rem 1rem;
       background: url('images/Efootball.png') no-repeat center center/cover;
+    }
+
+    #players h2 {
+      margin-top: 40px;
     }
 
     .player-cards {
