@@ -2,277 +2,359 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PES Tournament</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Fonts and icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- AOS animations -->
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
-  <link rel="stylesheet" href="libs/aos/aos.css" />
-  <link rel="stylesheet" href="css/preloader.css"/>
-  <link rel="stylesheet" href="css/scroll-to-top.css">
+  <!-- Local stylesheets -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/preloader.css" />
+  <link rel="stylesheet" href="css/scroll-to-top.css" />
+  <!-- If 'libs/aos/aos.css' is a duplicate, remove it to avoid duplication -->
+  <!-- <link rel="stylesheet" href="libs/aos/aos.css" /> -->
 
-  
   <style>
+    /* Base styles */
+    /* html, body {
+      overflow-x: hidden;
+    } */
     body {
-  font-family: 'Orbitron', sans-serif;
-  margin: 0;
-  padding: 0;
-  background: #121212;
-  color: #fff;
-}
-
-header {
-  text-align: center;
-  padding: 2rem 1rem;
-  background: #1f1f1f;
-  
-}
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background: #1a1a1a;
-  position: sticky;
-  top: 0;
-  z-index: 999;
-  border-bottom: 1px solid #333;
-}
-
-.nav-logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #ffcc00;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-}
-
-.hero {
-      height: fit-content;
-      background: url('images/stadium-night.png') no-repeat center center/cover;
-      /* display: flex; */
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 150px 16px 150px 16px;
+      font-family: 'Orbitron', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #121212;
+      color: #fff;
     }
 
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: #1f1f1f;
+    }
 
-.title {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-}
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: #1a1a1a;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      border-bottom: 1px solid #333;
+    }
 
-.tagline {
-  font-size: 1.2rem;
-  color: #ccc;
-}
+    .nav-logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #ffcc00;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-/* #countdown {
-  text-align: center;
-  padding: 2rem 1rem;
-  background: #242424;
-} */
+    .nav-logo img {
+      height: 15px;
+      padding: 0;
+      rotate: 24deg;
+    }
 
-#timer {
-  font-size: 2rem;
-  margin-top: 1rem;
-  font-weight: bold;
-}
+    .hero {
+      height: fit-content;
+      background: url('images/stadium-night.png') no-repeat center center/cover;
+      text-align: center;
+      padding: 150px 16px;
+    }
 
-#how-to-join {
-  padding: 3rem 1rem;
-  background: #181818;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 80vh;
-  position: relative;
-  align-items: center;
-  text-align: center;
-}
+    .title {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
 
-.steps {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  margin-bottom: 3rem;
-}
+    .tagline {
+      font-size: 1.2rem;
+      color: #ccc;
+    }
 
-.step {
-  text-align: center;
-  padding: 1rem;
-  border: 1px solid #333;
-  border-radius: 1rem;
-  background: #1f1f1f;
-  transition: transform 0.3s ease;
-}
+    #timer {
+      font-size: 2rem;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
 
-.step:hover {
-  transform: translateY(-5px);
-}
+    #how-to-join {
+      padding: 3rem 1rem;
+      background: #181818;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 80vh;
+      position: relative;
+      align-items: center;
+      text-align: center;
+    }
 
-.step-number {
-  font-size: 2rem;
-  color: #ffcc00;
-  margin-bottom: 0.5rem;
-}
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      width: 100%;
+      max-width: 900px;
+    }
 
-.step-title {
-  font-size: 1.5rem;
-  margin-bottom: 0.3rem;
-}
+    .step {
+      text-align: center;
+      padding: 1rem;
+      border: 1px solid #333;
+      border-radius: 1rem;
+      background: #1f1f1f;
+      transition: transform 0.3s ease;
+    }
 
-.step-description {
-  font-size: 1rem;
-  color: #bbb;
-}
+    .step:hover {
+      transform: translateY(-5px);
+    }
 
-.cta-button-container {
-  margin-top: auto;
-  text-align: center;
-  text-decoration: none;
-}
+    .step-number {
+      font-size: 2rem;
+      color: #ffcc00;
+      margin-bottom: 0.5rem;
+    }
 
-.cta-button {
-  display: inline-block;
-  padding: 1rem 2rem;
-  background: #ffcc00;
-  color: #000;
-  font-weight: bold;
-  border-radius: 50px;
-  text-decoration: none;
-  transition: background 0.3s;
-  text-decoration: none;
-}
+    .step-title {
+      font-size: 1.5rem;
+      margin-bottom: 0.3rem;
+    }
 
-.cta-button:hover {
-  background: #977900;
-}
+    .step-description {
+      font-size: 1rem;
+      color: #bbb;
+    }
 
-#players {
-  padding: 3rem 1rem;
-  background: url('images/Efootball.png') no-repeat center center/cover;
-}
+    .cta-button-container {
+      margin-top: auto;
+      text-align: center;
+    }
 
-.player-cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-}
+    .cta-button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: #ffcc00;
+      color: #000;
+      font-weight: bold;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
 
-.player-card {
-  background: #2c2c2c;
-  padding: 0 1.5rem;
-  border-radius: 1rem;
-  text-align: center;
-  width: 200px;
-  transition: transform 0.3s ease;
-}
+    .cta-button:hover {
+      background: #977900;
+    }
 
-.player-card:hover {
-  transform: translateY(-5px);
-}
+    #players {
+      padding: 3rem 1rem;
+      background: url('images/Efootball.png') no-repeat center center/cover;
+    }
 
-.player-card img {
-  width: 100px;
-  height: auto;
-  margin-bottom: 1rem;
-}
+    .player-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
 
-#register {
-  padding: 3rem 1rem;
-  background: #191919;
-  text-align: center;
-}
+    .player-card {
+      background: #2c2c2c;
+      padding: 0 1.5rem;
+      border-radius: 1rem;
+      text-align: center;
+      width: 200px;
+      transition: transform 0.3s ease;
+    }
 
-#register form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  max-width: 400px;
-  margin: 0 auto;
-}
+    .player-card:hover {
+      transform: translateY(-5px);
+    }
 
-#register input,
-#register button {
-  padding: 0.8rem;
-  border-radius: 8px;
-  border: none;
-  font-size: 1rem;
-}
+    #register {
+      padding: 3rem 1rem;
+      background: #191919;
+      text-align: center;
+    }
 
-#register input {
-  background: #2a2a2a;
-  color: #fff;
-}
+    #register form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 400px;
+      margin: 0 auto;
+    }
 
-#register button {
-  background: #ffcc00;
-  color: #000;
-  font-weight: bold;
-  cursor: pointer;
-}
+    #register input,
+    #register button {
+      padding: 0.8rem;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+    }
 
-#register button:hover {
-  background: rgb(230, 184, 0);
-}
+    #register input {
+      background: #2a2a2a;
+      color: #fff;
+    }
 
-footer {
-  text-align: center;
-  padding: 1rem;
-  background: #111;
-  color: #888;
-  font-size: 0.9rem;
-}
+    #register button {
+      background: #ffcc00;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-/* Responsive */
-@media (min-width: 768px) {
-  .steps {
-    flex-direction: row;
-    justify-content: space-between;
-  }
+    #register button:hover {
+      background: rgb(230, 184, 0);
+    }
 
-  .step {
-    flex: 1;
-    margin: 0 1rem;
-  }
-}
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #111;
+      color: #888;
+      font-size: 0.9rem;
+    }
 
+    /* Responsive */
+    @media (min-width: 768px) {
+      .steps {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .step {
+        flex: 1;
+        margin: 0 1rem;
+      }
+
+      .reg a {
+        margin: 11px auto auto 32px;
+        padding: 5px 20px;
+      }
+    }
+
+    /* Navigation styles */
+    nav ul.nav-list {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+
+    nav ul.nav-list li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav ul.nav-list li a:hover {
+      color: rgb(255, 204, 0);
+    }
+
+    .reg a {
+      padding: 5px 20px;
+      display: inline-block;
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      z-index: 11;
+    }
+
+    .nav-toggle span {
+      width: 16px;
+      height: 1px;
+      background: #fff;
+      margin: 2.5px 0;
+      transition: 0.3s;
+    }
+
+    .nav-toggle.active span:nth-child(1) {
+      transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    .nav-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle.active span:nth-child(3) {
+      transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    /* Mobile navigation */
+    @media (max-width: 768px) {
+      .nav-toggle {
+        display: flex;
+      }
+
+      nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        /* width: 100%; */
+      }
+
+      nav ul.nav-list {
+        flex-direction: column;
+        align-items: center;
+        background-color: rgba(26, 26, 26, 0.95);
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 100%;
+        padding-top: 100px;
+        transform: translateX(100%);
+        transition: transform 0.4s ease;
+        z-index: 9;
+      }
+
+      nav ul.nav-list.show {
+        transform: translateX(0);
+      }
+    }
   </style>
-
 </head>
 
 <body id="body">
-<nav class="navbar" id="navbar">
-  <div class="nav-logo">
-    <img style="height: 20px; padding: 4px 3px 0px 0px;" src="images/logo/pad-logo.png" alt="">
-    uPlay
-  </div>
-  <div style="display: flex; list-style: none;">
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <img src="images/logo/pad-logo.png" alt="Logo" />
+      uPlay
+    </div>
+    <div style="display: flex; list-style: none; align-items: center;">
       <ul class="nav-list">
         <li><a href="#body">Home</a></li>
         <li><a href="pages/about.html">About</a></li>
-        <!-- <li><a href="pages/register.html">Register</a></li> -->
-        <!-- <li><a href="pages/updates.html">Updates</a></li>
-        <li><a href="pages/contact.html">Contact</a></li>
-        <li><a href="#countdown">Countdown</a></li> -->
         <li><a href="#how-to-join">How to Join</a></li>
         <li><a href="#players">Players</a></li>
       </ul>
-        <li class="reg"><a class="cta-button" href="#register">Register</a></li>
-  </div>
-  <div class="nav-toggle">
-    <span></span><span></span><span></span>
-  </div>
-</nav>
+      <li class="reg"><a class="cta-button" href="#register">Register</a></li>
+    </div>
+    <div class="nav-toggle" aria-label="Toggle navigation" role="button" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
 
-<div class="preloader" id="preloader" style="opacity: 0; display: none;"></div>
+  <div class="preloader" id="preloader" style="opacity: 0; display: none;"></div>
 
   <header class="hero" id="header">
     <h1 class="title">PES Tournament</h1>
@@ -333,7 +415,7 @@ footer {
     </form>
   </section>
 
-  <a href="#" class="scrollToTop" id="scrollToTop">
+  <a href="#" class="scrollToTop" id="scrollToTop" aria-label="Scroll to top">
     <img src="images/icons/scroll-to-top3.svg" alt="Scroll to Top" />
   </a>
 
@@ -341,110 +423,13 @@ footer {
     <p>&copy; 2025 PES Tournament. All rights reserved.</p>
   </footer>
 
+  <!-- Scripts -->
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script>
-    AOS.init();
-  </script>
-<style>
-
-    .container {
-      width: 90%;
-      max-width: 1200px;
-      margin: auto;
-      padding: 40px 20px;
-    }
-
-    nav ul.nav-list {
-      list-style: none;
-      display: flex;
-      gap: 1rem;
-    }
-
-    nav ul.nav-list li a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    nav ul.nav-list li a:hover {
-      color: rgb(255, 204, 0);
-    }
-
-    .reg a {
-      /* margin: 11px auto auto 12px;  */
-      padding: 5px 20px; 
-      /* color: rgb(255, 0, 0); */
-    }
-
-    @media (min-width: 768px) {
-      .reg a {
-        margin: 11px auto auto 32px; 
-        padding: 5px 20px; 
-      }
-    }
-
-    .nav-toggle {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      z-index: 11;
-    }
-
-    .nav-toggle span {
-      width: 16px;
-      height: 1px;
-      background: #fff;
-      margin: 2.5px 0;
-      transition: 0.3s;
-    }
-
-    .nav-toggle.active span:nth-child(1) {
-      transform: rotate(-45deg) translate(-5px, 6px);
-    }
-    .nav-toggle.active span:nth-child(2) {
-      opacity: 0;
-    }
-    .nav-toggle.active span:nth-child(3) {
-      transform: rotate(45deg) translate(-5px, -6px);
-    }
-
-    @media (max-width: 768px) {
-      .nav-toggle {
-        display: flex;
-      }
-
-      nav {
-        position: absolute;
-        top: 100%;
-        left: 0;
-      }
-
-      nav ul.nav-list {
-        flex-direction: column;
-        align-items: center;
-        background-color: rgba(26, 26, 26, 0.95);
-        position: fixed;
-        top: 0;
-        right: 0;
-        height: 100vh;
-        width: 100%;
-        padding-top: 100px;
-        transform: translateX(100%);
-        transition: transform 0.4s ease;
-        z-index: 9;
-      }
-
-      nav ul.nav-list.show {
-        transform: translateX(0);
-      }
-    }
-  </style>
-
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init();
 
     document.addEventListener('DOMContentLoaded', () => {
+      // Fade-in on scroll
       const faders = document.querySelectorAll('.fade-in');
       const appearOnScroll = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
@@ -454,80 +439,60 @@ footer {
           }
         });
       });
-
       faders.forEach(el => appearOnScroll.observe(el));
 
-      const toggle = document.querySelector('.nav-toggle');
+      // Mobile nav toggle
+      const navToggle = document.querySelector('.nav-toggle');
       const navList = document.querySelector('.nav-list');
-      const navLinks = document.querySelectorAll('.nav-list a');
-
-      toggle.addEventListener('click', () => {
-        toggle.classList.toggle('active');
+      navToggle.addEventListener('click', () => {
         navList.classList.toggle('show');
-        document.body.classList.toggle('menu-open', navList.classList.contains('show'));
+        navToggle.classList.toggle('active');
       });
 
-      navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          toggle.classList.remove('active');
-          navList.classList.remove('show');
-          document.body.classList.remove('menu-open');
-        });
+      // Scroll to top button
+      const scrollToTopBtn = document.getElementById('scrollToTop');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          scrollToTopBtn.classList.add('show');
+        } else {
+          scrollToTopBtn.classList.remove('show');
+        }
       });
-    });
+      scrollToTopBtn.addEventListener('click', e => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
 
-    const countdown = document.getElementById('countdown');
-    const eventDate = new Date("2025-07-01T18:00:00").getTime();
+      // Countdown timer
+      function countdownTimer() {
+        const countdownEl = document.getElementById('countdown');
+        const tournamentDate = new Date('July 15, 2025 12:00:00').getTime();
+        const now = new Date().getTime();
+        const distance = tournamentDate - now;
 
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = eventDate - now;
+        if (distance < 0) {
+          countdownEl.textContent = 'Tournament Started!';
+          return;
+        }
 
-      if (distance < 0) {
-        countdown.innerHTML = "Tournament Started!";
-        return;
-      }
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor(
+          (distance % (1000 * 60 * 60)) / (1000 * 60)
+        );
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      const years = Math.floor(distance / (1000 * 60 * 60 * 24 * 30 * 12));
-      const months = Math.floor((distance / (1000 * 60 * 60 * 24 * 30)) %12);
-      const days = Math.floor((distance / (1000 * 60 * 60 * 24)) % 30);
-      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((distance / (1000 * 60)) % 60);
-      const seconds = Math.floor((distance / 1000) % 60);
-      const miliseconds = Math.floor((distance / 1) % 1000);
-
-      countdown.innerHTML = `
+        countdown.innerHTML = `
         <h3>Starts In:</h3>
         <p>${days}d : ${hours}h : ${minutes}m : ${seconds}s</p>
       `;
-    }
-
-    setInterval(updateCountdown, 1);
-    updateCountdown();
-
-    window.addEventListener('load', () => {
-      const preloader = document.getElementById('preloader');
-      preloader.style.opacity = '0';
-      setTimeout(() => {
-        preloader.style.display = 'none';
-      }, 500);
-    });
-
-    const scrollToTopBtn = document.getElementById("scrollToTop");
-
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 300) {
-        scrollToTopBtn.classList.add("active");
-      } else {
-        scrollToTopBtn.classList.remove("active");
       }
-    });
 
-    scrollToTopBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      countdownTimer();
+      setInterval(countdownTimer, 1000);
     });
   </script>
-
 </body>
 </html>
