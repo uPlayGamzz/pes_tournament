@@ -244,11 +244,11 @@
       { name: 'Kai M', country: 'Brazil', team: 'Rio Warriors', matches: 14, wins: 11, losses: 3, points: 33 },
       { name: 'Ayaan V', country: 'India', team: 'Delhi Dynamos', matches: 9, wins: 7, losses: 2, points: 21 },
       { name: 'Tom R', country: 'UK', team: 'London Spurs', matches: 13, wins: 9, losses: 4, points: 27 },
-      { name: 'Ivan K', country: 'Russia', team: 'Moscow Bears', matches: 12, wins: 7, losses: 5, points: 21 }
+      { name: 'Ivan K', country: 'Russia', team: 'Moscow Bears', matches: 12, wins: 7, losses: 5, points: 21 },
     ];
 
     let currentPage = 1;
-    const rowsPerPage = 5;
+    const rowsPerPage = 10;
 
     function displayPlayers(playersList) {
       const start = (currentPage - 1) * rowsPerPage;
@@ -262,7 +262,7 @@
         tr.className = "hover-row";
         tr.onclick = () => openModal(player);
         tr.innerHTML = `
-          <td>${start + index + 1}</td>
+          <td>#${start + index + 1}</td>
           <td>${player.name}</td>
           <td>${player.country}</td>
           <td>${player.team}</td>
