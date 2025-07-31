@@ -104,6 +104,11 @@
 
     }
 
+    .flex_buttons {
+      display: flex;
+      /* justify-content: space-between; */
+    }
+
     .title {
       font-size: 4rem;
       margin-bottom: 0.5rem;
@@ -200,8 +205,30 @@
       animation: breathe1 4s infinite;
     }
 
+    .cta-button-media {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: #ffcc00;
+      color: #000;
+      font-weight: bold;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+      animation: breathe 1.3s infinite;
+      box-shadow: 0 0 10px rgba(255, 204, 0, 0.6);
+    }
+
+    .cta-button-media:hover {
+      /* background: #977900; */
+      /* background: #ff7300; */
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 204, 0, 0.7);
+      animation: breathe1 4s infinite;
+    }
+
     #cta-button2 {
       display: inline-block;
+      text-align: center;
       margin-left: 20px;
       padding: 1rem 2rem;
       background: none;
@@ -456,11 +483,28 @@
     }
 
     .main-header {
-      padding: 30% 7% 70% 7%;
+      padding: 40% 7% 50% 7%;
     }
 
     .flex_container {
       font-size: x-small;
+    }
+
+    .flex_buttons {
+      display: contents;      
+    }
+
+    .cta-button-media {
+      padding: 1rem 1rem;
+      width: 20rem;
+      margin-bottom: 2rem;
+    }
+
+    #cta-button2 {
+      padding: 1rem 1rem;
+      width: 20rem;
+      margin: 0;
+      
     }
     }
   </style>
@@ -493,7 +537,7 @@
 
 
     <div class="main-header">
-      <h1 class="title"><h style="color: rgb(0, 136, 255);">PES</h> CHAMPIONS <h style="color: var(--UPlay-yellow);">LEAGUE</h></h1>
+      <h1 class="title"><h style="color: rgb(0, 130, 255);">PES</h> CHAMPIONS <h style="color: var(--UPlay-yellow);">LEAGUE</h></h1>
       <p class="tagline">Compete in the ultimate PES tournament and claim the grand prize of <h style="color: #ffcc00; font-weight: bold;">N10,000</h></p>
       
       <div class="flex_container">
@@ -504,12 +548,14 @@
         </div> 
       </div>
 
-      <div style="display: flex;">
+      <div class="flex_buttons">
           <h class="cta-button-container">
-            <a href="#register" class="cta-button">Register Now</a>
+            <a href="#register" class="cta-button-media">Register Now</a>
           </h>
           
-          <a href="#register" class="cta-button2" id="cta-button2">Watch Trailer</a>
+          <a href="#register" class="cta-button2" id="cta-button2">
+            <img style="height: 15px; padding-right: 10px;" src="images/icons/play-▶.png" alt="Logo" />Watch Trailer
+          </a>
       </div>
     </div>
   </header>
@@ -637,7 +683,7 @@
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         countdown.innerHTML = `
-        <h3 style="margin-bottom: 3px;">Game Starts In</h3>
+        <h3 style="margin-bottom: 3px; color: rgb(0, 130, 255);">Game Starts In</h3>
         <p style="margin-top: 3px; color: #ffb300;">${days}d : ${hours}h : ${minutes}m : ${seconds}s</p>
       `;
       }
