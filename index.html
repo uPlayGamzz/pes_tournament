@@ -619,7 +619,58 @@
     <img src="images/icons/scroll-to-top3.svg" alt="Scroll to Top" />
   </a>
 
-  <footer>
+
+  <section class="main-content" id="brackets">
+  <h2 style="text-align: center; color: var(--UPlay-yellow); margin-bottom: 2rem;">Tournament Bracket</h2>
+  <div class="bracket-container">
+    <div class="round">
+      <div class="match">
+        <div class="team" onclick="setWinner(this)">Player 1</div>
+        <div class="team" onclick="setWinner(this)">Player 2</div>
+      </div>
+      <div class="match">
+        <div class="team" onclick="setWinner(this)">Player 3</div>
+        <div class="team" onclick="setWinner(this)">Player 4</div>
+      </div>
+      <div class="match">
+        <div class="team" onclick="setWinner(this)">Player 5</div>
+        <div class="team" onclick="setWinner(this)">Player 6</div>
+      </div>
+      <div class="match">
+        <div class="team" onclick="setWinner(this)">Player 7</div>
+        <div class="team" onclick="setWinner(this)">Player 8</div>
+      </div>
+    </div>
+
+    <div class="round">
+      <div class="match">
+        <div class="team">Winner 1</div>
+        <div class="team">Winner 2</div>
+      </div>
+      <div class="match">
+        <div class="team">Winner 3</div>
+        <div class="team">Winner 4</div>
+      </div>
+    </div>
+
+    <div class="round">
+      <div class="match">
+        <div class="team">Semi Winner 1</div>
+        <div class="team">Semi Winner 2</div>
+      </div>
+    </div>
+
+    <div class="round final">
+      <div class="match">
+        <div class="team">🏆 Champion</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<footer>
     <p>&copy; 2025 PES Tournament. All rights reserved.</p>
   </footer>
 
@@ -627,7 +678,7 @@
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init();
-
+    
     document.addEventListener('DOMContentLoaded', () => {
       // Fade-in on scroll
       const faders = document.querySelectorAll('.fade-in');
@@ -674,7 +725,7 @@
           countdownEl.textContent = 'Tournament Started!';
           return;
         }
-
+        
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
         const hours = Math.floor(
           (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
@@ -683,17 +734,85 @@
           (distance % (1000 * 60 * 60)) / (1000 * 60)
         );
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
+        
         countdown.innerHTML = `
         <h3 style="margin-bottom: 3px; color: rgb(0, 130, 255);">Game Starts In</h3>
         <p style="margin-top: 3px; color: #ffb300;">${days}d : ${hours}h : ${minutes}m : ${seconds}s</p>
-      `;
+        `;
       }
-
+      
       countdownTimer();
       setInterval(countdownTimer, 1000);
     });
-  </script>
+    </script>
+    
+    <style>
+      .bracket-container {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        flex-wrap: wrap;
+        padding: 2rem 1rem;
+      }
+    
+      .round {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+    
+      .match {
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        padding: 0.5rem;
+        min-width: 140px;
+      }
+    
+      .team {
+        background-color: #1a1a1a;
+        padding: 10px;
+        border: 1px solid #333;
+        margin-bottom: 5px;
+        border-radius: 8px;
+        cursor: pointer;
+        text-align: center;
+        transition: background 0.2s, border 0.2s;
+      }
+    
+      .team:hover {
+        background-color: rgba(255, 215, 0, 0.1);
+        border-color: var(--UPlay-yellow);
+      }
+    
+      .team.winner {
+        border-color: var(--UPlay-yellow);
+        background-color: rgba(255, 215, 0, 0.2);
+      }
+    
+      .final .match .team {
+        font-weight: bold;
+        background-color: #222;
+        border: 2px dashed var(--UPlay-yellow);
+      }
+    
+      @media (max-width: 768px) {
+        .bracket-container {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+    </style>
+    
+    <script>
+      function setWinner(el) {
+        const match = el.parentElement;
+        match.querySelectorAll('.team').forEach(team => {
+          team.classList.remove('winner');
+        });
+        el.classList.add('winner');
+        // You can add logic to pass this winner to next round dynamically if needed
+      }
+    </script>
 </body>
 </html>
 
