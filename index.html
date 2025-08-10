@@ -623,50 +623,204 @@
   <section class="main-content" id="brackets">
   <h2 style="text-align: center; color: var(--UPlay-yellow); margin-bottom: 2rem;">Tournament Bracket</h2>
   <div class="bracket-container">
-    <div class="round">
-      <div class="match">
-        <div class="team" onclick="setWinner(this)">Player 1</div>
-        <div class="team" onclick="setWinner(this)">Player 2</div>
+    <div class="bracket">
+      <div class="round">
+        <div class="match">
+          <div class="team" onclick="setWinner(this)">Player 1</div>
+          <div class="team" onclick="setWinner(this)">Player 2</div>
+        </div>
+        <div class="match">
+          <div class="team" onclick="setWinner(this)">Player 3</div>
+          <div class="team" onclick="setWinner(this)">Player 4</div>
+        </div>
+        <div class="match">
+          <div class="team" onclick="setWinner(this)">Player 5</div>
+          <div class="team" onclick="setWinner(this)">Player 6</div>
+        </div>
+        <div class="match">
+          <div class="team" onclick="setWinner(this)">Player 7</div>
+          <div class="team" onclick="setWinner(this)">Player 8</div>
+        </div>
+        <div class="match">
+          <div class="team" onclick="setWinner(this)">Player 9</div>
+          <div class="team" onclick="setWinner(this)">Player 10</div>
+        </div>
+        <div class="match">
+          <div class="team" onclick="setWinner(this)">Player 11</div>
+          <div class="team" onclick="setWinner(this)">Player 12</div>
+        </div>
+        <div class="match">
+          <div class="team" onclick="setWinner(this)">Player 13</div>
+          <div class="team" onclick="setWinner(this)">Player 14</div>
+        </div>
+        <div class="match">
+          <div class="team" onclick="setWinner(this)">Player 15</div>
+          <div class="team" onclick="setWinner(this)">Player 16</div>
+        </div>
       </div>
-      <div class="match">
-        <div class="team" onclick="setWinner(this)">Player 3</div>
-        <div class="team" onclick="setWinner(this)">Player 4</div>
+  
+      <div class="round">
+        <div class="match">
+          <div class="team">Winner 1</div>
+          <div class="team">Winner 2</div>
+        </div>
+        <div class="match">
+          <div class="team">Winner 3</div>
+          <div class="team">Winner 4</div>
+        </div>
+        <div class="match">
+          <div class="team">Winner 5</div>
+          <div class="team">Winner 6</div>
+        </div>
+        <div class="match">
+          <div class="team">Winner 7</div>
+          <div class="team">Winner 8</div>
+        </div>
       </div>
-      <div class="match">
-        <div class="team" onclick="setWinner(this)">Player 5</div>
-        <div class="team" onclick="setWinner(this)">Player 6</div>
+  
+      <div class="round">
+        <div class="match">
+          <div class="team">Semi Winner 1</div>
+          <div class="team">Semi Winner 2</div>
+        </div>
+        <div class="match">
+          <div class="team">Semi Winner 3</div>
+          <div class="team">Semi Winner 4</div>
+        </div>
       </div>
-      <div class="match">
-        <div class="team" onclick="setWinner(this)">Player 7</div>
-        <div class="team" onclick="setWinner(this)">Player 8</div>
-      </div>
-    </div>
 
-    <div class="round">
-      <div class="match">
-        <div class="team">Winner 1</div>
-        <div class="team">Winner 2</div>
+      <div class="round">
+        <div class="match">
+          <div class="team">Semi Winner 1</div>
+          <div class="team">Semi Winner 2</div>
+        </div>
       </div>
-      <div class="match">
-        <div class="team">Winner 3</div>
-        <div class="team">Winner 4</div>
-      </div>
-    </div>
-
-    <div class="round">
-      <div class="match">
-        <div class="team">Semi Winner 1</div>
-        <div class="team">Semi Winner 2</div>
-      </div>
-    </div>
-
-    <div class="round final">
-      <div class="match">
-        <div class="team">🏆 Champion</div>
+  
+      <div class="round final">
+        <div class="match">
+          <div class="team">🏆 Champion</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .bracket-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    padding: 2rem 1rem;
+    overflow-x: auto;       /* Allow horizontal scrolling */
+    white-space: nowrap; 
+  }
+
+.bracket-container img {
+  max-height: 100%;       /* Keep height flexible */
+  display: inline-block;
+}
+
+  .bracket {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 40px;
+    }
+
+  .round {
+    /* display: flex; */
+    flex-direction: column;
+    gap: 30px;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-around;
+  }
+
+  .match {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 0.5rem;
+    min-width: 140px;
+  }
+
+  .team {
+    background-color: #1a1a1a;
+    padding: 10px;
+    border: 1px solid #333;
+    margin-bottom: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.2s, border 0.2s;
+  }
+
+  .team:hover {
+    background-color: rgba(255, 215, 0, 0.1);
+    border-color: var(--UPlay-yellow);
+  }
+
+  .team.winner {
+    border-color: var(--UPlay-yellow);
+    background-color: rgba(255, 215, 0, 0.2);
+  }
+
+  .final .match .team {
+    font-weight: bold;
+    background-color: #222;
+    border: 2px dashed var(--UPlay-yellow);
+  }
+
+  /* Connector lines */
+    /* .match::after {
+        content: '';
+        position: absolute;
+        right: -20px;
+        top: 50%;
+        width: 20px;
+        height: 2px;
+        background: white;
+    }
+
+    .round:not(:last-child) .match::before {
+        content: '';
+        position: absolute;
+        right: -20px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: white;
+        margin: auto 0;
+    } */
+
+  @media (max-width: 768px) {
+    .bracket-container {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .team {
+            min-width: 80px;
+            font-size: 12px;
+        }
+
+    .bracket {
+        gap: 20px;
+    }
+  }
+</style>
+
+<script>
+  function setWinner(el) {
+    const match = el.parentElement;
+    match.querySelectorAll('.team').forEach(team => {
+      team.classList.remove('winner');
+    });
+    el.classList.add('winner');
+    // You can add logic to pass this winner to next round dynamically if needed
+  }
+</script>
+
 
 
 
@@ -744,74 +898,6 @@
       countdownTimer();
       setInterval(countdownTimer, 1000);
     });
-    </script>
-    
-    <style>
-      .bracket-container {
-        display: flex;
-        justify-content: center;
-        gap: 40px;
-        flex-wrap: wrap;
-        padding: 2rem 1rem;
-      }
-    
-      .round {
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-      }
-    
-      .match {
-        background-color: rgba(255, 255, 255, 0.05);
-        border-radius: 10px;
-        padding: 0.5rem;
-        min-width: 140px;
-      }
-    
-      .team {
-        background-color: #1a1a1a;
-        padding: 10px;
-        border: 1px solid #333;
-        margin-bottom: 5px;
-        border-radius: 8px;
-        cursor: pointer;
-        text-align: center;
-        transition: background 0.2s, border 0.2s;
-      }
-    
-      .team:hover {
-        background-color: rgba(255, 215, 0, 0.1);
-        border-color: var(--UPlay-yellow);
-      }
-    
-      .team.winner {
-        border-color: var(--UPlay-yellow);
-        background-color: rgba(255, 215, 0, 0.2);
-      }
-    
-      .final .match .team {
-        font-weight: bold;
-        background-color: #222;
-        border: 2px dashed var(--UPlay-yellow);
-      }
-    
-      @media (max-width: 768px) {
-        .bracket-container {
-          flex-direction: column;
-          align-items: center;
-        }
-      }
-    </style>
-    
-    <script>
-      function setWinner(el) {
-        const match = el.parentElement;
-        match.querySelectorAll('.team').forEach(team => {
-          team.classList.remove('winner');
-        });
-        el.classList.add('winner');
-        // You can add logic to pass this winner to next round dynamically if needed
-      }
     </script>
 </body>
 </html>

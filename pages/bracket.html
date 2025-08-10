@@ -1,126 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <section class="main-content" id="brackets">
-  <h2 style="text-align: center; color: var(--UPlay-yellow); margin-bottom: 2rem;">Tournament Bracket</h2>
-  <div class="bracket-container">
-    <div class="round">
-      <div class="match">
-        <div class="team" onclick="setWinner(this)">Player 1</div>
-        <div class="team" onclick="setWinner(this)">Player 2</div>
-      </div>
-      <div class="match">
-        <div class="team" onclick="setWinner(this)">Player 3</div>
-        <div class="team" onclick="setWinner(this)">Player 4</div>
-      </div>
-      <div class="match">
-        <div class="team" onclick="setWinner(this)">Player 5</div>
-        <div class="team" onclick="setWinner(this)">Player 6</div>
-      </div>
-      <div class="match">
-        <div class="team" onclick="setWinner(this)">Player 7</div>
-        <div class="team" onclick="setWinner(this)">Player 8</div>
-      </div>
-    </div>
-
-    <div class="round">
-      <div class="match">
-        <div class="team">Winner 1</div>
-        <div class="team">Winner 2</div>
-      </div>
-      <div class="match">
-        <div class="team">Winner 3</div>
-        <div class="team">Winner 4</div>
-      </div>
-    </div>
-
-    <div class="round">
-      <div class="match">
-        <div class="team">Semi Winner 1</div>
-        <div class="team">Semi Winner 2</div>
-      </div>
-    </div>
-
-    <div class="round final">
-      <div class="match">
-        <div class="team">🏆 Champion</div>
-      </div>
-    </div>
-  </div>
-</section>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>16 Player Tournament Bracket</title>
 <style>
-  .bracket-container {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
-    padding: 2rem 1rem;
-  }
-
-  .round {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-  }
-
-  .match {
-    background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-    padding: 0.5rem;
-    min-width: 140px;
-  }
-
-  .team {
-    background-color: #1a1a1a;
-    padding: 10px;
-    border: 1px solid #333;
-    margin-bottom: 5px;
-    border-radius: 8px;
-    cursor: pointer;
-    text-align: center;
-    transition: background 0.2s, border 0.2s;
-  }
-
-  .team:hover {
-    background-color: rgba(255, 215, 0, 0.1);
-    border-color: var(--UPlay-yellow);
-  }
-
-  .team.winner {
-    border-color: var(--UPlay-yellow);
-    background-color: rgba(255, 215, 0, 0.2);
-  }
-
-  .final .match .team {
-    font-weight: bold;
-    background-color: #222;
-    border: 2px dashed var(--UPlay-yellow);
-  }
-
-  @media (max-width: 768px) {
-    .bracket-container {
-      flex-direction: column;
-      align-items: center;
+    body {
+        font-family: Arial, sans-serif;
+        background: #111;
+        color: white;
+        padding: 20px;
+        overflow-x: auto;
     }
-  }
+
+    .bracket {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 40px;
+    }
+
+    .round {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .match {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 20px 0;
+        position: relative;
+    }
+
+    .player {
+        background: #222;
+        padding: 6px 12px;
+        margin: 4px 0;
+        border: 2px solid var(--UPlay-yellow, gold);
+        border-radius: 6px;
+        min-width: 120px;
+    }
+
+    /* Connector lines */
+    .match::after {
+        content: '';
+        position: absolute;
+        right: -20px;
+        top: 50%;
+        width: 20px;
+        height: 2px;
+        background: white;
+    }
+
+    .round:not(:last-child) .match::before {
+        content: '';
+        position: absolute;
+        right: -20px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: white;
+        margin: auto 0;
+    }
+
+    /* Responsive tweak */
+    @media (max-width: 768px) {
+        .player {
+            min-width: 80px;
+            font-size: 12px;
+        }
+        .bracket {
+            gap: 20px;
+        }
+    }
+
+.bracket-container {
+  overflow-x: auto;       /* Allow horizontal scrolling */
+  white-space: nowrap;    /* Prevent wrapping */
+}
+
+.bracket-container img {
+  max-height: 100%;       /* Keep height flexible */
+  display: inline-block;
+}
 </style>
 
-<script>
-  function setWinner(el) {
-    const match = el.parentElement;
-    match.querySelectorAll('.team').forEach(team => {
-      team.classList.remove('winner');
-    });
-    el.classList.add('winner');
-    // You can add logic to pass this winner to next round dynamically if needed
-  }
-</script>
+</head>
+<body>
+
+<div class="bracket-container">
+    <h1>16 Player Bracket</h1>
+    <div class="bracket">
+        <!-- Round 1 -->
+        <div class="round">
+            <div class="match">
+                <div class="player">Player 1</div>
+                <div class="player">Player 2</div>
+            </div>
+            <div class="match">
+                <div class="player">Player 3</div>
+                <div class="player">Player 4</div>
+            </div>
+            <div class="match">
+                <div class="player">Player 5</div>
+                <div class="player">Player 6</div>
+            </div>
+        <div class="match">
+            <div class="player">Player 7</div>
+            <div class="player">Player 8</div>
+        </div>
+        <div class="match">
+            <div class="player">Player 9</div>
+            <div class="player">Player 10</div>
+        </div>
+        <div class="match">
+            <div class="player">Player 11</div>
+            <div class="player">Player 12</div>
+        </div>
+        <div class="match">
+            <div class="player">Player 13</div>
+            <div class="player">Player 14</div>
+        </div>
+        <div class="match">
+            <div class="player">Player 15</div>
+            <div class="player">Player 16</div>
+        </div>
+    </div>
+    
+    <!-- Round 2 -->
+    <div class="round">
+        <div class="match">
+            <div class="player">Winner 1</div>
+            <div class="player">Winner 2</div>
+        </div>
+        <div class="match">
+            <div class="player">Winner 3</div>
+            <div class="player">Winner 4</div>
+        </div>
+        <div class="match">
+            <div class="player">Winner 5</div>
+            <div class="player">Winner 6</div>
+        </div>
+        <div class="match">
+            <div class="player">Winner 7</div>
+            <div class="player">Winner 8</div>
+        </div>
+    </div>
+    
+    <!-- Semifinals -->
+    <div class="round">
+        <div class="match">
+            <div class="player">Winner QF1</div>
+            <div class="player">Winner QF2</div>
+        </div>
+        <div class="match">
+            <div class="player">Winner QF3</div>
+            <div class="player">Winner QF4</div>
+        </div>
+    </div>
+    
+    <!-- Final -->
+    <div class="round">
+        <div class="match">
+            <div class="player">Finalist 1</div>
+            <div class="player">Finalist 2</div>
+        </div>
+    </div>
+
+    <!-- Champion -->
+    <div class="round">
+        <div class="match">
+            <div class="player">Champion</div>
+        </div>
+    </div>
+</div>
+</div>
 
 </body>
 </html>
