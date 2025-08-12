@@ -45,6 +45,11 @@
       color: #fff;
     }
 
+    .logos {
+      height: 15px;
+      padding: 0;
+    }
+
     header {
       text-align: center;
       padding: 2rem 1rem;
@@ -303,7 +308,9 @@
     .player-card {
       background: #2c2c2c;
       padding: 0 1.5rem;
+      padding-top: 20px;
       border-radius: 1rem;
+      border: solid, rgb(147, 146, 146), 0.5px;
       text-align: center;
       width: 200px;
       transition: transform 0.3s ease;
@@ -328,14 +335,14 @@
     }
 
     #register input,
-    #register button {
+    #register button, #register select  {
       padding: 0.8rem;
       border-radius: 8px;
       border: none;
       font-size: 1rem;
     }
 
-    #register input {
+    #register input, select {
       background: #2a2a2a;
       color: #fff;
     }
@@ -594,28 +601,42 @@
   <section id="players">
     <h2>Top Players</h2>
     <div class="player-cards">
-      <div class="player-card" data-aos="fade-up">
-        <h3>Player One</h3>
+      <div style="background: linear-gradient(to left, #2c2c2c,#2c2c2c, #5e5536); border: solid, #fbda56, 0.5px;" class="player-card" data-aos="fade-up">
+        <img class="logos" src="images/logo/pad-logo.png" alt="Logo" />
         <p>Rank: #1</p>
+        <h3>Player One</h3>
       </div>
-      <div class="player-card" data-aos="fade-up" data-aos-delay="100">
-        <h3>Player Two</h3>
+      <div style="background: linear-gradient(to left, #2c2c2c,#2c2c2c, #6b6a6a);" class="player-card" data-aos="fade-up" data-aos-delay="100">
+        <img class="logos" src="images/logo/pad-logo.png" alt="Logo" />
         <p>Rank: #2</p>
+        <h3>Player Two</h3>
       </div>
-      <div class="player-card" data-aos="fade-up" data-aos-delay="200">
-        <h3>Player Three</h3>
+      <div style="background: linear-gradient(to left, #2c2c2c,#2c2c2c, rgba(34, 45, 129, 0.954)); border: solid,rgb(54, 54, 213), 0.5px;" class="player-card" data-aos="fade-up" data-aos-delay="200">
+        <img class="logos" src="images/logo/pad-logo.png" alt="Logo" />
         <p>Rank: #3</p>
+        <h3>Player Three</h3>
       </div>
     </div>
   </section>
 
   <section id="register">
-    <h2>Register for the Tournament</h2>
+    <h1>PES Tournament Registration</h1>
     <form action="https://api.web3forms.com/submit" method="POST">
-      <input type="hidden" name="access_key" value="your-web3forms-access-key" />
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
-      <input type="text" name="gamertag" placeholder="Gamertag" required />
+      <input type="hidden" name="access_key" value="c31a9d61-842a-4048-9d56-622f6cfcac35">
+      <input type="hidden" name="redirect" value="https://fiofio24.github.io/pes_tournament/pages/thankyou.html">
+      <input type="hidden" name="auto_response" value="Thanks for registering for the PES Tournament! We'll contact you soon.">
+
+      <input type="text" id="name" name="name" placeholder="Your Name" required>
+      <input type="email" id="email" name="email" placeholder="Your Email" required>
+      <div style="padding: 0.8rem; border-radius: 8px; border: none; background: #2a2a2a; color: #fff; padding: 0; display: flex; justify-content: space-between; text-align: left;">
+        <select style="width: 97.5%;" id="platform" name="platform" required>
+          <option style="color: gray;" value="">-- Select Platform --</option>
+          <option value="ps5">PS5</option>
+          <option value="ps4">PS4</option>
+          <option value="pc">PC</option>
+        </select>
+      </div>
+
       <button type="submit">Submit</button>
     </form>
   </section>
@@ -712,6 +733,7 @@
 
 <style>
   .bracket-container {
+    font-size: xx-small;
     display: flex;
     justify-content: center;
     gap: 40px;
