@@ -1,0 +1,177 @@
+    /* Base / shared styles (aligned to your index.html) */
+    body {
+      font-family: var(--UPlay-font);
+      margin: 0; padding: 0;
+      background: #121212; color: var(--UPlay-text-color);
+    }
+    .navbar {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:1rem 2rem; position:sticky; top:0; z-index:999;
+      background:#1a1a1a80; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid #ffffff34;
+    }
+    .nav-logo { font-size:1.5rem; font-weight:700; display:flex; align-items:center; gap:.5rem; }
+    .nav-logo img { height:15px; rotate:24deg; }
+    nav ul.nav-list { list-style:none; display:flex; gap:1rem; margin:0; padding:0; align-items:center; }
+    nav ul.nav-list li a { color:#fff; text-decoration:none; font-weight:700; }
+    nav ul.nav-list li a:hover { color:var(--UPlay-yellow); }
+    .reg a.cta-button { display:inline-block; padding:.6rem 1.1rem; background:var(--UPlay-yellow); color:#000; border-radius:999px; font-weight:700; }
+    .nav-toggle { display:none; }
+
+    footer {
+      text-align:center; padding:1rem; background:#111; color:#888; font-size:.9rem;
+      border-top: 1px solid #2a2a2a;
+    }
+
+    /* Page header */
+    .page-hero {
+      background: linear-gradient(90deg, rgba(0,0,0,.6), rgba(0,0,0,0)),
+                  url('images/stadium-night.png') center/cover no-repeat;
+      padding: 48px 7% 24px;
+      border-bottom: 1px solid #1f1f1f;
+    }
+    .page-hero h1 {
+      margin: 0 0 .25rem 0; font-size: clamp(1.8rem, 2.5vw, 2.6rem);
+    }
+    .page-hero .sub {
+      color:#cfcfcf; margin: 0; font-size: .95rem;
+    }
+
+    /* Admin controls */
+    .admin-bar {
+      display:flex; gap:.5rem; align-items:center; justify-content:flex-end;
+      padding: .5rem 7%;
+      background: #161616; border-bottom: 1px solid #232323;
+      position: sticky; top: 56px; z-index: 998;
+    }
+    .admin-badge {
+      font-size:.75rem; padding:.25rem .55rem; border-radius:999px; border:1px solid #2c2c2c;
+      background:#1d1d1d; color:#aaa;
+    }
+    .admin-badge.active { color:#111; background: var(--UPlay-yellow); border-color: #caa800; }
+    .btn {
+      font-family: var(--UPlay-font); cursor:pointer; border:none; border-radius:10px;
+      padding:.55rem .9rem; font-weight:700;
+      background:#2b2b2b; color:#eaeaea;
+    }
+    .btn:hover { background:#333; }
+    .btn-primary { background: var(--UPlay-yellow); color:#111; }
+    .btn-primary:hover { filter: brightness(0.95); }
+
+    /* Bracket layout */
+    .bracket-wrap {
+      padding: 24px 7% 64px;
+      overflow-x: auto; /* allow horizontal scroll on small screens */
+    }
+    .bracket {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: max-content;
+      gap: 56px;
+      align-items: center;
+      min-width: 980px; /* keep structure widthy; still scrollable on phones */
+    }
+
+    .round {
+      display: grid;
+      gap: 28px;
+      position: relative;
+    }
+    .round-title {
+      text-align:center; color:#bdbdbd; font-size:.95rem; margin-bottom: .25rem;
+    }
+
+    /* Match card */
+    .match {
+      background: linear-gradient(180deg, var(--card), var(--card-alt));
+      border: 1px solid #2f2f2f;
+      border-radius: 14px;
+      padding: 10px;
+      min-width: 240px;
+      position: relative;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.03) inset;
+    }
+
+    .row {
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 8px; padding: 8px 10px; border-radius: 10px;
+      border: 1px solid transparent;
+      background:#1a1a1a;
+    }
+    .row + .row { margin-top: 8px; }
+    .row.winner {
+      background: rgba(255,204,0,0.15);
+      border-color: var(--UPlay-yellow);
+    }
+    .team {
+      display:flex; align-items:center; gap:8px; min-width:0; flex:1;
+    }
+    .seed {
+      font-size:.76rem; color:#999; background:#101010; border:1px solid #2c2c2c;
+      padding:.12rem .38rem; border-radius:6px; min-width: 1.6rem; text-align:center;
+    }
+    .name {
+      flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+    }
+    .name[contenteditable="true"] { outline: 1px dashed #444; border-radius:6px; padding:0 2px; }
+    .score {
+      width:48px; text-align:center; font-weight:700; font-size:1rem;
+      padding:.35rem .4rem; border-radius:8px; border:1px solid #2f2f2f; background:#121212; color:#fff;
+    }
+    .score:disabled { opacity:.6; }
+
+
+
+
+
+
+    /* Connectors */
+
+    /* child match short line (directional) */
+    .match::after{
+    content:"";
+    position:absolute;
+    top:50%;
+    width:28px; height:2px;
+    background:var(--line);
+    }
+    .match.to-right::after { right:-28px; } /* child feeds to a parent on its right */
+    .match.to-left::after  { left:-28px;  } /* child feeds to a parent on its left  */
+
+    /* parent connector (directional) */
+    .connector{
+    position:absolute;
+    top:50%;
+    width:28px; height:2px;
+    background:var(--line);
+    }
+    .connector.left  { left:-28px;  }  /* children are on the left  */
+    .connector.right { right:-28px; }  /* children are on the right */
+
+    /* optional: shared bits created by JS */
+    .connector .v1,.connector .v2{ position:absolute; width:2px; background:var(--line); }
+    .connector .s1,.connector .s2{ position:absolute; height:2px; background:var(--line); }
+
+
+    /* Final & Champion */
+    .final .match { border-style: dashed; border-color: var(--UPlay-yellow); }
+    .champion {
+      text-align:center; font-weight:700; padding: 16px 20px;
+      background:#222; border:2px dashed var(--UPlay-yellow); border-radius:16px;
+      box-shadow: 0 0 22px rgba(255, 204, 0, .08), inset 0 0 0 1px rgba(255,255,255,.03);
+      animation: pulseGlow 2.2s ease-in-out infinite;
+      min-width: 240px;
+    }
+    @keyframes pulseGlow {
+      0%,100% { box-shadow: 0 0 22px rgba(255,204,0,.10), inset 0 0 0 1px rgba(255,255,255,.03); transform: translateZ(0); }
+      50% { box-shadow: 0 0 36px rgba(255,204,0,.24), inset 0 0 0 1px rgba(255,255,255,.05); transform: translateY(-1px); }
+    }
+    .champion .cup { font-size: 1.4rem; margin-right:.3rem; color: var(--UPlay-yellow); }
+
+    /* Mobile tweaks */
+    @media (max-width: 768px) {
+      .navbar { background:#1a1a1af3; backdrop-filter:none; }
+      .bracket-wrap { padding: 16px 4% 48px; }
+      .match { min-width: 220px; }
+      .admin-bar { top: 62px; padding: .5rem 4%; }
+    }

@@ -1,182 +1,849 @@
-<!DOCTYPE html>
+<!-- youve changed the pade style pleace keep my current style the only thing you should cjange is to mirror connecting lines of the right side bracket so it will align and have opposite dirrection to the left side connecting lines then secondly create a secrete hidden button that only admin knows where its located for editing scores this is my current code: <!DOCTYPE html> -->
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>16 Player Tournament Bracket</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background: #111;
-        color: white;
-        padding: 20px;
-        overflow-x: auto;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PES Tournament — Bracket</title>
+  <link sizes="32x32" rel="icon" href="images/logo/pad-logo-title.png" type="image/png">
+
+  <!-- Fonts and icons (match site) -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- AOS animations -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+  <style>
+    :root {
+      --UPlay-yellow: #ffcc00;
+      --UPlay-background-color: #1a1a1a;
+      --UPlay-text-color: #ffffff;
+      --UPlay-font: 'Orbitron', sans-serif;
+      --line: #3a3a3a;
+      --card: #1f1f1f;
+      --card-alt: #242424;
+      --accent: #0082ff;
     }
 
+    /* Base / shared styles (aligned to your index.html) */
+    body {
+      font-family: var(--UPlay-font);
+      margin: 0; padding: 0;
+      background: #121212; color: var(--UPlay-text-color);
+    }
+    .navbar {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:1rem 2rem; position:sticky; top:0; z-index:999;
+      background:#1a1a1a80; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid #ffffff34;
+    }
+    .nav-logo { font-size:1.5rem; font-weight:700; display:flex; align-items:center; gap:.5rem; }
+    .nav-logo img { height:15px; rotate:24deg; }
+    nav ul.nav-list { list-style:none; display:flex; gap:1rem; margin:0; padding:0; align-items:center; }
+    nav ul.nav-list li a { color:#fff; text-decoration:none; font-weight:700; }
+    nav ul.nav-list li a:hover { color:var(--UPlay-yellow); }
+    .reg a.cta-button { display:inline-block; padding:.6rem 1.1rem; background:var(--UPlay-yellow); color:#000; border-radius:999px; font-weight:700; }
+    .nav-toggle { display:none; }
+
+    footer {
+      text-align:center; padding:1rem; background:#111; color:#888; font-size:.9rem;
+      border-top: 1px solid #2a2a2a;
+    }
+
+    /* Page header */
+    .page-hero {
+      background: linear-gradient(90deg, rgba(0,0,0,.6), rgba(0,0,0,0)),
+                  url('images/stadium-night.png') center/cover no-repeat;
+      padding: 48px 7% 24px;
+      border-bottom: 1px solid #1f1f1f;
+    }
+    .page-hero h1 {
+      margin: 0 0 .25rem 0; font-size: clamp(1.8rem, 2.5vw, 2.6rem);
+    }
+    .page-hero .sub {
+      color:#cfcfcf; margin: 0; font-size: .95rem;
+    }
+
+    /* Admin controls */
+    .admin-bar {
+      display:flex; gap:.5rem; align-items:center; justify-content:flex-end;
+      padding: .5rem 7%;
+      background: #161616; border-bottom: 1px solid #232323;
+      position: sticky; top: 56px; z-index: 998;
+    }
+    .admin-badge {
+      font-size:.75rem; padding:.25rem .55rem; border-radius:999px; border:1px solid #2c2c2c;
+      background:#1d1d1d; color:#aaa;
+    }
+    .admin-badge.active { color:#111; background: var(--UPlay-yellow); border-color: #caa800; }
+    .btn {
+      font-family: var(--UPlay-font); cursor:pointer; border:none; border-radius:10px;
+      padding:.55rem .9rem; font-weight:700;
+      background:#2b2b2b; color:#eaeaea;
+    }
+    .btn:hover { background:#333; }
+    .btn-primary { background: var(--UPlay-yellow); color:#111; }
+    .btn-primary:hover { filter: brightness(0.95); }
+
+    /* Bracket layout */
+    .bracket-wrap {
+      padding: 24px 7% 64px;
+      overflow-x: auto; /* allow horizontal scroll on small screens */
+    }
     .bracket {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        gap: 40px;
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: max-content;
+      gap: 56px;
+      align-items: center;
+      min-width: 980px; /* keep structure widthy; still scrollable on phones */
     }
 
     .round {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
+      display: grid;
+      gap: 28px;
+      position: relative;
+    }
+    .round-title {
+      text-align:center; color:#bdbdbd; font-size:.95rem; margin-bottom: .25rem;
     }
 
+    /* Match card */
     .match {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        margin: 20px 0;
-        position: relative;
+      background: linear-gradient(180deg, var(--card), var(--card-alt));
+      border: 1px solid #2f2f2f;
+      border-radius: 14px;
+      padding: 10px;
+      min-width: 240px;
+      position: relative;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.03) inset;
     }
 
-    .player {
-        background: #222;
-        padding: 6px 12px;
-        margin: 4px 0;
-        border: 2px solid var(--UPlay-yellow, gold);
-        border-radius: 6px;
-        min-width: 120px;
+    .row {
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 8px; padding: 8px 10px; border-radius: 10px;
+      border: 1px solid transparent;
+      background:#1a1a1a;
     }
-
-    /* Connector lines */
-    .match::after {
-        content: '';
-        position: absolute;
-        right: -20px;
-        top: 50%;
-        width: 20px;
-        height: 2px;
-        background: white;
+    .row + .row { margin-top: 8px; }
+    .row.winner {
+      background: rgba(255,204,0,0.15);
+      border-color: var(--UPlay-yellow);
     }
-
-    .round:not(:last-child) .match::before {
-        content: '';
-        position: absolute;
-        right: -20px;
-        top: 0;
-        bottom: 0;
-        width: 2px;
-        background: white;
-        margin: auto 0;
+    .team {
+      display:flex; align-items:center; gap:8px; min-width:0; flex:1;
     }
+    .seed {
+      font-size:.76rem; color:#999; background:#101010; border:1px solid #2c2c2c;
+      padding:.12rem .38rem; border-radius:6px; min-width: 1.6rem; text-align:center;
+    }
+    .name {
+      flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+    }
+    .name[contenteditable="true"] { outline: 1px dashed #444; border-radius:6px; padding:0 2px; }
+    .score {
+      width:48px; text-align:center; font-weight:700; font-size:1rem;
+      padding:.35rem .4rem; border-radius:8px; border:1px solid #2f2f2f; background:#121212; color:#fff;
+    }
+    .score:disabled { opacity:.6; }
 
-    /* Responsive tweak */
+
+
+
+
+
+    /* Connectors */
+
+    /* child match short line (directional) */
+    .match::after{
+    content:"";
+    position:absolute;
+    top:50%;
+    width:28px; height:2px;
+    background:var(--line);
+    }
+    .match.to-right::after { right:-28px; } /* child feeds to a parent on its right */
+    .match.to-left::after  { left:-28px;  } /* child feeds to a parent on its left  */
+
+    /* parent connector (directional) */
+    .connector{
+    position:absolute;
+    top:50%;
+    width:28px; height:2px;
+    background:var(--line);
+    }
+    .connector.left  { left:-28px;  }  /* children are on the left  */
+    .connector.right { right:-28px; }  /* children are on the right */
+
+    /* optional: shared bits created by JS */
+    .connector .v1,.connector .v2{ position:absolute; width:2px; background:var(--line); }
+    .connector .s1,.connector .s2{ position:absolute; height:2px; background:var(--line); }
+
+
+    /* Final & Champion */
+    .final .match { border-style: dashed; border-color: var(--UPlay-yellow); }
+    .champion {
+      text-align:center; font-weight:700; padding: 16px 20px;
+      background:#222; border:2px dashed var(--UPlay-yellow); border-radius:16px;
+      box-shadow: 0 0 22px rgba(255, 204, 0, .08), inset 0 0 0 1px rgba(255,255,255,.03);
+      animation: pulseGlow 2.2s ease-in-out infinite;
+      min-width: 240px;
+    }
+    @keyframes pulseGlow {
+      0%,100% { box-shadow: 0 0 22px rgba(255,204,0,.10), inset 0 0 0 1px rgba(255,255,255,.03); transform: translateZ(0); }
+      50% { box-shadow: 0 0 36px rgba(255,204,0,.24), inset 0 0 0 1px rgba(255,255,255,.05); transform: translateY(-1px); }
+    }
+    .champion .cup { font-size: 1.4rem; margin-right:.3rem; color: var(--UPlay-yellow); }
+
+    /* Mobile tweaks */
     @media (max-width: 768px) {
-        .player {
-            min-width: 80px;
-            font-size: 12px;
-        }
-        .bracket {
-            gap: 20px;
-        }
+      .navbar { background:#1a1a1af3; backdrop-filter:none; }
+      .bracket-wrap { padding: 16px 4% 48px; }
+      .match { min-width: 220px; }
+      .admin-bar { top: 62px; padding: .5rem 4%; }
     }
-
-.bracket-container {
-  overflow-x: auto;       /* Allow horizontal scrolling */
-  white-space: nowrap;    /* Prevent wrapping */
-}
-
-.bracket-container img {
-  max-height: 100%;       /* Keep height flexible */
-  display: inline-block;
-}
-</style>
-
+  </style>
 </head>
 <body>
 
-<div class="bracket-container">
-    <h1>16 Player Bracket</h1>
-    <div class="bracket">
-        <!-- Round 1 -->
-        <div class="round">
-            <div class="match">
-                <div class="player">Player 1</div>
-                <div class="player">Player 2</div>
-            </div>
-            <div class="match">
-                <div class="player">Player 3</div>
-                <div class="player">Player 4</div>
-            </div>
-            <div class="match">
-                <div class="player">Player 5</div>
-                <div class="player">Player 6</div>
-            </div>
-        <div class="match">
-            <div class="player">Player 7</div>
-            <div class="player">Player 8</div>
-        </div>
-        <div class="match">
-            <div class="player">Player 9</div>
-            <div class="player">Player 10</div>
-        </div>
-        <div class="match">
-            <div class="player">Player 11</div>
-            <div class="player">Player 12</div>
-        </div>
-        <div class="match">
-            <div class="player">Player 13</div>
-            <div class="player">Player 14</div>
-        </div>
-        <div class="match">
-            <div class="player">Player 15</div>
-            <div class="player">Player 16</div>
-        </div>
+  <!-- NAV (copied style) -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <img src="images/logo/pad-logo.png" alt="Logo" />
+      uPlay
     </div>
-    
-    <!-- Round 2 -->
-    <div class="round">
-        <div class="match">
-            <div class="player">Winner 1</div>
-            <div class="player">Winner 2</div>
-        </div>
-        <div class="match">
-            <div class="player">Winner 3</div>
-            <div class="player">Winner 4</div>
-        </div>
-        <div class="match">
-            <div class="player">Winner 5</div>
-            <div class="player">Winner 6</div>
-        </div>
-        <div class="match">
-            <div class="player">Winner 7</div>
-            <div class="player">Winner 8</div>
-        </div>
+    <div style="display:flex; list-style:none; align-items:center;">
+      <ul class="nav-list">
+        <li><a href="index.html#body">Home</a></li>
+        <li><a href="pages/about.html">About</a></li>
+        <li><a href="index.html#how-to-join">How to Join</a></li>
+        <li><a href="index.html#players">Players</a></li>
+        <li><a href="pages/leaderboard.html"><img src="images/icons/leaderboard-icon.png" alt="leaderboard" style="height:16px;width:16px;padding-left:4px;"></a></li>
+      </ul>
+      <li class="reg"><a class="cta-button" href="index.html#register">Register</a></li>
     </div>
-    
-    <!-- Semifinals -->
-    <div class="round">
-        <div class="match">
-            <div class="player">Winner QF1</div>
-            <div class="player">Winner QF2</div>
-        </div>
-        <div class="match">
-            <div class="player">Winner QF3</div>
-            <div class="player">Winner QF4</div>
-        </div>
+    <div class="nav-toggle" aria-label="Toggle navigation" role="button" tabindex="0">
+      <span></span><span></span><span></span>
     </div>
-    
-    <!-- Final -->
-    <div class="round">
-        <div class="match">
-            <div class="player">Finalist 1</div>
-            <div class="player">Finalist 2</div>
-        </div>
-    </div>
+  </nav>
 
-    <!-- Champion -->
-    <div class="round">
-        <div class="match">
-            <div class="player">Champion</div>
+  <!-- Page header -->
+  <header class="page-hero">
+    <h1><span style="color:var(--accent)">PES</span> Bracket <span style="color:var(--UPlay-yellow)">— 16 Players</span></h1>
+  </header>
+
+  <!-- Admin bar (local test) -->
+   <div id="admin-panel" style="display:none;">
+       <div class="admin-bar">
+         <span id="adminStatus" class="admin-badge">Viewer</span>
+         <button id="adminToggle" class="btn">Admin</button>
+         <button id="saveBracket" class="btn btn-primary" disabled>Save</button>
+         <button id="clearBracket" class="btn" disabled>Clear</button>
+       </div>
+   </div>
+
+
+  <!-- Bracket -->
+  <main class="bracket-wrap">
+    <div id="bracket" class="bracket" data-aos="fade-up">
+
+      <!-- Round of 16 (Left side: 4 matches) -->
+      <section class="round" id="r16-left">
+        <div class="round-title">Round of 16</div>
+
+        <div class="match" data-match="m1" data-next="qf1" data-slot="home">
+          <div class="row">
+            <div class="team">
+              <span class="seed">1</span>
+              <span class="name" contenteditable="false">Player 1</span>
+            </div>
+            <input class="score" type="number" min="0" disabled />
+          </div>
+          <div class="row">
+            <div class="team">
+              <span class="seed">2</span>
+              <span class="name" contenteditable="false">Player 2</span>
+            </div>
+            <input class="score" type="number" min="0" disabled />
+          </div>
         </div>
+
+        <div class="match" data-match="m2" data-next="qf1" data-slot="away">
+          <div class="row">
+            <div class="team">
+              <span class="seed">3</span>
+              <span class="name" contenteditable="false">Player 3</span>
+            </div>
+            <input class="score" type="number" min="0" disabled />
+          </div>
+          <div class="row">
+            <div class="team">
+              <span class="seed">4</span>
+              <span class="name" contenteditable="false">Player 4</span>
+            </div>
+            <input class="score" type="number" min="0" disabled />
+          </div>
+        </div>
+
+        <div class="match" data-match="m3" data-next="qf2" data-slot="home">
+          <div class="row">
+            <div class="team">
+              <span class="seed">5</span>
+              <span class="name" contenteditable="false">Player 5</span>
+            </div>
+            <input class="score" type="number" min="0" disabled />
+          </div>
+          <div class="row">
+            <div class="team">
+              <span class="seed">6</span>
+              <span class="name" contenteditable="false">Player 6</span>
+            </div>
+            <input class="score" type="number" min="0" disabled />
+          </div>
+        </div>
+
+        <div class="match" data-match="m4" data-next="qf2" data-slot="away">
+          <div class="row">
+            <div class="team">
+              <span class="seed">7</span>
+              <span class="name" contenteditable="false">Player 7</span>
+            </div>
+            <input class="score" type="number" min="0" disabled />
+          </div>
+          <div class="row">
+            <div class="team">
+              <span class="seed">8</span>
+              <span class="name" contenteditable="false">Player 8</span>
+            </div>
+            <input class="score" type="number" min="0" disabled />
+          </div>
+        </div>
+      </section>
+
+      <!-- Quarterfinals (Left) -->
+      <section class="round" id="qf-left">
+        <div class="round-title">Quarterfinals</div>
+
+        <div class="match" data-match="qf1" data-next="sf1" data-slot="home">
+          <div class="row">
+            <div class="team">
+              <span class="seed">L</span>
+              <span class="name" contenteditable="false">Winner M1</span>
+            </div>
+            <input class="score" type="number" min="0" disabled />
+          </div>
+          <div class="row">
+            <div class="team">
+              <span class="seed">L</span>
+              <span class="name" contenteditable="false">Winner M2</span>
+            </div>
+            <input class="score" type="number" min="0" disabled />
+          </div>
+          <div class="connector"></div>
+        </div>
+
+        <div class="match" data-match="qf2" data-next="sf1" data-slot="away">
+          <div class="row">
+            <div class="team">
+              <span class="seed">L</span>
+              <span class="name" contenteditable="false">Winner M3</span>
+            </div>
+            <input class="score" type="number" min="0" disabled />
+          </div>
+          <div class="row">
+            <div class="team">
+              <span class="seed">L</span>
+              <span class="name" contenteditable="false">Winner M4</span>
+            </div>
+            <input class="score" type="number" min="0" disabled />
+          </div>
+          <div class="connector"></div>
+        </div>
+      </section>
+
+      <!-- Semifinal (Left) -->
+      <section class="round" id="sf-left">
+        <div class="round-title">Semifinal</div>
+
+        <div class="match" data-match="sf1" data-next="final" data-slot="home">
+          <div class="row">
+            <div class="team">
+              <span class="seed">L</span>
+              <span class="name" contenteditable="false">Winner QF1</span>
+            </div>
+            <input class="score" type="number" min="0" disabled />
+          </div>
+          <div class="row">
+            <div class="team">
+              <span class="seed">L</span>
+              <span class="name" contenteditable="false">Winner QF2</span>
+            </div>
+            <input class="score" type="number" min="0" disabled />
+          </div>
+          <div class="connector"></div>
+        </div>
+      </section>
+
+      <!-- FINAL (center) -->
+      <section class="round final" id="final-col">
+        <div class="round-title">Final</div>
+
+        <div class="match" data-match="final" data-next="champion" data-slot="center">
+          <div class="row">
+            <div class="team">
+              <span class="seed">F</span>
+              <span class="name" contenteditable="false">Winner SF1</span>
+            </div>
+            <input class="score" type="number" min="0" disabled />
+          </div>
+          <div class="row">
+            <div class="team">
+              <span class="seed">F</span>
+              <span class="name" contenteditable="false">Winner SF2</span>
+            </div>
+            <input class="score" type="number" min="0" disabled />
+          </div>
+        </div>
+
+        <a href="">
+            <div class="champion" id="championBox" style="margin-top: 16px;">
+              <span class="cup">🏆</span>
+              <span id="championName">Champion</span>
+            </div>
+        </a>
+      </section>
+
+      <!-- Semifinal (Right) -->
+      <section class="round" id="sf-right">
+        <div class="round-title">Semifinal</div>
+
+        <div class="match" data-match="sf2" data-next="final" data-slot="away">
+          <div class="row">
+            <input class="score" type="number" min="0" disabled />
+            <div class="team">
+                <span class="name" contenteditable="false">Winner QF3</span>
+                <span class="seed">R</span>
+            </div>
+          </div>
+          <div class="row">
+            <input class="score" type="number" min="0" disabled />
+            <div class="team">
+                <span class="name" contenteditable="false">Winner QF4</span>
+                <span class="seed">R</span>
+            </div>
+          </div>
+          <div class="connector"></div>
+        </div>
+      </section>
+
+      <!-- Quarterfinals (Right) -->
+      <section class="round" id="qf-right">
+        <div class="round-title">Quarterfinals</div>
+
+        <div class="match" data-match="qf3" data-next="sf2" data-slot="home">
+          <div class="row">
+            <input class="score" type="number" min="0" disabled />
+            <div class="team">
+                <span class="name" contenteditable="false">Winner M5</span>
+                <span class="seed">R</span>
+            </div>
+          </div>
+          <div class="row">
+            <input class="score" type="number" min="0" disabled />
+            <div class="team">
+                <span class="name" contenteditable="false">Winner M6</span>
+                <span class="seed">R</span>
+            </div>
+          </div>
+          <div class="connector"></div>
+        </div>
+
+        <div class="match" data-match="qf4" data-next="sf2" data-slot="away">
+          <div class="row">
+            <input class="score" type="number" min="0" disabled />
+            <div class="team">
+                <span class="name" contenteditable="false">Winner M7</span>
+                <span class="seed">R</span>
+            </div>
+          </div>
+          <div class="row">
+            <input class="score" type="number" min="0" disabled />
+            <div class="team">
+                <span class="name" contenteditable="false">Winner M8</span>
+                <span class="seed">R</span>
+            </div>
+          </div>
+          <div class="connector"></div>
+        </div>
+      </section>
+
+      <!-- Round of 16 (Right: 4 matches) -->
+      <section class="round" id="r16-right">
+        <div class="round-title">Round of 16</div>
+
+        <div class="match" data-match="m5" data-next="qf3" data-slot="home">
+          <div class="row">
+            <input class="score" type="number" min="0" disabled />
+            <div class="team">
+                <span class="name" contenteditable="false">Player 9</span>
+                <span class="seed">9</span>
+            </div>
+          </div>
+          <div class="row">
+            <input class="score" type="number" min="0" disabled />
+            <div class="team">
+                <span class="name" contenteditable="false">Player 10</span>
+                <span class="seed">10</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="match" data-match="m6" data-next="qf3" data-slot="away">
+          <div class="row">
+            <input class="score" type="number" min="0" disabled />
+            <div class="team">
+                <span class="name" contenteditable="false">Player 11</span>
+                <span class="seed">11</span>
+            </div>
+          </div>
+          <div class="row">
+            <input class="score" type="number" min="0" disabled />
+            <div class="team">
+                <span class="name" contenteditable="false">Player 12</span>
+                <span class="seed">12</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="match" data-match="m7" data-next="qf4" data-slot="home">
+          <div class="row">
+            <input class="score" type="number" min="0" disabled />
+            <div class="team">
+                <span class="name" contenteditable="false">Player 13</span>
+                <span class="seed">13</span>
+            </div>
+          </div>
+          <div class="row">
+            <input class="score" type="number" min="0" disabled />
+            <div class="team">
+                <span class="name" contenteditable="false">Player 14</span>
+                <span class="seed">14</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="match" data-match="m8" data-next="qf4" data-slot="away">
+          <div class="row">
+            <input class="score" type="number" min="0" disabled />
+            <div class="team">
+              <span class="name" contenteditable="false">Player 15</span>
+              <span class="seed">15</span>
+            </div>
+          </div>
+          <div class="row">
+            <input class="score" type="number" min="0" disabled />
+            <div class="team">
+              <span class="name" contenteditable="false">Player 16</span>
+              <span class="seed">16</span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
     </div>
-</div>
-</div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 PES Tournament. All rights reserved.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+
+  <script>
+    // ===== Admin lock (local test) =====
+    const ADMIN_PW = 'admin'; // change for your local test
+    const adminToggle = document.getElementById('adminToggle');
+    const adminStatus = document.getElementById('adminStatus');
+    const saveBtn = document.getElementById('saveBracket');
+    const clearBtn = document.getElementById('clearBracket');
+
+    function setAdminMode(on) {
+      const inputs = document.querySelectorAll('.score');
+      const names = document.querySelectorAll('.name');
+      inputs.forEach(i => i.disabled = !on);
+      names.forEach(n => n.setAttribute('contenteditable', on ? 'true' : 'false'));
+      adminStatus.textContent = on ? 'Admin' : 'Viewer';
+      adminStatus.classList.toggle('active', on);
+      saveBtn.disabled = !on;
+      clearBtn.disabled = !on;
+      localStorage.setItem('uplay_is_admin', on ? '1' : '0');
+    }
+    // restore admin state
+    setAdminMode(localStorage.getItem('uplay_is_admin') === '1');
+
+    adminToggle.addEventListener('click', () => {
+      const isAdmin = adminStatus.textContent === 'Admin';
+      if (isAdmin) {
+        setAdminMode(false);
+      } else {
+        const pw = prompt('Enter admin password (local test):');
+        if (pw === ADMIN_PW) setAdminMode(true);
+        else alert('Incorrect password.');
+      }
+    });
+
+    // ===== Bracket auto-advance =====
+    // Map: child match -> next match + slot
+    const forwarding = {};
+    document.querySelectorAll('.match[data-next]').forEach(m => {
+      const id = m.dataset.match;
+      forwarding[id] = { next: m.dataset.next, slot: m.dataset.slot };
+    });
+
+    function getRows(matchEl) {
+      const rows = matchEl.querySelectorAll('.row');
+      return [rows[0], rows[1]];
+    }
+    function extractTeam(row) {
+      return {
+        nameEl: row.querySelector('.name'),
+        scoreEl: row.querySelector('.score'),
+        rowEl: row
+      };
+    }
+
+    function setWinnerStyles(r1, r2, winnerRow) {
+      [r1.rowEl, r2.rowEl].forEach(r => r.classList.remove('winner'));
+      if (winnerRow) winnerRow.rowEl.classList.add('winner');
+    }
+
+    function pushToNext(childMatchId, winnerName) {
+      const map = forwarding[childMatchId];
+      if (!map) return;
+      const nextMatch = document.querySelector(`.match[data-match="${map.next}"]`);
+      if (!nextMatch) return;
+
+      const rows = getRows(nextMatch).map(extractTeam);
+      const target = map.slot === 'away' ? rows[1] : rows[0];
+      target.nameEl.textContent = winnerName || (map.slot === 'away' ? 'TBD' : 'TBD');
+      target.scoreEl.value = '';
+      setWinnerStyles(rows[0], rows[1], null);
+
+      // If next is final and both names are set, clear champion until re-evaluated
+      if (map.next === 'final') {
+        document.getElementById('championName').textContent = 'Champion';
+      }
+    }
+
+    function recalcMatch(matchEl) {
+      const [rowA, rowB] = getRows(matchEl).map(extractTeam);
+
+      const a = parseInt(rowA.scoreEl.value, 10);
+      const b = parseInt(rowB.scoreEl.value, 10);
+
+      // No decision until both filled
+      if (Number.isNaN(a) || Number.isNaN(b)) {
+        setWinnerStyles(rowA, rowB, null);
+        return;
+      }
+
+      if (a === b) {
+        // tie: admin decides later; do not advance
+        setWinnerStyles(rowA, rowB, null);
+        return;
+      }
+
+      const winner = (a > b) ? rowA : rowB;
+      setWinnerStyles(rowA, rowB, winner);
+      pushToNext(matchEl.dataset.match, winner.nameEl.textContent);
+
+      // If we just decided the final, set champion
+      if (matchEl.dataset.match === 'final') {
+        document.getElementById('championName').textContent = winner.nameEl.textContent;
+      }
+    }
+
+    // Hook change events (only fire when admin unlocked)
+    document.querySelectorAll('.score').forEach(inp => {
+      inp.addEventListener('input', e => {
+        if (inp.disabled) return; // viewer
+        const match = inp.closest('.match');
+        recalcMatch(match);
+      });
+    });
+
+    // Also update names propagation if admin edits names of initial R16
+    document.querySelectorAll('.name').forEach(nameEl => {
+      nameEl.addEventListener('blur', () => {
+        if (nameEl.getAttribute('contenteditable') !== 'true') return;
+        // If the edited name already advanced somewhere, keep manual control as scores push forward later
+        // (no immediate propagation needed here).
+      });
+    });
+
+    // ===== Persistence (localStorage) =====
+    function serialize() {
+      const data = {};
+      document.querySelectorAll('.match').forEach(m => {
+        const id = m.dataset.match;
+        const rows = getRows(m).map(extractTeam);
+        data[id] = rows.map(r => ({
+          name: r.nameEl.textContent,
+          score: r.scoreEl.value || ''
+        }));
+      });
+      data['champion'] = document.getElementById('championName').textContent;
+      return data;
+    }
+    function deserialize(data) {
+      if (!data) return;
+      Object.keys(data).forEach(key => {
+        if (key === 'champion') {
+          document.getElementById('championName').textContent = data[key] || 'Champion';
+          return;
+        }
+        const m = document.querySelector(`.match[data-match="${key}"]`);
+        if (!m) return;
+        const rows = getRows(m).map(extractTeam);
+        (data[key] || []).forEach((r, i) => {
+          if (rows[i]) {
+            rows[i].nameEl.textContent = r.name ?? rows[i].nameEl.textContent;
+            rows[i].scoreEl.value = r.score ?? '';
+          }
+        });
+        // Recalc to restore winner styles/advances
+        recalcMatch(m);
+      });
+    }
+
+    const STORAGE_KEY = 'uplay_bracket_v1';
+    // Load
+    try { deserialize(JSON.parse(localStorage.getItem(STORAGE_KEY))); } catch(e){}
+
+    saveBtn.addEventListener('click', () => {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(serialize()));
+      saveBtn.textContent = 'Saved';
+      setTimeout(() => saveBtn.textContent = 'Save', 1200);
+    });
+
+    clearBtn.addEventListener('click', () => {
+      if (!confirm('Clear all scores and names (keeps structure)?')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      // reset all matches
+      document.querySelectorAll('.match').forEach(m => {
+        const rows = m.querySelectorAll('.row');
+        rows.forEach(r => {
+          r.classList.remove('winner');
+          const score = r.querySelector('.score');
+          if (score) score.value = '';
+        });
+      });
+      // reset display names to defaults for R16; others to placeholders
+      const defaults = {
+        m1:['Player 1','Player 2'], m2:['Player 3','Player 4'],
+        m3:['Player 5','Player 6'], m4:['Player 7','Player 8'],
+        m5:['Player 9','Player 10'], m6:['Player 11','Player 12'],
+        m7:['Player 13','Player 14'], m8:['Player 15','Player 16'],
+        qf1:['Winner M1','Winner M2'], qf2:['Winner M3','Winner M4'],
+        qf3:['Winner M5','Winner M6'], qf4:['Winner M7','Winner M8'],
+        sf1:['Winner QF1','Winner QF2'], sf2:['Winner QF3','Winner QF4'],
+        final:['Winner SF1','Winner SF2']
+      };
+      Object.keys(defaults).forEach(id => {
+        const m = document.querySelector(`.match[data-match="${id}"]`);
+        if (!m) return;
+        const names = m.querySelectorAll('.name');
+        names.forEach((n,i)=> n.textContent = defaults[id][i]);
+      });
+      document.getElementById('championName').textContent = 'Champion';
+    });
+
+
+    function placeConnectors() {
+    // For every parent, figure out where its two children sit
+    const parents = new Set(
+        Array.from(document.querySelectorAll('.match[data-next]'))
+            .map(m => m.getAttribute('data-next'))
+    );
+
+    parents.forEach(parentId => {
+        const parent = document.querySelector(`.match[data-match="${parentId}"]`);
+        if (!parent) return;
+
+        const kids = Array.from(document.querySelectorAll(`.match[data-next="${parentId}"]`));
+        if (kids.length !== 2) return;
+
+        const pRect = parent.getBoundingClientRect();
+        const kRect = kids.map(k => k.getBoundingClientRect());
+
+        // Tag each child with flow direction so its short line points the right way
+        kids.forEach((kid, i) => {
+        const toLeft = kRect[i].left > pRect.left;  // child is to the RIGHT of parent → needs line to the LEFT
+        kid.classList.toggle('to-left',  toLeft);
+        kid.classList.toggle('to-right', !toLeft);
+        });
+
+        // Prepare the parent's connector and set its side (left/right)
+        const parentConnector = parent.querySelector('.connector');
+        if (!parentConnector) return;
+
+        const childrenAreLeft  = kRect.every(r => r.left < pRect.left);
+        const childrenAreRight = kRect.every(r => r.left > pRect.left);
+        parentConnector.classList.toggle('left',  childrenAreLeft);
+        parentConnector.classList.toggle('right', childrenAreRight);
+        parentConnector.style.top = (pRect.height/2) + 'px';
+
+        // Compute vertical span between child midpoints
+        const mids = kRect.map(r => r.top + r.height/2);
+        const topY = Math.min(...mids);
+        const botY = Math.max(...mids);
+        const height = botY - topY;
+        const parentMidY = pRect.top + pRect.height/2;
+
+        // Ensure helper nodes exist
+        let v1 = parentConnector.querySelector('.v1');
+        let s1 = parentConnector.querySelector('.s1');
+        let s2 = parentConnector.querySelector('.s2');
+        if (!v1){ v1=document.createElement('div'); v1.className='v1'; parentConnector.appendChild(v1); }
+        if (!s1){ s1=document.createElement('div'); s1.className='s1'; parentConnector.appendChild(s1); }
+        if (!s2){ s2=document.createElement('div'); s2.className='s2'; parentConnector.appendChild(s2); }
+
+        // Place the long vertical and the small horizontal stubs toward each child
+        const stubLen = 16;
+        const verticalX = parentConnector.classList.contains('left') ? -2 : 28;
+        const stubStartX = parentConnector.classList.contains('left') ? -stubLen : 28;
+
+        v1.style.left = verticalX + 'px';
+        v1.style.top  = -(parentMidY - topY) + 'px';
+        v1.style.height = height + 'px';
+
+        s1.style.left = stubStartX + 'px';
+        s2.style.left = stubStartX + 'px';
+        s1.style.top  = -(parentMidY - mids[0]) + 'px';
+        s2.style.top  = -(parentMidY - mids[1]) + 'px';
+        s1.style.width = stubLen + 'px';
+        s2.style.width = stubLen + 'px';
+    });
+    }
+
+    window.addEventListener('load', placeConnectors);
+    window.addEventListener('resize', placeConnectors);
+
+  </script>
+
+  <script>
+document.addEventListener('keydown', function(e) {
+  // Check if Ctrl + Shift + e is pressed
+  if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'e') {
+    const panel = document.getElementById('admin-panel');
+    panel.style.display = (panel.style.display === 'none') ? 'block' : 'none';
+  }
+});
+</script>
 
 </body>
 </html>
