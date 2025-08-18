@@ -644,6 +644,28 @@
           <option value="pc">PC</option>
         </select>
       </div>
+      <p style="font-size: 0.9rem; color: #ccc; margin-top: 1rem;">
+        By registering, you agree to the <a href="#" id="termsLink">Terms & Conditions</a>.
+      </p>
+
+      <!-- Terms & Conditions Modal -->
+      <div id="termsModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>UPlay PES Tournament - Terms & Conditions</h2>
+          <p>By registering and participating in the UPlay PES Tournament, you acknowledge that you have read, understood, and agreed to the following:</p>
+          <ul>
+            <li>All players must register with accurate details.</li>
+            <li>Fair play is mandatory — cheating or misconduct leads to disqualification.</li>
+            <li>Players must attend scheduled matches on time or risk forfeiture.</li>
+            <li>Prizes will be awarded as announced by organizers.</li>
+            <li>Decisions of tournament officials are final and binding.</li>
+            <li>Organizers are not liable for technical issues or personal losses.</li>
+          </ul>
+          <p>By submitting your registration, you confirm agreement to these Terms & Conditions.</p>
+        </div>
+      </div>
+
 
       <button type="submit">Submit</button>
     </form>
@@ -734,7 +756,7 @@
               <span class="seed">7</span>
               <span class="name" contenteditable="false">Player 7</span>
             </div>
-            <input class="score" type="number" min="0" disabled />
+            <input class="score"  type="number" min="0" disabled />
           </div>
           <div class="row">
             <div class="team">
@@ -1148,7 +1170,7 @@
       // Countdown timer
       function countdownTimer() {
         const countdownEl = document.getElementById('countdown');
-        const tournamentDate = new Date('august 15, 2025 12:00:00').getTime();
+        const tournamentDate = new Date('august 30, 2025 12:00:00').getTime();
         const now = new Date().getTime();
         const distance = tournamentDate - now;
 
@@ -1177,6 +1199,64 @@
     });
     </script>
 <script src="javar/bracket.js"></script>
+
+<style>
+/* Modal styles for terms $ condition*/
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0,0,0,0.8);
+}
+.modal-content {
+  background: #111;
+  color: #fff;
+  margin: auto;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 700px;
+  border: 1px solid var(--UPlay-yellow);
+}
+.close {
+  color: var(--UPlay-yellow);
+  float: right;
+  font-size: 28px;
+  cursor: pointer;
+}
+.close:hover { color: red; }
+
+.modal-content ul {
+  text-align: left;
+} 
+</style>
+
+<script>
+  // Modal script
+  const modal = document.getElementById("termsModal");
+  const link = document.getElementById("termsLink");
+  const span = document.getElementsByClassName("close")[0];
+
+  link.onclick = function(e) {
+    e.preventDefault();
+    modal.style.display = "block";
+  }
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+</script>
+
+
 </body>
 </html>
 
