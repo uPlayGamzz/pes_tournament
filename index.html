@@ -48,7 +48,7 @@
       font-family: var(--UPlay-font);
       margin: 0;
       padding: 0;
-      background: #121212;
+      background: #181818;
       color: #fff;
     }
 
@@ -151,6 +151,25 @@
 
     #how-to-join h2{
       margin: 50px auto;
+    }
+
+    #section {
+      padding: 20px 1rem 10px 1rem;
+      background: #201f1f;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 18rem;
+      position: relative;
+      align-items: center;
+      text-align: center;
+      margin: 50px; 
+      border: 1px solid var(--line); 
+      border-radius: 1rem;
+    }
+
+    #section h2{
+      margin: auto;
     }
 
     .steps {
@@ -605,6 +624,32 @@
     </div>
   </section>
 
+  <section id="section">
+    <h2 style="margin: 10px;">Tournament Overview</h2>
+    <div style="margin: 20px auto 15px auto;" class="steps">
+      <div style="border-radius: 1rem; border: 1px solid #ffcc0079; padding: auto 2rem;" class="step" data-aos="fade-up">
+        <img class="logos" src="images/logo/pad-logo.png" alt="Logo" />
+        <h3 style="color: var(--UPlay-yellow); font-weight: bolder; font-size: x-large;">16</h3>
+        <p style="color: #7f7f7f;">Total Players</p>
+      </div>
+      <div style="border-radius: 1rem; border: 1px solid #ffcc0079; padding: auto 2rem;" class="step" data-aos="fade-up" data-aos-delay="100">
+        <img class="logos" src="images/logo/pad-logo.png" alt="Logo" />
+        <h3 style="color: var(--UPlay-yellow); font-weight: bolder; font-size: x-large;">N10,000</h3>
+        <p style="color: #7f7f7f;">Prize Pool</p>
+      </div>
+      <div style="border-radius: 1rem; border: 1px solid #ffcc0079; padding: auto 2rem;" class="step" data-aos="fade-up" data-aos-delay="200">
+        <img class="logos" src="images/logo/pad-logo.png" alt="Logo" />
+        <h3 style="color: var(--UPlay-yellow); font-weight: bolder; font-size: x-large;">15</h3>
+        <p style="color: #7f7f7f;">Tournament Duration</p>
+      </div>
+      <div style="border-radius: 1rem; border: 1px solid #ffcc0079; padding: auto 2rem;" class="step" data-aos="fade-up" data-aos-delay="200">
+        <img class="logos" src="images/logo/pad-logo.png" alt="Logo" />
+        <h3 style="color: var(--UPlay-yellow); font-weight: bolder; font-size: x-large;">8 Rounds</h3>
+        <p style="color: #7f7f7f;">Knockout Stage</p>
+      </div>
+    </div>
+  </section>
+
   <section id="players">
     <h2>Top Players</h2>
     <div class="player-cards">
@@ -652,7 +697,7 @@
       <div id="termsModal" class="modal">
         <div class="modal-content">
           <span class="close">&times;</span>
-          <h2>UPlay PES Tournament - Terms & Conditions</h2>
+          <h2 style="color: white;">UPlay PES Tournament - Terms & Conditions</h2>
           <p>By registering and participating in the UPlay PES Tournament, you acknowledge that you have read, understood, and agreed to the following:</p>
           <ul>
             <li>All players must register with accurate details.</li>
@@ -1212,16 +1257,16 @@
   width: 100%;
   height: 100%;
   overflow: auto;
-  background: rgba(0,0,0,0.8);
+  background: rgba(58, 58, 58, 0.8);
 }
 .modal-content {
-  background: #111;
-  color: #fff;
+  background: #111111e3;
+  color: #cccccc;
   margin: auto;
   padding: 20px;
   border-radius: 12px;
   max-width: 700px;
-  border: 1px solid var(--UPlay-yellow);
+  border: 1px solid #ffcc0090;
 }
 .close {
   color: var(--UPlay-yellow);
