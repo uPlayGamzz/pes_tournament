@@ -1,28 +1,3 @@
-    /* Base / shared styles (aligned to your index.html) */
-    body {
-      font-family: var(--UPlay-font);
-      margin: 0; padding: 0;
-      background: #121212; color: var(--UPlay-text-color);
-    }
-    .navbar {
-      display:flex; justify-content:space-between; align-items:center;
-      padding:1rem 2rem; position:sticky; top:0; z-index:999;
-      background:#1a1a1a80; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-      border-bottom: 1px solid #ffffff34;
-    }
-    .nav-logo { font-size:1.5rem; font-weight:700; display:flex; align-items:center; gap:.5rem; }
-    .nav-logo img { height:15px; rotate:24deg; }
-    nav ul.nav-list { list-style:none; display:flex; gap:1rem; margin:0; padding:0; align-items:center; }
-    nav ul.nav-list li a { color:#fff; text-decoration:none; font-weight:700; }
-    nav ul.nav-list li a:hover { color:var(--UPlay-yellow); }
-    .reg a.cta-button { display:inline-block; padding:.6rem 1.1rem; background:var(--UPlay-yellow); color:#000; border-radius:999px; font-weight:700; }
-    .nav-toggle { display:none; }
-
-    footer {
-      text-align:center; padding:1rem; background:#111; color:#888; font-size:.9rem;
-      border-top: 1px solid #2a2a2a;
-    }
-
     /* Page header */
     .page-hero {
       background: linear-gradient(90deg, rgba(0,0,0,.6), rgba(0,0,0,0)),
@@ -58,6 +33,16 @@
     .btn-primary { background: var(--UPlay-yellow); color:#111; }
     .btn-primary:hover { filter: brightness(0.95); }
 
+    /* Background */
+    .bracket-wrap {
+      position: relative;
+      width: 100%;
+      min-height: 100vh; /* ensure it fills the screen */
+      background: url("../images/stadium.png") center center no-repeat;
+      background-size: cover;
+      background-attachment: scroll; /* ensures it moves with the content */
+      overflow: hidden;
+    }
     /* Bracket layout */
     .bracket-wrap {
       padding: 24px 7% 64px;
@@ -154,6 +139,9 @@
 
 
     /* Final & Champion */
+    .champ {
+      text-align: center;
+    }
     .final .match { border-style: dashed; border-color: var(--UPlay-yellow); }
     .champion {
       text-align:center; font-weight:700; padding: 16px 20px;
@@ -161,6 +149,10 @@
       box-shadow: 0 0 22px rgba(255, 204, 0, .08), inset 0 0 0 1px rgba(255,255,255,.03);
       animation: pulseGlow 2.2s ease-in-out infinite;
       min-width: 240px;
+    }
+
+    a img {
+      width: 150px;
     }
     @keyframes pulseGlow {
       0%,100% { box-shadow: 0 0 22px rgba(255,204,0,.10), inset 0 0 0 1px rgba(255,255,255,.03); transform: translateZ(0); }
@@ -170,8 +162,8 @@
 
     /* Mobile tweaks */
     @media (max-width: 768px) {
-      .navbar { background:#1a1a1af3; backdrop-filter:none; }
       .bracket-wrap { padding: 16px 4% 48px; }
       .match { min-width: 220px; }
       .admin-bar { top: 62px; padding: .5rem 4%; }
     }
+
