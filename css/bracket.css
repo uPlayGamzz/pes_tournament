@@ -129,6 +129,7 @@
     .match.to-right::after { right:-28px; } /* child feeds to a parent on its right */
     .match.to-left::after  { left:-28px;  } /* child feeds to a parent on its left  */
 
+
     /* parent connector (directional) */
     .connector{
     position:absolute;
@@ -149,6 +150,9 @@
       text-align: center;
     }
     .final .match { border-style: dashed; border-color: var(--UPlay-yellow); }
+    .final {
+      margin-top: 150px;
+    }
     .champion {
       text-align:center; font-weight:700; padding: 16px 20px;
       background:#222; border:2px dashed var(--UPlay-yellow); border-radius:16px;
