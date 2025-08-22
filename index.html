@@ -30,6 +30,7 @@
       --UPlay-text-color: white;
       --UPlay-font: 'Orbitron', sans-serif;
       --line: #3a3a3a;
+      --line2: #d6ab01;
       --card: #1f1f1f;
       --card-alt: #242424;
       --accent: #0082ff;
@@ -552,26 +553,26 @@
 
 <body id="body">
   
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <img src="images/logo/pad-logo.png" alt="Logo" />
+      uPlay
+    </div>
+    <div style="display: flex; list-style: none; align-items: center;">
+      <ul class="nav-list">
+        <li><a href="#body">Home</a></li>
+        <li><a href="pages/about.html">About</a></li>
+        <li><a href="#how-to-join">How to Join</a></li>
+        <li><a href="#players">Players</a></li>
+        <li><a href="pages/leaderboard.html"><img src="images/icons/leaderboard-icon.png" alt=""></a></li>
+      </ul>
+      <li class="reg"><a class="cta-button" href="#register">Register</a></li>
+    </div>
+    <div class="nav-toggle" aria-label="Toggle navigation" role="button" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
   <header class="hero" id="header">
-    <nav class="navbar" id="navbar">
-      <div class="nav-logo">
-        <img src="images/logo/pad-logo.png" alt="Logo" />
-        uPlay
-      </div>
-      <div style="display: flex; list-style: none; align-items: center;">
-        <ul class="nav-list">
-          <li><a href="#body">Home</a></li>
-          <li><a href="pages/about.html">About</a></li>
-          <li><a href="#how-to-join">How to Join</a></li>
-          <li><a href="#players">Players</a></li>
-          <li><a href="pages/leaderboard.html"><img src="images/icons/leaderboard-icon.png" alt=""></a></li>
-        </ul>
-        <li class="reg"><a class="cta-button" href="#register">Register</a></li>
-      </div>
-      <div class="nav-toggle" aria-label="Toggle navigation" role="button" tabindex="0">
-        <span></span><span></span><span></span>
-      </div>
-    </nav>
 
     <div class="preloader" id="preloader" style="opacity: 0; display: none;"></div>
 
@@ -594,7 +595,7 @@
           </h>
           
           <a href="#register" class="cta-button2" id="cta-button2">
-            <img style="height: 15px; padding-right: 10px;" src="images/icons/play-▶.png" alt="Logo" />Watch Trailer
+            <img style="height: 15px; width: 15px; padding-right: 10px;" src="images/icons/play-▶.png" alt="Logo" />Watch Trailer
           </a>
       </div>
     </div>
@@ -721,10 +722,11 @@
   </a>
 
 
+  
+<section class="bracket-container">
   <header class="page-hero">
     <h1><span style="color:var(--accent)">PES</span> Bracket <span style="color:var(--UPlay-yellow)">— 16 Players</span></h1>
   </header>
-
   <!-- Admin bar (local test) -->
    <div id="admin-panel" style="display:none;">
        <div class="admin-bar">
@@ -734,320 +736,320 @@
          <button id="clearBracket" class="btn" disabled>Clear</button>
        </div>
    </div>
-
-
-  <!-- Bracket -->
-  <main class="bracket-wrap">
-    <div id="bracket" class="bracket" data-aos="fade-up">
-
-      <!-- Round of 16 (Left side: 4 matches) -->
-      <section class="round" id="r16-left">
-        <div class="round-title">Round of 16</div>
-
-        <div class="match" data-match="m1" data-next="qf1" data-slot="home">
-          <div class="row">
-            <div class="team">
-              <span class="seed">1</span>
-              <span class="name" contenteditable="false">Player 1</span>
-            </div>
-            <input class="score" type="number" min="0" disabled />
-          </div>
-          <div class="row">
-            <div class="team">
-              <span class="seed">2</span>
-              <span class="name" contenteditable="false">Player 2</span>
-            </div>
-            <input class="score" type="number" min="0" disabled />
-          </div>
-        </div>
-
-        <div class="match" data-match="m2" data-next="qf1" data-slot="away">
-          <div class="row">
-            <div class="team">
-              <span class="seed">3</span>
-              <span class="name" contenteditable="false">Player 3</span>
-            </div>
-            <input class="score" type="number" min="0" disabled />
-          </div>
-          <div class="row">
-            <div class="team">
-              <span class="seed">4</span>
-              <span class="name" contenteditable="false">Player 4</span>
-            </div>
-            <input class="score" type="number" min="0" disabled />
-          </div>
-        </div>
-
-        <div class="match" data-match="m3" data-next="qf2" data-slot="home">
-          <div class="row">
-            <div class="team">
-              <span class="seed">5</span>
-              <span class="name" contenteditable="false">Player 5</span>
-            </div>
-            <input class="score" type="number" min="0" disabled />
-          </div>
-          <div class="row">
-            <div class="team">
-              <span class="seed">6</span>
-              <span class="name" contenteditable="false">Player 6</span>
-            </div>
-            <input class="score" type="number" min="0" disabled />
-          </div>
-        </div>
-
-        <div class="match" data-match="m4" data-next="qf2" data-slot="away">
-          <div class="row">
-            <div class="team">
-              <span class="seed">7</span>
-              <span class="name" contenteditable="false">Player 7</span>
-            </div>
-            <input class="score"  type="number" min="0" disabled />
-          </div>
-          <div class="row">
-            <div class="team">
-              <span class="seed">8</span>
-              <span class="name" contenteditable="false">Player 8</span>
-            </div>
-            <input class="score" type="number" min="0" disabled />
-          </div>
-        </div>
-      </section>
-
-      <!-- Quarterfinals (Left) -->
-      <section class="round" id="qf-left">
-        <div class="round-title">Quarterfinals</div>
-
-        <div class="match" data-match="qf1" data-next="sf1" data-slot="home">
-          <div class="row">
-            <div class="team">
-              <span class="seed">L</span>
-              <span class="name" contenteditable="false">Winner M1</span>
-            </div>
-            <input class="score" type="number" min="0" disabled />
-          </div>
-          <div class="row">
-            <div class="team">
-              <span class="seed">L</span>
-              <span class="name" contenteditable="false">Winner M2</span>
-            </div>
-            <input class="score" type="number" min="0" disabled />
-          </div>
-          <div class="connector"></div>
-        </div>
-
-        <div class="match" data-match="qf2" data-next="sf1" data-slot="away">
-          <div class="row">
-            <div class="team">
-              <span class="seed">L</span>
-              <span class="name" contenteditable="false">Winner M3</span>
-            </div>
-            <input class="score" type="number" min="0" disabled />
-          </div>
-          <div class="row">
-            <div class="team">
-              <span class="seed">L</span>
-              <span class="name" contenteditable="false">Winner M4</span>
-            </div>
-            <input class="score" type="number" min="0" disabled />
-          </div>
-          <div class="connector"></div>
-        </div>
-      </section>
-
-      <!-- Semifinal (Left) -->
-      <section class="round" id="sf-left">
-        <div class="round-title">Semifinal</div>
-
-        <div class="match" data-match="sf1" data-next="final" data-slot="home">
-          <div class="row">
-            <div class="team">
-              <span class="seed">L</span>
-              <span class="name" contenteditable="false">Winner QF1</span>
-            </div>
-            <input class="score" type="number" min="0" disabled />
-          </div>
-          <div class="row">
-            <div class="team">
-              <span class="seed">L</span>
-              <span class="name" contenteditable="false">Winner QF2</span>
-            </div>
-            <input class="score" type="number" min="0" disabled />
-          </div>
-          <div class="connector"></div>
-        </div>
-      </section>
-
-      <!-- FINAL (center) -->
-      <section class="round final" id="final-col">
-        <div class="round-title">Final</div>
-
-        <div class="match" data-match="final" data-next="champion" data-slot="center">
-          <div class="row">
-            <div class="team">
-              <span class="seed">F</span>
-              <span class="name" contenteditable="false">Winner SF1</span>
-            </div>
-            <input class="score" type="number" min="0" disabled />
-          </div>
-          <div class="row">
-            <div class="team">
-              <span class="seed">F</span>
-              <span class="name" contenteditable="false">Winner SF2</span>
-            </div>
-            <input class="score" type="number" min="0" disabled />
-          </div>
-        </div>
-
-        <a class="champ">
-          <img src="images/balondor.png" alt="trophy">
-          <div class="champion" id="championBox" style="margin-top: 16px;">
-              <span class="cup">🏆</span>
-              <span id="championName">Champion</span>
-            </div>
-        </a>
-      </section>
-
-      <!-- Semifinal (Right) -->
-      <section class="round" id="sf-right">
-        <div class="round-title">Semifinal</div>
-
-        <div class="match" data-match="sf2" data-next="final" data-slot="away">
-          <div class="row">
-            <input class="score" type="number" min="0" disabled />
-            <div class="team">
-                <span class="name" contenteditable="false">Winner QF3</span>
-                <span class="seed">R</span>
-            </div>
-          </div>
-          <div class="row">
-            <input class="score" type="number" min="0" disabled />
-            <div class="team">
-                <span class="name" contenteditable="false">Winner QF4</span>
-                <span class="seed">R</span>
-            </div>
-          </div>
-          <div class="connector"></div>
-        </div>
-      </section>
-
-      <!-- Quarterfinals (Right) -->
-      <section class="round" id="qf-right">
-        <div class="round-title">Quarterfinals</div>
-
-        <div class="match" data-match="qf3" data-next="sf2" data-slot="home">
-          <div class="row">
-            <input class="score" type="number" min="0" disabled />
-            <div class="team">
-                <span class="name" contenteditable="false">Winner M5</span>
-                <span class="seed">R</span>
-            </div>
-          </div>
-          <div class="row">
-            <input class="score" type="number" min="0" disabled />
-            <div class="team">
-                <span class="name" contenteditable="false">Winner M6</span>
-                <span class="seed">R</span>
-            </div>
-          </div>
-          <div class="connector"></div>
-        </div>
-
-        <div class="match" data-match="qf4" data-next="sf2" data-slot="away">
-          <div class="row">
-            <input class="score" type="number" min="0" disabled />
-            <div class="team">
-                <span class="name" contenteditable="false">Winner M7</span>
-                <span class="seed">R</span>
-            </div>
-          </div>
-          <div class="row">
-            <input class="score" type="number" min="0" disabled />
-            <div class="team">
-                <span class="name" contenteditable="false">Winner M8</span>
-                <span class="seed">R</span>
-            </div>
-          </div>
-          <div class="connector"></div>
-        </div>
-      </section>
-
-      <!-- Round of 16 (Right: 4 matches) -->
-      <section class="round" id="r16-right">
-        <div class="round-title">Round of 16</div>
-
-        <div class="match" data-match="m5" data-next="qf3" data-slot="home">
-          <div class="row">
-            <input class="score" type="number" min="0" disabled />
-            <div class="team">
-                <span class="name" contenteditable="false">Player 9</span>
-                <span class="seed">9</span>
-            </div>
-          </div>
-          <div class="row">
-            <input class="score" type="number" min="0" disabled />
-            <div class="team">
-                <span class="name" contenteditable="false">Player 10</span>
-                <span class="seed">10</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="match" data-match="m6" data-next="qf3" data-slot="away">
-          <div class="row">
-            <input class="score" type="number" min="0" disabled />
-            <div class="team">
-                <span class="name" contenteditable="false">Player 11</span>
-                <span class="seed">11</span>
-            </div>
-          </div>
-          <div class="row">
-            <input class="score" type="number" min="0" disabled />
-            <div class="team">
-                <span class="name" contenteditable="false">Player 12</span>
-                <span class="seed">12</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="match" data-match="m7" data-next="qf4" data-slot="home">
-          <div class="row">
-            <input class="score" type="number" min="0" disabled />
-            <div class="team">
-                <span class="name" contenteditable="false">Player 13</span>
-                <span class="seed">13</span>
-            </div>
-          </div>
-          <div class="row">
-            <input class="score" type="number" min="0" disabled />
-            <div class="team">
-                <span class="name" contenteditable="false">Player 14</span>
-                <span class="seed">14</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="match" data-match="m8" data-next="qf4" data-slot="away">
-          <div class="row">
-            <input class="score" type="number" min="0" disabled />
-            <div class="team">
-              <span class="name" contenteditable="false">Player 15</span>
-              <span class="seed">15</span>
-            </div>
-          </div>
-          <div class="row">
-            <input class="score" type="number" min="0" disabled />
-            <div class="team">
-              <span class="name" contenteditable="false">Player 16</span>
-              <span class="seed">16</span>
-            </div>
-          </div>
-        </div>
-
-      </section>
-
-
-    </div>
-  </main>
+   <!-- Bracket -->
+   <main class="bracket-wrap">
+     
+       <div id="bracket" class="bracket" data-aos="fade-up">
+   
+         <!-- Round of 16 (Left side: 4 matches) -->
+         <section class="round" id="r16-left">
+           <div class="round-title">Round of 16</div>
+   
+           <div class="match" data-match="m1" data-next="qf1" data-slot="home">
+             <div class="row">
+               <div class="team">
+                 <span class="seed">1</span>
+                 <span class="name" contenteditable="false">Player 1</span>
+               </div>
+               <input class="score" type="number" min="0" disabled />
+             </div>
+             <div class="row">
+               <div class="team">
+                 <span class="seed">2</span>
+                 <span class="name" contenteditable="false">Player 2</span>
+               </div>
+               <input class="score" type="number" min="0" disabled />
+             </div>
+           </div>
+   
+           <div class="match" data-match="m2" data-next="qf1" data-slot="away">
+             <div class="row">
+               <div class="team">
+                 <span class="seed">3</span>
+                 <span class="name" contenteditable="false">Player 3</span>
+               </div>
+               <input class="score" type="number" min="0" disabled />
+             </div>
+             <div class="row">
+               <div class="team">
+                 <span class="seed">4</span>
+                 <span class="name" contenteditable="false">Player 4</span>
+               </div>
+               <input class="score" type="number" min="0" disabled />
+             </div>
+           </div>
+   
+           <div class="match" data-match="m3" data-next="qf2" data-slot="home">
+             <div class="row">
+               <div class="team">
+                 <span class="seed">5</span>
+                 <span class="name" contenteditable="false">Player 5</span>
+               </div>
+               <input class="score" type="number" min="0" disabled />
+             </div>
+             <div class="row">
+               <div class="team">
+                 <span class="seed">6</span>
+                 <span class="name" contenteditable="false">Player 6</span>
+               </div>
+               <input class="score" type="number" min="0" disabled />
+             </div>
+           </div>
+   
+           <div class="match" data-match="m4" data-next="qf2" data-slot="away">
+             <div class="row">
+               <div class="team">
+                 <span class="seed">7</span>
+                 <span class="name" contenteditable="false">Player 7</span>
+               </div>
+               <input class="score"  type="number" min="0" disabled />
+             </div>
+             <div class="row">
+               <div class="team">
+                 <span class="seed">8</span>
+                 <span class="name" contenteditable="false">Player 8</span>
+               </div>
+               <input class="score" type="number" min="0" disabled />
+             </div>
+           </div>
+         </section>
+   
+         <!-- Quarterfinals (Left) -->
+         <section class="round" id="qf-left">
+           <div class="round-title">Quarterfinals</div>
+   
+           <div class="match" data-match="qf1" data-next="sf1" data-slot="home">
+             <div class="row">
+               <div class="team">
+                 <span class="seed">L</span>
+                 <span class="name" contenteditable="false">Winner M1</span>
+               </div>
+               <input class="score" type="number" min="0" disabled />
+             </div>
+             <div class="row">
+               <div class="team">
+                 <span class="seed">L</span>
+                 <span class="name" contenteditable="false">Winner M2</span>
+               </div>
+               <input class="score" type="number" min="0" disabled />
+             </div>
+             <div class="connector"></div>
+           </div>
+   
+           <div class="match" data-match="qf2" data-next="sf1" data-slot="away">
+             <div class="row">
+               <div class="team">
+                 <span class="seed">L</span>
+                 <span class="name" contenteditable="false">Winner M3</span>
+               </div>
+               <input class="score" type="number" min="0" disabled />
+             </div>
+             <div class="row">
+               <div class="team">
+                 <span class="seed">L</span>
+                 <span class="name" contenteditable="false">Winner M4</span>
+               </div>
+               <input class="score" type="number" min="0" disabled />
+             </div>
+             <div class="connector"></div>
+           </div>
+         </section>
+   
+         <!-- Semifinal (Left) -->
+         <section class="round" id="sf-left">
+           <div class="round-title">Semifinal</div>
+   
+           <div class="match" data-match="sf1" data-next="final" data-slot="home">
+             <div class="row">
+               <div class="team">
+                 <span class="seed">L</span>
+                 <span class="name" contenteditable="false">Winner QF1</span>
+               </div>
+               <input class="score" type="number" min="0" disabled />
+             </div>
+             <div class="row">
+               <div class="team">
+                 <span class="seed">L</span>
+                 <span class="name" contenteditable="false">Winner QF2</span>
+               </div>
+               <input class="score" type="number" min="0" disabled />
+             </div>
+             <div class="connector"></div>
+           </div>
+         </section>
+   
+         <!-- FINAL (center) -->
+         <section class="round final" id="final-col">
+           <div class="round-title">Final</div>
+   
+           <div class="match" data-match="final" data-next="champion" data-slot="center">
+             <div class="row">
+               <div class="team">
+                 <span class="seed">F</span>
+                 <span class="name" contenteditable="false">Winner SF1</span>
+               </div>
+               <input class="score" type="number" min="0" disabled />
+             </div>
+             <div class="row">
+               <div class="team">
+                 <span class="seed">F</span>
+                 <span class="name" contenteditable="false">Winner SF2</span>
+               </div>
+               <input class="score" type="number" min="0" disabled />
+             </div>
+           </div>
+   
+           <a class="champ">
+             <img src="images/balondor.png" alt="trophy">
+             <div class="champion" id="championBox" style="margin-top: 16px;">
+                 <span class="cup">🏆</span>
+                 <span id="championName">Champion</span>
+               </div>
+           </a>
+         </section>
+   
+         <!-- Semifinal (Right) -->
+         <section class="round" id="sf-right">
+           <div class="round-title">Semifinal</div>
+   
+           <div class="match" data-match="sf2" data-next="final" data-slot="away">
+             <div class="row">
+               <input class="score" type="number" min="0" disabled />
+               <div class="team">
+                   <span class="name" contenteditable="false">Winner QF3</span>
+                   <span class="seed">R</span>
+               </div>
+             </div>
+             <div class="row">
+               <input class="score" type="number" min="0" disabled />
+               <div class="team">
+                   <span class="name" contenteditable="false">Winner QF4</span>
+                   <span class="seed">R</span>
+               </div>
+             </div>
+             <div class="connector"></div>
+           </div>
+         </section>
+   
+         <!-- Quarterfinals (Right) -->
+         <section class="round" id="qf-right">
+           <div class="round-title">Quarterfinals</div>
+   
+           <div class="match" data-match="qf3" data-next="sf2" data-slot="home">
+             <div class="row">
+               <input class="score" type="number" min="0" disabled />
+               <div class="team">
+                   <span class="name" contenteditable="false">Winner M5</span>
+                   <span class="seed">R</span>
+               </div>
+             </div>
+             <div class="row">
+               <input class="score" type="number" min="0" disabled />
+               <div class="team">
+                   <span class="name" contenteditable="false">Winner M6</span>
+                   <span class="seed">R</span>
+               </div>
+             </div>
+             <div class="connector"></div>
+           </div>
+   
+           <div class="match" data-match="qf4" data-next="sf2" data-slot="away">
+             <div class="row">
+               <input class="score" type="number" min="0" disabled />
+               <div class="team">
+                   <span class="name" contenteditable="false">Winner M7</span>
+                   <span class="seed">R</span>
+               </div>
+             </div>
+             <div class="row">
+               <input class="score" type="number" min="0" disabled />
+               <div class="team">
+                   <span class="name" contenteditable="false">Winner M8</span>
+                   <span class="seed">R</span>
+               </div>
+             </div>
+             <div class="connector"></div>
+           </div>
+         </section>
+   
+         <!-- Round of 16 (Right: 4 matches) -->
+         <section class="round" id="r16-right">
+           <div class="round-title">Round of 16</div>
+   
+           <div class="match" data-match="m5" data-next="qf3" data-slot="home">
+             <div class="row">
+               <input class="score" type="number" min="0" disabled />
+               <div class="team">
+                   <span class="name" contenteditable="false">Player 9</span>
+                   <span class="seed">9</span>
+               </div>
+             </div>
+             <div class="row">
+               <input class="score" type="number" min="0" disabled />
+               <div class="team">
+                   <span class="name" contenteditable="false">Player 10</span>
+                   <span class="seed">10</span>
+               </div>
+             </div>
+           </div>
+   
+           <div class="match" data-match="m6" data-next="qf3" data-slot="away">
+             <div class="row">
+               <input class="score" type="number" min="0" disabled />
+               <div class="team">
+                   <span class="name" contenteditable="false">Player 11</span>
+                   <span class="seed">11</span>
+               </div>
+             </div>
+             <div class="row">
+               <input class="score" type="number" min="0" disabled />
+               <div class="team">
+                   <span class="name" contenteditable="false">Player 12</span>
+                   <span class="seed">12</span>
+               </div>
+             </div>
+           </div>
+   
+           <div class="match" data-match="m7" data-next="qf4" data-slot="home">
+             <div class="row">
+               <input class="score" type="number" min="0" disabled />
+               <div class="team">
+                   <span class="name" contenteditable="false">Player 13</span>
+                   <span class="seed">13</span>
+               </div>
+             </div>
+             <div class="row">
+               <input class="score" type="number" min="0" disabled />
+               <div class="team">
+                   <span class="name" contenteditable="false">Player 14</span>
+                   <span class="seed">14</span>
+               </div>
+             </div>
+           </div>
+   
+           <div class="match" data-match="m8" data-next="qf4" data-slot="away">
+             <div class="row">
+               <input class="score" type="number" min="0" disabled />
+               <div class="team">
+                 <span class="name" contenteditable="false">Player 15</span>
+                 <span class="seed">15</span>
+               </div>
+             </div>
+             <div class="row">
+               <input class="score" type="number" min="0" disabled />
+               <div class="team">
+                 <span class="name" contenteditable="false">Player 16</span>
+                 <span class="seed">16</span>
+               </div>
+             </div>
+           </div>
+   
+         </section>
+   
+   
+       </div>
+</section>  
+</main>
 
 <style>
   /* .bracket-container {

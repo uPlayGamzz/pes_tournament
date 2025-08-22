@@ -1,9 +1,9 @@
     /* Page header */
     .page-hero {
-      background: linear-gradient(90deg, rgba(0,0,0,.6), rgba(0,0,0,0)),
-                  url('images/stadium-night.png') center/cover no-repeat;
+      background: linear-gradient(180deg, #191919, #191919f3, #191919bf, #19191900),
+                  center/cover no-repeat;
       padding: 48px 7% 24px;
-      border-bottom: 1px solid #1f1f1f;
+      /* border-bottom: 1px solid #b4b4b4be; */
     }
     .page-hero h1 {
       margin: 0 0 .25rem 0; font-size: clamp(1.8rem, 2.5vw, 2.6rem);
@@ -34,27 +34,31 @@
     .btn-primary:hover { filter: brightness(0.95); }
 
     /* Background */
-    .bracket-wrap {
-      position: relative;
-      width: 100%;
-      min-height: 100vh; /* ensure it fills the screen */
+    .bracket-container {
       background: url("../images/stadium.png") center center no-repeat;
       background-size: cover;
       background-attachment: scroll; /* ensures it moves with the content */
       overflow: hidden;
+
+    }
+    .bracket-wrap {
+      position: relative;
+      width: 100%;
+      min-height: fit-content; /* ensure it fills the screen */
     }
     /* Bracket layout */
     .bracket-wrap {
-      padding: 24px 7% 64px;
+      padding: 0px 0 64px 0;
       overflow-x: auto; /* allow horizontal scroll on small screens */
     }
     .bracket {
+      padding: 30px 40px;
       display: grid;
       grid-auto-flow: column;
       grid-auto-columns: max-content;
       gap: 56px;
       align-items: center;
-      min-width: 980px; /* keep structure widthy; still scrollable on phones */
+      min-width: fit-content; /* keep structure widthy; still scrollable on phones */
     }
 
     .round {
@@ -63,7 +67,7 @@
       position: relative;
     }
     .round-title {
-      text-align:center; color:#bdbdbd; font-size:.95rem; margin-bottom: .25rem;
+      text-align:center; color:white; font-size:.95rem; margin-bottom: .25rem;
     }
 
     /* Match card */
@@ -85,6 +89,7 @@
     }
     .row + .row { margin-top: 8px; }
     .row.winner {
+      color: red;
       background: rgba(255,204,0,0.15);
       border-color: var(--UPlay-yellow);
     }
@@ -96,6 +101,7 @@
       padding:.12rem .38rem; border-radius:6px; min-width: 1.6rem; text-align:center;
     }
     .name {
+      color: rgb(198, 197, 197);
       flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
     }
     .name[contenteditable="true"] { outline: 1px dashed #444; border-radius:6px; padding:0 2px; }
@@ -116,9 +122,9 @@
     .match::after{
     content:"";
     position:absolute;
-    top:50%;
+    top: 50.5%;
     width:28px; height:2px;
-    background:var(--line);
+    background:var(--line2);
     }
     .match.to-right::after { right:-28px; } /* child feeds to a parent on its right */
     .match.to-left::after  { left:-28px;  } /* child feeds to a parent on its left  */
@@ -128,14 +134,14 @@
     position:absolute;
     top:50%;
     width:28px; height:2px;
-    background:var(--line);
+    background:var(--line2);
     }
     .connector.left  { left:-28px;  }  /* children are on the left  */
     .connector.right { right:-28px; }  /* children are on the right */
 
     /* optional: shared bits created by JS */
-    .connector .v1,.connector .v2{ position:absolute; width:2px; background:var(--line); }
-    .connector .s1,.connector .s2{ position:absolute; height:2px; background:var(--line); }
+    .connector .v1,.connector .v2{ position:absolute; width:2px; background:var(--line2); }
+    .connector .s1,.connector .s2{ position:absolute; height:2px; background:var(--line2); }
 
 
     /* Final & Champion */
@@ -162,7 +168,7 @@
 
     /* Mobile tweaks */
     @media (max-width: 768px) {
-      .bracket-wrap { padding: 16px 4% 48px; }
+      .bracket-wrap { padding: 0px 0 48px 0; min-height: fit-content; }
       .match { min-width: 220px; }
       .admin-bar { top: 62px; padding: .5rem 4%; }
     }
