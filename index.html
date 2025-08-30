@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PES Tournament</title>
+  <title>Uplay</title>
   <link sizes="32x32" rel="icon" href="images/logo/pad-logo-title.png" type="image/png">
 
   <!-- Fonts and icons -->
@@ -593,11 +593,15 @@
           <h class="cta-button-container">
             <a href="#register" class="cta-button-media">Register Now</a>
           </h>
+          <a href="#" class="flyer" id="cta-button2">
           
-          <a href="#register" class="cta-button2" id="cta-button2">
-            <img style="height: 15px; width: 15px; padding-right: 10px;" src="images/icons/play-▶.png" alt="Logo" />Watch Trailer
+            <img style="height: 15px; width: 15px; padding-right: 10px;" src="images/icons/flyer.png" alt="Logo" />Flyer
           </a>
       </div>
+      
+        <div class="flyerPics">
+          <img src="images/balondor.png" alt="">
+        </div>
     </div>
   </header>
 
@@ -1204,7 +1208,7 @@
       // Scroll to top button
       const scrollToTopBtn = document.getElementById('scrollToTop');
       window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
+        if (window.scrollY > 500) {
           scrollToTopBtn.classList.add('show');
         } else {
           scrollToTopBtn.classList.remove('show');
