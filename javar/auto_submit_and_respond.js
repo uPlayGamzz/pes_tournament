@@ -23,83 +23,51 @@ function clearSelect(sel) {
 }
 
 // Populate selects but preserve current selection if still valid
-async function populateSelects() {
-  const playerSelect = document.getElementById("playercode");
-  const opponentSelect = document.getElementById("opponentcode");
+function populateSelects(players) {
+  const { playerSel, oppSel } = getSelects();
+  if (!playerSel || !oppSel) return;
 
-  try {
-    const res = await fetch('${WEBAPP_URL}?action=availableCodes');
-    const data = await res.json();
+  const prevPlayer = playerSel.value || "";
+  const prevOpp = oppSel.value || "";
 
-    if (!data.success) throw new Error(data.error || "Failed to load codes");
+  // rebuild both selects
+  clearSelect(playerSel);
+  clearSelect(oppSel);
 
-    playerSelect.innerHTML = "";
-    opponentSelect.innerHTML = "";
+  playerSel.add(new Option("-- Select --", ""));
+  oppSel.add(new Option("-- Select --", ""));
 
-    data.players.forEach(p => {
-      const { code, availableSelf, availableOpponent, matchedWith } = p;
+  players.forEach(p => {
+    const code = String(p.code || "").trim();
+    const availableSelf = !!p.availableSelf;
+    const availableOpponent = !!p.availableOpponent;
 
-      // --- PlayerCode dropdown ---
-      if (availableSelf) {
-        const opt = document.createElement("option");
-        opt.value = code;
-        opt.textContent = code;
-        playerSelect.appendChild(opt);
-      }
+    // Player select option
+    const opt1 = new Option(code + (availableSelf ? "" : " (taken)"), code);
+    if (!availableSelf) opt1.disabled = true;
+    playerSel.add(opt1);
 
-      // --- OpponentCode dropdown ---
-      if (availableOpponent) {
-        const opt = document.createElement("option");
-        opt.value = code;
-        opt.textContent = code;
-
-        // If this code is already matched, only allow its existing partner to choose it
-        if (matchedWith) {
-          opt.dataset.matchedWith = matchedWith;
-        }
-
-        opponentSelect.appendChild(opt);
-      }
-    });
-
-  } catch (err) {
-    console.error("Failed to populate codes:", err);
-    alert("Could not load player codes. Try refresh or contact admin.");
-  }
-}
-
-// Auto-restrict opponent when a player is already matched
-document.addEventListener("change", (e) => {
-  if (e.target.id !== "playercode") return;
-
-  const playerSelect = e.target;
-  const opponentSelect = document.getElementById("opponentcode");
-
-  const chosenPlayer = playerSelect.value;
-  if (!chosenPlayer) return;
-
-  // Find the chosen player's option in opponent list
-  const allOpts = Array.from(opponentSelect.options);
-
-  // Look for "matchedWith" tag in opponent options
-  let matchedPartner = null;
-  allOpts.forEach(opt => {
-    if (opt.dataset.matchedWith === chosenPlayer) {
-      matchedPartner = opt.value;
-    }
+    // Opponent select option
+    const opt2 = new Option(code + (availableOpponent ? "" : " (taken)"), code);
+    if (!availableOpponent) opt2.disabled = true;
+    // allow matchedWith if backend supplies it (optional)
+    if (p.matchedWith) opt2.dataset.matchedWith = p.matchedWith;
+    oppSel.add(opt2);
   });
 
-  // If player has a matched partner, restrict to that only
-  if (matchedPartner) {
-    allOpts.forEach(opt => {
-      opt.disabled = opt.value !== matchedPartner;
-    });
-    opponentSelect.value = matchedPartner; // auto-fill
-  } else {
-    // Reset: re-enable all opponent options
-    allOpts.forEach(opt => opt.disabled = false);
+  // restore previous selections if still available, otherwise clear
+  if (prevPlayer) {
+    const found = Array.from(playerSel.options).find(o => o.value === prevPlayer && !o.disabled);
+    playerSel.value = found ? prevPlayer : "";
   }
-});
+  if (prevOpp) {
+    const found = Array.from(oppSel.options).find(o => o.value === prevOpp && !o.disabled);
+    oppSel.value = found ? prevOpp : "";
+  }
+
+  // make sure player selection is disabled in opponent list
+  syncSelectionToOpponent();
+}
 
 // If player selects a code, disable that option in the opponent select
 function syncSelectionToOpponent() {
@@ -107,11 +75,16 @@ function syncSelectionToOpponent() {
   if (!playerSel || !oppSel) return;
   const chosen = playerSel.value;
 
-  for (let i = 0; i < oppSel.options.length; i++) {
-    const opt = oppSel.options[i];
-    if (opt.value === chosen) {
-      opt.disabled = true;
-      if (oppSel.value === chosen) oppSel.value = ""; // clear if it was selected
+  // enable all first
+  for (let i = 0; i < oppSel.options.length; i++) oppSel.options[i].disabled = false;
+
+  if (chosen) {
+    for (let i = 0; i < oppSel.options.length; i++) {
+      const opt = oppSel.options[i];
+      if (opt.value === chosen) {
+        opt.disabled = true;
+        if (oppSel.value === chosen) oppSel.value = ""; // clear if it was selected
+      }
     }
   }
 }
@@ -121,18 +94,15 @@ async function loadAvailableCodes() {
   if (isSubmitting) return;
 
   const { playerSel, oppSel } = getSelects();
+  // if user is actively interacting with selects, skip refresh
   if (document.activeElement === playerSel || document.activeElement === oppSel) {
     return;
   }
 
   try {
-    const res = await fetch(WEBAPP_URL + "?action=availableCodes");
+    const res = await fetch(${WEBAPP_URL}?action=availableCodes);
     const json = await res.json();
     if (!json.success) throw new Error(json.error || "Failed fetching codes");
-
-    // Now backend must return players with "matchedWith" info
-    // Example:
-    // { code: "Player_02", availableSelf: false, availableOpponent: false, matchedWith: "Player_01" }
 
     populateSelects(json.players || []);
   } catch (err) {
@@ -144,7 +114,7 @@ async function loadAvailableCodes() {
   }
 }
 
-// Robustly read form values
+// Robustly read form values (handles name/id variants)
 function readFormValues(form) {
   const get = (names) => {
     for (const n of names) {
@@ -164,11 +134,20 @@ function readFormValues(form) {
   };
 }
 
+// Main init
 document.addEventListener("DOMContentLoaded", () => {
   loadAvailableCodes();
 
+  // refresh codes every 12s (optional). If you want it enabled, uncomment:
+  // setInterval(loadAvailableCodes, 12000);
+
   const { playerSel, oppSel } = getSelects();
-  if (playerSel) playerSel.addEventListener("change", () => syncSelectionToOpponent());
+  if (playerSel) playerSel.addEventListener("change", () => {
+    syncSelectionToOpponent();
+    // also run the "player->opponent matched" behavior if server provides matchedWith
+    const ev = new Event('change', { bubbles: true });
+    playerSel.dispatchEvent(ev);
+  });
   if (oppSel) oppSel.addEventListener("change", () => syncSelectionToOpponent());
 
   const form = document.getElementById("regForm") || document.querySelector("form[id='regForm']") || document.querySelector("form");
@@ -191,7 +170,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      const checkRes = await fetch(WEBAPP_URL + "?action=availableCodes");
+      // Re-check availability before final submission
+      const checkRes = await fetch(${WEBAPP_URL}?action=availableCodes);
       const j = await checkRes.json();
       if (!j.success) throw new Error(j.error || "Could not re-check availability");
 
