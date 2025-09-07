@@ -222,7 +222,7 @@
       background: #ffcc00;
       color: #000;
       font-weight: bold;
-      border-radius: 50px;
+      border-radius: 0px;
       text-decoration: none;
       transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
       animation: breathe 1.3s infinite;
@@ -243,7 +243,7 @@
       background: #ffcc00;
       color: #000;
       font-weight: bold;
-      border-radius: 50px;
+      border-radius: 0px;
       text-decoration: none;
       transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
       animation: breathe 1.3s infinite;
@@ -267,7 +267,7 @@
       color: #ffffff;
       font-weight: bold;
       border: 1.5px solid, white;
-      border-radius: 50px;
+      border-radius: 0px;
       text-decoration: none;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
@@ -353,18 +353,32 @@
       text-align: center;
     }
 
-    #register form {
+    #register form{
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 2rem;
       max-width: 400px;
       margin: 50px auto 20px auto;
+    }
+
+    .form-inputs {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-inputs h {
+      margin: 0;
+      color: #ccc;
+      font-size: smaller;
+
     }
 
     #register input,
     #register button, #register select  {
       padding: 0.8rem;
-      border-radius: 8px;
+      border-radius: 0px;
       border: none;
       font-size: 1rem;
     }
@@ -599,9 +613,9 @@
           </a>
       </div>
       
-        <div class="flyerPics">
+        <!-- <div class="flyerPics">
           <img src="images/balondor.png" alt="">
-        </div>
+        </div> -->
     </div>
   </header>
 
@@ -679,24 +693,81 @@
   <section id="register">
     <h1>PES Tournament Registration</h1>
     <p style="color: #ccc;">Secure your spot in the championship tournament</p>
-    <form action="https://api.web3forms.com/submit" method="POST">
+    <form id="regForm" method="POST" enctype="multipart/form-data">
+    <!-- <form action="https://api.web3forms.com/submit" method="POST"> -->
     <!-- <form action="https://hooks.zapier.com/hooks/catch/24431614/uha7orx/" method="POST"> -->
-      <input type="hidden" name="access_key" value="560fb351-dfe6-49f4-acb8-2cfe1447ecee"> <!--uplaygamzz@gmail.com-->
+      <!-- <input type="hidden" name="access_key" value="560fb351-dfe6-49f4-acb8-2cfe1447ecee"> uplaygamzz@gmail.com -->
       <!--input type="hidden" name="access_key" value="c31a9d61-842a-4048-9d56-622f6cfcac35"--> <!-- emmanuelovie2004@gmail.com -->
       
       <input type="hidden" name="redirect" value="https://fiofio24.github.io/pes_tournament/pages/thankyou.html">
-      <input type="hidden" name="auto_response" value="Thanks for registering for the PES Tournament! We'll contact you soon.">
+      <!-- <input type="hidden" name="auto_response" value="Thanks for registering for the PES Tournament! We'll contact you soon."> -->
 
-      <input type="text" id="name" name="name" placeholder="Your Name" required>
-      <input type="email" id="email" name="email" placeholder="Your Email" required>
-      <div style="padding: 0.8rem; border-radius: 8px; border: none; background: #2a2a2a; color: #fff; padding: 0; display: flex; justify-content: space-between; text-align: left;">
-        <select style="width: 97.5%;" id="platform" name="platform" required>
-          <option style="color: gray;" value="">-- Select Platform --</option>
-          <option value="ps5">PS5</option>
-          <option value="ps4">PS4</option>
-          <option value="pc">PC</option>
-        </select>
+      <div class="form-inputs">
+        <h>Username :</h>  
+        <input type="text" id="name" name="name" placeholder="player_x" required>
       </div>
+
+      <div class="form-inputs">
+        <h>Email :</h>
+        <input type="email" id="email" name="email" placeholder="example@email.com" required>
+      </div>
+      
+      <div class="form-inputs">
+        <h>Choose Your Code :</h>
+        <div style="padding: 0.8rem; border: none; background: #2a2a2a; color: #fff; padding: 0; display: flex; justify-content: space-between; text-align: left;">
+          <select style="width: 97.5%;" id="playercode" name="playercode" required>
+            <option style="color: gray;" value="">-- Player Code --</option>
+            <option value="player_01">player_01</option>
+            <option value="player_02">player_02</option>
+            <option value="player_03">player_03</option>
+            <option value="player_04">player_04</option>
+            <option value="player_05">player_05</option>
+            <option value="player_06">player_06</option>
+            <option value="player_07">player_07</option>
+            <option value="player_08">player_08</option>
+            <option value="player_09">player_09</option>
+            <option value="player_10">player_10</option>
+            <option value="player_11">player_11</option>
+            <option value="player_12">player_12</option>
+            <option value="player_13">player_13</option>
+            <option value="player_14">player_14</option>
+            <option value="player_15">player_15</option>
+            <option value="player_16">player_16</option>
+          </select>
+        </div>
+      </div>
+  
+      <div class="form-inputs">
+        <h>Choose Opponent Code :</h>
+        <div style="padding: 0.8rem; border: none; background: #2a2a2a; color: #fff; padding: 0; display: flex; justify-content: space-between; text-align: left;">
+          <select style="width: 97.5%;" id="opponentcode" name="opponentcode" required>
+            <option style="color: gray;" value="">-- Opponent Code --</option>
+            <option value="player_01">player_01</option>
+            <option value="player_02">player_02</option>
+            <option value="player_03">player_03</option>
+            <option value="player_04">player_04</option>
+            <option value="player_05">player_05</option>
+            <option value="player_06">player_06</option>
+            <option value="player_07">player_07</option>
+            <option value="player_08">player_08</option>
+            <option value="player_09">player_09</option>
+            <option value="player_10">player_10</option>
+            <option value="player_11">player_11</option>
+            <option value="player_12">player_12</option>
+            <option value="player_13">player_13</option>
+            <option value="player_14">player_14</option>
+            <option value="player_15">player_15</option>
+            <option value="player_16">player_16</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- <div class="form-inputs"> -->
+        <!-- 📎 Upload Payment Receipt -->
+         <!-- <h>Upload Your Payment Receipt :</h>
+        <input type="file" id="receiptFile" name="receiptFile" accept="image/*,application/pdf" required>
+      </div> -->
+
       <p style="font-size: 0.9rem; color: #ccc; margin-top: 1rem;">
         By registering, you agree to the <a href="#" id="termsLink">Terms & Conditions</a>.
       </p>
@@ -718,7 +789,6 @@
           <p>By submitting your registration, you confirm agreement to these Terms & Conditions.</p>
         </div>
       </div>
-
 
       <button type="submit">Submit</button>
     </form>
@@ -755,68 +825,68 @@
            <div class="match" data-match="m1" data-next="qf1" data-slot="home">
              <div class="row">
                <div class="team">
-                 <span class="seed">1</span>
-                 <span class="name" contenteditable="false">Player 1</span>
+                 <span class="seed">01</span>
+                 <span class="name" contenteditable="false">Player_01</span>
                </div>
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
              </div>
              <div class="row">
                <div class="team">
-                 <span class="seed">2</span>
-                 <span class="name" contenteditable="false">Player 2</span>
+                 <span class="seed">02</span>
+                 <span class="name" contenteditable="false">Player_02</span>
                </div>
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
              </div>
            </div>
    
            <div class="match" data-match="m2" data-next="qf1" data-slot="away">
              <div class="row">
                <div class="team">
-                 <span class="seed">3</span>
-                 <span class="name" contenteditable="false">Player 3</span>
+                 <span class="seed">03</span>
+                 <span class="name" contenteditable="false">Player_03</span>
                </div>
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
              </div>
              <div class="row">
                <div class="team">
-                 <span class="seed">4</span>
-                 <span class="name" contenteditable="false">Player 4</span>
+                 <span class="seed">04</span>
+                 <span class="name" contenteditable="false">Player_04</span>
                </div>
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
              </div>
            </div>
    
            <div class="match" data-match="m3" data-next="qf2" data-slot="home">
              <div class="row">
                <div class="team">
-                 <span class="seed">5</span>
-                 <span class="name" contenteditable="false">Player 5</span>
+                 <span class="seed">05</span>
+                 <span class="name" contenteditable="false">Player_05</span>
                </div>
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
              </div>
              <div class="row">
                <div class="team">
-                 <span class="seed">6</span>
-                 <span class="name" contenteditable="false">Player 6</span>
+                 <span class="seed">06</span>
+                 <span class="name" contenteditable="false">Player_06</span>
                </div>
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
              </div>
            </div>
    
            <div class="match" data-match="m4" data-next="qf2" data-slot="away">
              <div class="row">
                <div class="team">
-                 <span class="seed">7</span>
-                 <span class="name" contenteditable="false">Player 7</span>
+                 <span class="seed">07</span>
+                 <span class="name" contenteditable="false">Player_07</span>
                </div>
-               <input class="score"  type="number" min="0" disabled />
+               <input class="score"  type="number" min="0" placeholder="0" disabled />
              </div>
              <div class="row">
                <div class="team">
-                 <span class="seed">8</span>
-                 <span class="name" contenteditable="false">Player 8</span>
+                 <span class="seed">08</span>
+                 <span class="name" contenteditable="false">Player_08</span>
                </div>
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
              </div>
            </div>
          </section>
@@ -831,14 +901,14 @@
                  <span class="seed">L</span>
                  <span class="name" contenteditable="false">Winner M1</span>
                </div>
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
              </div>
              <div class="row">
                <div class="team">
                  <span class="seed">L</span>
                  <span class="name" contenteditable="false">Winner M2</span>
                </div>
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
              </div>
              <div class="connector"></div>
            </div>
@@ -849,14 +919,14 @@
                  <span class="seed">L</span>
                  <span class="name" contenteditable="false">Winner M3</span>
                </div>
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
              </div>
              <div class="row">
                <div class="team">
                  <span class="seed">L</span>
                  <span class="name" contenteditable="false">Winner M4</span>
                </div>
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
              </div>
              <div class="connector"></div>
            </div>
@@ -872,14 +942,14 @@
                  <span class="seed">L</span>
                  <span class="name" contenteditable="false">Winner QF1</span>
                </div>
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
              </div>
              <div class="row">
                <div class="team">
                  <span class="seed">L</span>
                  <span class="name" contenteditable="false">Winner QF2</span>
                </div>
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
              </div>
              <div class="connector"></div>
            </div>
@@ -895,14 +965,14 @@
                  <span class="seed">F</span>
                  <span class="name" contenteditable="false">Winner SF1</span>
                </div>
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
              </div>
              <div class="row">
                <div class="team">
                  <span class="seed">F</span>
                  <span class="name" contenteditable="false">Winner SF2</span>
                </div>
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
              </div>
            </div>
    
@@ -921,14 +991,14 @@
    
            <div class="match" data-match="sf2" data-next="final" data-slot="away">
              <div class="row">
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
                <div class="team">
                    <span class="name" contenteditable="false">Winner QF3</span>
                    <span class="seed">R</span>
                </div>
              </div>
              <div class="row">
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
                <div class="team">
                    <span class="name" contenteditable="false">Winner QF4</span>
                    <span class="seed">R</span>
@@ -944,14 +1014,14 @@
    
            <div class="match" data-match="qf3" data-next="sf2" data-slot="home">
              <div class="row">
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
                <div class="team">
                    <span class="name" contenteditable="false">Winner M5</span>
                    <span class="seed">R</span>
                </div>
              </div>
              <div class="row">
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
                <div class="team">
                    <span class="name" contenteditable="false">Winner M6</span>
                    <span class="seed">R</span>
@@ -962,14 +1032,14 @@
    
            <div class="match" data-match="qf4" data-next="sf2" data-slot="away">
              <div class="row">
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
                <div class="team">
                    <span class="name" contenteditable="false">Winner M7</span>
                    <span class="seed">R</span>
                </div>
              </div>
              <div class="row">
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
                <div class="team">
                    <span class="name" contenteditable="false">Winner M8</span>
                    <span class="seed">R</span>
@@ -985,14 +1055,14 @@
    
            <div class="match" data-match="m5" data-next="qf3" data-slot="home">
              <div class="row">
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
                <div class="team">
-                   <span class="name" contenteditable="false">Player 9</span>
-                   <span class="seed">9</span>
+                   <span class="name" contenteditable="false">Player_09</span>
+                   <span class="seed">09</span>
                </div>
              </div>
              <div class="row">
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
                <div class="team">
                    <span class="name" contenteditable="false">Player 10</span>
                    <span class="seed">10</span>
@@ -1002,14 +1072,14 @@
    
            <div class="match" data-match="m6" data-next="qf3" data-slot="away">
              <div class="row">
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
                <div class="team">
                    <span class="name" contenteditable="false">Player 11</span>
                    <span class="seed">11</span>
                </div>
              </div>
              <div class="row">
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
                <div class="team">
                    <span class="name" contenteditable="false">Player 12</span>
                    <span class="seed">12</span>
@@ -1019,14 +1089,14 @@
    
            <div class="match" data-match="m7" data-next="qf4" data-slot="home">
              <div class="row">
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
                <div class="team">
                    <span class="name" contenteditable="false">Player 13</span>
                    <span class="seed">13</span>
                </div>
              </div>
              <div class="row">
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
                <div class="team">
                    <span class="name" contenteditable="false">Player 14</span>
                    <span class="seed">14</span>
@@ -1036,14 +1106,14 @@
    
            <div class="match" data-match="m8" data-next="qf4" data-slot="away">
              <div class="row">
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
                <div class="team">
                  <span class="name" contenteditable="false">Player 15</span>
                  <span class="seed">15</span>
                </div>
              </div>
              <div class="row">
-               <input class="score" type="number" min="0" disabled />
+               <input class="score" type="number" min="0" placeholder="0" disabled />
                <div class="team">
                  <span class="name" contenteditable="false">Player 16</span>
                  <span class="seed">16</span>

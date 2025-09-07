@@ -178,10 +178,10 @@
       });
       // reset display names to defaults for R16; others to placeholders
       const defaults = {
-        m1:['Player 1','Player 2'], m2:['Player 3','Player 4'],
-        m3:['Player 5','Player 6'], m4:['Player 7','Player 8'],
-        m5:['Player 9','Player 10'], m6:['Player 11','Player 12'],
-        m7:['Player 13','Player 14'], m8:['Player 15','Player 16'],
+        m1:['Player_01','Player_02'], m2:['Player_03','Player_04'],
+        m3:['Player_05','Player_06'], m4:['Player_07','Player_08'],
+        m5:['Player_09','Player_10'], m6:['Player_11','Player_12'],
+        m7:['Player_13','Player_14'], m8:['Player_15','Player_16'],
         qf1:['Winner M1','Winner M2'], qf2:['Winner M3','Winner M4'],
         qf3:['Winner M5','Winner M6'], qf4:['Winner M7','Winner M8'],
         sf1:['Winner QF1','Winner QF2'], sf2:['Winner QF3','Winner QF4'],
