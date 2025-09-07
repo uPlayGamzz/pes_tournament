@@ -36,23 +36,44 @@
 
 document.getElementById("regForm").addEventListener("submit", async (e) => {
   e.preventDefault();
-
   const form = e.target;
   const formData = new FormData(form);
 
-  const response = await fetch("https://script.google.com/macros/s/AKfycbwMf9ND9XjlMLuBlUQPeWaeQrC5klHAsp2Jk7zpgjI4siHy4GOKGFJU1mBpd5S7I0Ku/exec", {
-    method: "POST",
-    body: formData,
-  });
+  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx4UdMvyyZnaPMp3qyptA-Zozn1jKR9NAG7EVZDZU1bVaXcAnFnCYIcs9Epc078hshh/exec"; // ← replace with your deployed web app /exec URL
 
-  const result = await response.json();
-  alert(result.message || "Something went wrong!");
+  try {
+    const resp = await fetch(WEB_APP_URL, {
+      method: "POST",
+      body: formData
+    });
+
+    // get raw text so we can debug non-JSON responses
+    const text = await resp.text();
+    console.log("Response status:", resp.status);
+    console.log("Response content-type:", resp.headers.get("content-type"));
+    console.log("Response body:", text);
+
+    // try parse JSON, but handle gracefully if it's not JSON
+    let result;
+    try {
+      result = JSON.parse(text);
+    } catch (parseErr) {
+      alert("Server returned non-JSON response. Check browser console (Network & Console) for details.");
+      return;
+    }
+
+    if (result && result.success) {
+      // success -> redirect if a redirect hidden input exists
+      alert(result.message || "Registration successful!");
+      const redirectInput = form.querySelector('input[name="redirect"]');
+      if (redirectInput && redirectInput.value) {
+        window.location.href = redirectInput.value;
+      }
+    } else {
+      alert("Server error: " + (result.error || result.message || JSON.stringify(result)));
+    }
+  } catch (err) {
+    console.error("Network / Fetch error:", err);
+    alert("Network error: " + err.message);
+  }
 });
-
-//Redirect to Thank You Page
-if (result.status === "success") {
-  window.location.href = form.querySelector('input[name="redirect"]').value;
-} else {
-  alert(result.message || "Something went wrong!");
-}
-
