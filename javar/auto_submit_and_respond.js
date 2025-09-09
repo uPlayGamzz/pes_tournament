@@ -23,83 +23,66 @@ function clearSelect(sel) {
 }
 
 // Populate selects but preserve current selection if still valid
-async function populateSelects() {
-  const playerSelect = document.getElementById("playercode");
-  const opponentSelect = document.getElementById("opponentcode");
+function populateSelects(players) {
+  const { playerSel, oppSel } = getSelects();
+  if (!playerSel || !oppSel) return;
 
-  try {
-    const res = await fetch('${WEBAPP_URL}?action=availableCodes');
-    const data = await res.json();
+  const prevPlayer = playerSel.value || "";
+  const prevOpp = oppSel.value || "";
 
-    if (!data.success) throw new Error(data.error || "Failed to load codes");
+  clearSelect(playerSel);
+  clearSelect(oppSel);
 
-    playerSelect.innerHTML = "";
-    opponentSelect.innerHTML = "";
+  const blank = new Option("-- Select --", "");
+  playerSel.add(blank.cloneNode(true));
+  oppSel.add(blank.cloneNode(true));
 
-    data.players.forEach(p => {
-      const { code, availableSelf, availableOpponent, matchedWith } = p;
+  players.forEach(p => {
+    const code = p.code || "";
 
-      // --- PlayerCode dropdown ---
-      if (availableSelf) {
-        const opt = document.createElement("option");
-        opt.value = code;
-        opt.textContent = code;
-        playerSelect.appendChild(opt);
-      }
-
-      // --- OpponentCode dropdown ---
-      if (availableOpponent) {
-        const opt = document.createElement("option");
-        opt.value = code;
-        opt.textContent = code;
-
-        // If this code is already matched, only allow its existing partner to choose it
-        if (matchedWith) {
-          opt.dataset.matchedWith = matchedWith;
-        }
-
-        opponentSelect.appendChild(opt);
-      }
-    });
-
-  } catch (err) {
-    console.error("Failed to populate codes:", err);
-    alert("Could not load player codes. Try refresh or contact admin.");
-  }
-}
-
-// Auto-restrict opponent when a player is already matched
-document.addEventListener("change", (e) => {
-  if (e.target.id !== "playercode") return;
-
-  const playerSelect = e.target;
-  const opponentSelect = document.getElementById("opponentcode");
-
-  const chosenPlayer = playerSelect.value;
-  if (!chosenPlayer) return;
-
-  // Find the chosen player's option in opponent list
-  const allOpts = Array.from(opponentSelect.options);
-
-  // Look for "matchedWith" tag in opponent options
-  let matchedPartner = null;
-  allOpts.forEach(opt => {
-    if (opt.dataset.matchedWith === chosenPlayer) {
-      matchedPartner = opt.value;
+    // ----- PLAYER SELECT -----
+    const opt1 = new Option(code, code);
+    if (!p.availableSelf) {
+      opt1.disabled = true; // code already taken as player
+      opt1.text = code + " (taken)";
     }
+    playerSel.add(opt1);
+
+    // ----- OPPONENT SELECT -----
+    let opt2;
+    if (p.matchedWith) {
+      // This player is already matched
+      if (p.matchedWith === prevPlayer) {
+        // Allow only if it's the proper opponent
+        opt2 = new Option(code + " (locked to you)", code);
+      } else {
+        // Already matched with someone else → disable
+        opt2 = new Option(code + " (already matched)", code);
+        opt2.disabled = true;
+      }
+    } else {
+      // Normal availability
+      opt2 = new Option(code, code);
+      if (!p.availableOpponent) {
+        opt2.disabled = true;
+        opt2.text = code + " (taken)";
+      }
+    }
+    oppSel.add(opt2);
   });
 
-  // If player has a matched partner, restrict to that only
-  if (matchedPartner) {
-    allOpts.forEach(opt => {
-      opt.disabled = opt.value !== matchedPartner;
-    });
-    opponentSelect.value = matchedPartner; // auto-fill
-  } else {
-    // Reset: re-enable all opponent options
-    allOpts.forEach(opt => opt.disabled = false);
+  // restore previous selections if still valid
+  if (prevPlayer) {
+    const found = Array.from(playerSel.options).find(o => o.value === prevPlayer);
+    playerSel.value = (found && !found.disabled) ? prevPlayer : "";
   }
-});
+  if (prevOpp) {
+    const found = Array.from(oppSel.options).find(o => o.value === prevOpp);
+    oppSel.value = (found && !found.disabled) ? prevOpp : "";
+  }
+
+  syncSelectionToOpponent();
+}
 
 // If player selects a code, disable that option in the opponent select
 function syncSelectionToOpponent() {
