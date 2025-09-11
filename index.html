@@ -658,7 +658,7 @@
       </div>
       <div style="border-radius: 1rem; border: 1px solid #ffcc0079; padding: auto 2rem;" class="step" data-aos="fade-up" data-aos-delay="200">
         <img class="logos" src="images/logo/pad-logo.png" alt="Logo" />
-        <h3 style="color: var(--UPlay-yellow); font-weight: bolder; font-size: x-large;">15</h3>
+        <h3 style="color: var(--UPlay-yellow); font-weight: bolder; font-size: x-large;">15 Days</h3>
         <p style="color: #7f7f7f;">Tournament Duration</p>
       </div>
       <div style="border-radius: 1rem; border: 1px solid #ffcc0079; padding: auto 2rem;" class="step" data-aos="fade-up" data-aos-delay="200">
@@ -703,21 +703,21 @@
       <!-- <input type="hidden" name="auto_response" value="Thanks for registering for the PES Tournament! We'll contact you soon."> -->
 
       <div class="form-inputs">
-        <h>Username :</h>  
+        <label for="name">Username :</label>  
         <input type="text" id="name" name="name" placeholder="player_x" required>
       </div>
 
       <div class="form-inputs">
-        <h>Email :</h>
+        <label for="email">Email :</label>
         <input type="email" id="email" name="email" placeholder="example@email.com" required>
       </div>
       
       <div class="form-inputs">
-        <h>Choose Your Code :</h>
+        <label for="playercode">Your Code :</label>
         <div style="padding: 0.8rem; border: none; background: #2a2a2a; color: #fff; padding: 0; display: flex; justify-content: space-between; text-align: left;">
           <select style="width: 97.5%;" id="playerCode" name="playerCode" required>
             <option style="color: gray;" value="">-- wait a sec --</option>
-            <option value="player_01">player_01</option>
+            <!-- <option value="player_01">player_01</option>
             <option value="player_02">player_02</option>
             <option value="player_03">player_03</option>
             <option value="player_04">player_04</option>
@@ -732,17 +732,17 @@
             <option value="player_13">player_13</option>
             <option value="player_14">player_14</option>
             <option value="player_15">player_15</option>
-            <option value="player_16">player_16</option>
+            <option value="player_16">player_16</option> -->
           </select>
         </div>
       </div>
   
       <div class="form-inputs">
-        <h>Choose Opponent Code :</h>
+        <label for="opponentcode">Opponent Code :</label>
         <div style="padding: 0.8rem; border: none; background: #2a2a2a; color: #fff; padding: 0; display: flex; justify-content: space-between; text-align: left;">
           <select style="width: 97.5%;" id="opponentCode" name="opponentCode" required>
             <option style="color: gray;" value="">-- wait a sec --</option>
-            <option value="player_01">player_01</option>
+            <!-- <option value="player_01">player_01</option>
             <option value="player_02">player_02</option>
             <option value="player_03">player_03</option>
             <option value="player_04">player_04</option>
@@ -757,7 +757,7 @@
             <option value="player_13">player_13</option>
             <option value="player_14">player_14</option>
             <option value="player_15">player_15</option>
-            <option value="player_16">player_16</option>
+            <option value="player_16">player_16</option> -->
           </select>
         </div>
       </div>
@@ -773,6 +773,7 @@
       </p>
 
       <!-- Terms & Conditions Modal -->
+       
       <div id="termsModal" class="modal">
         <div class="modal-content">
           <span class="close">&times;</span>
@@ -784,7 +785,8 @@
             <li>Players must attend scheduled matches on time or risk forfeiture.</li>
             <li>Prizes will be awarded as announced by organizers.</li>
             <li>Decisions of tournament officials are final and binding.</li>
-            <li>Organizers are not liable for technical issues or personal losses.</li>
+            <li>Organizers are not liable for ingame issues or personal losses.</li>
+            <li>Refunds after registration is not available</li>
           </ul>
           <p>By submitting your registration, you confirm agreement to these Terms & Conditions.</p>
         </div>
@@ -1295,7 +1297,7 @@
       // Countdown timer
       function countdownTimer() {
         const countdownEl = document.getElementById('countdown');
-        const tournamentDate = new Date('august 30, 2025 12:00:00').getTime();
+        const tournamentDate = new Date('oct 30, 2025 12:00:00').getTime();
         const now = new Date().getTime();
         const distance = tournamentDate - now;
 
