@@ -145,8 +145,18 @@ function readFormValues(form) {
     playerCode: form.querySelector("[name='playerCode']")?.value || "",
     opponentCode: form.querySelector("[name='opponentCode']")?.value || "",
     ticketAmount: form.querySelector("[name='ticketAmount']")?.value || "",
-    receiptURL: form.querySelector("[name='receiptURL']")?.value || ""
+    // receiptURL: form.querySelector("[name='receiptURL']")?.value || ""
   };
+}
+
+// Helper: Convert file -> Base64
+function toBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -191,6 +201,16 @@ document.addEventListener("DOMContentLoaded", () => {
       // }
 
       const fd = new FormData(form);
+
+      // Handle receipt file
+      const fileInput = document.getElementById("receiptFile"); // <-- your file input
+      const file = fileInput?.files[0];
+
+      if (file) {
+        const base64 = await toBase64(file);
+        fd.append("receiptFile", base64.replace(/^data:.+;base64,/, "")); // strip base64 header
+        fd.append("receiptType", file.type);
+      }
 
       isSubmitting = true;
       const submitBtn = form.querySelector("[type='submit']");
