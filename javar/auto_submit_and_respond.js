@@ -1,5 +1,5 @@
 /* ====== CONFIG: set your deployed web app URL here ====== */
-const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbzEONSY98keeymd---Fqh8PSDbXSP1VzttVaEH-ef4vRB8rQ0v8bBrbL0N4tJk95mvc/exec";
+const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwKWCAtGrr8N5ew6TDVI5Xr7ra8ZHa-Vz3pK7M5z-cml1UgQxrJyNo_kHMh6JdDr5Hv/exec";
 
 let isSubmitting = false;
 
@@ -23,6 +23,8 @@ function getSelects() {
 }
 
 // Populate selects dynamically from Google Sheet data
+let playerMap = {}; // global cache
+
 async function populateSelects(players = []) {
   const { playerSel, oppSel } = getSelects();
   if (!playerSel || !oppSel) return;
@@ -30,19 +32,17 @@ async function populateSelects(players = []) {
   playerSel.innerHTML = "";
   oppSel.innerHTML = "";
 
-  // Add default placeholder options
   playerSel.appendChild(newOption("-- Select Self --", ""));
   oppSel.appendChild(newOption("-- Select Opponent --", ""));
 
-  if (!players.length) {
-    console.warn("No players received from backend.");
-    return;
-  }
+  if (!players.length) return;
 
   console.log("Players from backend:", players);
+  playerMap = {}; // reset cache
 
   players.forEach(p => {
-    const { code, availableSelf, availableOpponent } = p;
+    const { code, availableSelf, availableOpponent, matchedWith } = p;
+    playerMap[code] = p;
 
     // Player dropdown (self availability)
     const optSelf = newOption(
@@ -52,7 +52,7 @@ async function populateSelects(players = []) {
     );
     playerSel.appendChild(optSelf);
 
-    // Opponent dropdown (opponent availability)
+    // Opponent dropdown (normal availability for now)
     const optOpp = newOption(
       availableOpponent ? code : code + " (unavailable)",
       code,
@@ -67,39 +67,51 @@ function syncSelectionToOpponent() {
   const { playerSel, oppSel } = getSelects();
   if (!playerSel || !oppSel) return;
 
-  const chosen = playerSel.value;
+  const chosenSelf = playerSel.value;
+  if (!chosenSelf) return;
 
+  // Clear opponent dropdown rules
   for (let i = 0; i < oppSel.options.length; i++) {
     const opt = oppSel.options[i];
-    if (opt.value === "") continue; // skip placeholder
+    if (opt.value === "") continue;
+    opt.disabled = false;
+    opt.style.color = "";
+    opt.textContent = opt.value; // reset labels
+  }
 
-    if (opt.value === chosen) {
-      // block self-pick
-      opt.disabled = true;
-      if (!opt.textContent.includes("(cannot pick self)")) {
-        opt.textContent = opt.value + " (cannot pick self)";
-      }
-      opt.style.color = "gray";
+  const selfPlayer = playerMap[chosenSelf];
+  if (!selfPlayer) return;
 
-      if (oppSel.value === chosen) {
-        oppSel.value = ""; // clear if it was selected
-      }
-    } else {
-      // restore original status (only opponent availability matters)
-      const player = [...oppSel.options].find(o => o.value === opt.value);
-      if (player) {
-        if (opt.textContent.includes("(cannot pick self)")) {
-          opt.textContent = opt.value; // reset to base
-        }
-      }
+  // ✅ Special rule: if this player has a matchedWith, force them to pick only that opponent
+  if (selfPlayer.matchedWith) {
+    for (let i = 0; i < oppSel.options.length; i++) {
+      const opt = oppSel.options[i];
+      if (opt.value === "") continue;
 
-      if (opt.textContent.includes("(unavailable)")) {
+      if (opt.value !== selfPlayer.matchedWith) {
         opt.disabled = true;
         opt.style.color = "gray";
-      } else {
-        opt.disabled = false;
-        opt.style.color = "";
+        opt.textContent = opt.value + " (not your match)";
       }
+    }
+    oppSel.value = selfPlayer.matchedWith; // auto-select
+    return;
+  }
+
+  // ✅ Normal rules: block self-pick + keep unavailable
+  for (let i = 0; i < oppSel.options.length; i++) {
+    const opt = oppSel.options[i];
+    if (opt.value === "") continue;
+
+    if (opt.value === chosenSelf) {
+      opt.disabled = true;
+      opt.textContent = opt.value + " (cannot pick self)";
+      opt.style.color = "gray";
+      if (oppSel.value === chosenSelf) oppSel.value = "";
+    } else if (playerMap[opt.value] && !playerMap[opt.value].availableOpponent) {
+      opt.disabled = true;
+      opt.style.color = "gray";
+      opt.textContent = opt.value + " (unavailable)";
     }
   }
 }
@@ -167,16 +179,16 @@ document.addEventListener("DOMContentLoaded", () => {
       const map = {};
       (j.players || []).forEach(p => map[p.code] = p);
 
-      if (!map[vals.playerCode] || !map[vals.playerCode].availableSelf) {
-        alert("Selected Player Code is no longer available. Please choose another.");
-        loadAvailableCodes();
-        return;
-      }
-      if (!map[vals.opponentCode] || !map[vals.opponentCode].availableOpponent) {
-        alert("Selected Opponent Code is no longer available. Please choose another.");
-        loadAvailableCodes();
-        return;
-      }
+      // if (!map[vals.playerCode] || !map[vals.playerCode].availableSelf) {
+      //   alert("Selected Player Code is no longer available. Please choose another.");
+      //   loadAvailableCodes();
+      //   return;
+      // }
+      // if (!map[vals.opponentCode] || !map[vals.opponentCode].availableOpponent) {
+      //   alert("Selected Opponent Code is no longer available. Please choose another.");
+      //   loadAvailableCodes();
+      //   return;
+      // }
 
       const fd = new FormData(form);
 
