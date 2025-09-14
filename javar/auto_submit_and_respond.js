@@ -1,5 +1,5 @@
 /* ====== CONFIG: set your deployed web app URL here ====== */
-const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwKWCAtGrr8N5ew6TDVI5Xr7ra8ZHa-Vz3pK7M5z-cml1UgQxrJyNo_kHMh6JdDr5Hv/exec";
+const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwT7u441PuQEXnzcrHmiXecYQbCeJoPITXi58fzV1wXB0UmJJEuAZWp0_Mmz4s50YdJ/exec";
 
 let isSubmitting = false;
 
@@ -220,11 +220,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const submitJson = await submitRes.json();
 
       if (submitJson.success) {
-        alert("Registration successful! Your ticket: " + (submitJson.ticket || ""));
+        alert("✅ Registration successful!\nYour ticket: " + (submitJson.ticket || ""));
         if (form.redirect && form.redirect.value) window.location = form.redirect.value;
         await loadAvailableCodes();
       } else {
-        alert("Registration failed: " + (submitJson.error || "Unknown error"));
+        // Show the actual backend error
+        console.error("Backend error:", submitJson.error);
+        alert("❌ Registration failed:\n" + (submitJson.error || "Unknown error from server"));
         await loadAvailableCodes();
       }
     } catch (err) {
