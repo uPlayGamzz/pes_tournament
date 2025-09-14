@@ -2,55 +2,437 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PES Tournament</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Uplay</title>
+  <link sizes="32x32" rel="icon" href="images/logo/pad-logo-title.png" type="image/png">
+
+  <!-- Fonts and icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- AOS animations -->
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
-  <link rel="stylesheet" href="css/preloader.css"/>
-  <link rel="stylesheet" href="css/scroll-to-top.css">
+  <!-- Local stylesheets -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/preloader.css" />
+  <link rel="stylesheet" href="css/scroll-to-top.css" />
+  <!-- If 'libs/aos/aos.css' is a duplicate, remove it to avoid duplication -->
+  <!-- <link rel="stylesheet" href="libs/aos/aos.css" /> -->
+
+  <!-- player bracket links -->
+   <link rel="stylesheet" href="css/bracket.css" />
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+
+    :root {
+      --UPlay-yellow: #ffcc00;
+      --UPlay-background-color: #1a1a1a;
+      --UPlay-text-color: white;
+      --UPlay-font: 'Orbitron', sans-serif;
+      --line: #3a3a3a;
+      --line2: #d6ab01;
+      --card: #1f1f1f;
+      --card-alt: #242424;
+      --accent: #0082ff;
+    }
+
+
+    /* Base styles */
+    /* html, body {
+      overflow-x: hidden;
+    } */
+    #title-icon {
+      height: 1px;
     }
 
     body {
-      font-family: 'Orbitron', sans-serif;
-      background-color: #0d0d0d;
+      font-family: var(--UPlay-font);
+      margin: 0;
+      padding: 0;
+      background: #181818;
       color: #fff;
-      line-height: 1.6;
-      overflow-x: hidden;
     }
 
-    .container {
-      width: 90%;
-      max-width: 1200px;
-      margin: auto;
-      padding: 40px 20px;
+    .logos {
+      height: 15px;
+      padding: 0;
     }
 
     header {
-      background-color: #1a1a1a;
-      padding: 20px;
-      border-bottom: 2px solid #ff4500;
+      text-align: center;
+      padding: 2rem 1rem;
+      background: #1f1f1f;
+    }
+
+    .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 1rem 2rem;
+      background: #1a1a1a00;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      border-bottom: 1px solid #ffffff34;
+    }
+
+    .nav-logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--UPay-yellow);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo img {
+      height: 15px;
+      padding: 0;
+      rotate: 24deg;
+    }
+
+    .hero {
+      height: fit-content;
+      background: linear-gradient(to left, rgba(0, 0, 0, 0) 5%, #181818 90%), url('images/stadium-night.png') no-repeat center center/cover;
+      text-align: left;
+      padding: 0px;
+    }
+
+    .main-header {
+      padding: 40px 20% 163px 7%;
+    }
+
+    .flex_container{
+      display: flex;
+      justify-content: space-between;
+      background: #181818c8;
+      margin: 20px auto;
+      padding: 10px 28px;
+      border: 1px solid rgb(94, 93, 93);
+      border-radius: 10px;
+      text-align: left;
+      color: #8a8a8a;
+
+    }
+
+    .flex_buttons {
+      display: flex;
+      /* justify-content: space-between; */
+    }
+
+    .title {
+      font-size: 4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .tagline {
+      font-size: 1.3rem;
+      color: #ccc;
+    }
+
+    #timer {
+      font-size: 2rem;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    #how-to-join {
+      padding: 3rem 1rem;
+      background: #181818;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 80vh;
       position: relative;
-      z-index: 10;
+      align-items: center;
+      text-align: center;
     }
 
-    header h1 {
-      color: #ff4500;
-      font-size: 1.8rem;
+    #how-to-join h2{
+      margin: 50px auto;
     }
 
+    #section {
+      padding: 20px 1rem 10px 1rem;
+      background: #201f1f;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 18rem;
+      position: relative;
+      align-items: center;
+      text-align: center;
+      margin: 50px; 
+      border: 1px solid var(--line); 
+      border-radius: 1rem;
+    }
+
+    #section h2{
+      margin: auto;
+    }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .step {
+      text-align: center;
+      padding: 1rem;
+      border: 1px solid #333;
+      border-radius: 1rem;
+      background: #1f1f1f;
+      transition: transform 0.3s ease;
+    }
+
+    .step:hover {
+      transform: translateY(-5px);
+    }
+
+    .step-number {
+      font-size: 2rem;
+      color: #ffcc00;
+      margin-bottom: 0.5rem;
+    }
+
+    .step-title {
+      font-size: 1.5rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .step-description {
+      font-size: 1rem;
+      color: #bbb;
+    }
+
+    .cta-button-container {
+      margin-top: auto;
+      text-align: center;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: #ffcc00;
+      color: #000;
+      font-weight: bold;
+      border-radius: 0px;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+      animation: breathe 1.3s infinite;
+      box-shadow: 0 0 10px rgba(255, 204, 0, 0.6);
+    }
+
+    .cta-button:hover {
+      /* background: #977900; */
+      /* background: #ff7300; */
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 204, 0, 0.7);
+      animation: breathe1 4s infinite;
+    }
+
+    .cta-button-media {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: #ffcc00;
+      color: #000;
+      font-weight: bold;
+      border-radius: 0px;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+      animation: breathe 1.3s infinite;
+      box-shadow: 0 0 10px rgba(255, 204, 0, 0.6);
+    }
+
+    .cta-button-media:hover {
+      /* background: #977900; */
+      /* background: #ff7300; */
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 204, 0, 0.7);
+      animation: breathe1 4s infinite;
+    }
+
+    #cta-button2 {
+      display: inline-block;
+      text-align: center;
+      margin-left: 20px;
+      padding: 1rem 2rem;
+      background: none;
+      color: #ffffff;
+      font-weight: bold;
+      border: 1.5px solid, white;
+      border-radius: 0px;
+      text-decoration: none;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      /* transition: background 0.3s, transform 0.3s, box-shadow 0.3s; */
+      /* animation: breathe 1.3s infinite; */
+      /* box-shadow: 0 0 10px rgba(255, 204, 0, 0.6); */
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 15px rgba(255, 204, 0, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(255, 204, 0, 0);
+      }
+    }
+
+
+    
+
+    @keyframes breathe {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
+      }
+      60% {
+        background-color: #ffd83d;
+        transform: scale(1.03);
+        box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
+      }
+    }
+
+    @keyframes breathe1 {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 5px rgba(255, 115, 0, 0.5);
+      }
+      60% {
+        background-color: #ffd83d;
+        transform: scale(1.03);
+        box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
+      }
+    }
+
+
+    #players {
+      padding: 3rem 1rem;
+      background: url('images/Efootball.png') no-repeat center center/cover;
+    }
+
+    #players h2 {
+      margin-top: 40px;
+    }
+
+    .player-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .player-card {
+      background: #2c2c2c;
+      padding: 0 1.5rem;
+      padding-top: 20px;
+      border-radius: 1rem;
+      border: solid, rgb(147, 146, 146), 0.5px;
+      text-align: center;
+      width: 200px;
+      transition: transform 0.3s ease;
+    }
+
+    .player-card:hover {
+      transform: translateY(-5px);
+    }
+
+    #register {
+      padding: 3rem 1rem;
+      background: #191919;
+      text-align: center;
+    }
+
+    #register form{
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      max-width: 400px;
+      margin: 50px auto 20px auto;
+    }
+
+    .form-inputs {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-inputs h {
+      margin: 0;
+      color: #ccc;
+      font-size: smaller;
+
+    }
+
+    #register input,
+    #register button, #register select  {
+      padding: 0.8rem;
+      border-radius: 0px;
+      border: none;
+      font-size: 1rem;
+    }
+
+    #register input, select {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    #register button {
+      background: #ffcc00;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #register button:hover {
+      background: rgb(230, 184, 0);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #111;
+      color: #888;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (min-width: 768px) {
+      .steps {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .step {
+        flex: 1;
+        margin: 0 1rem;
+      }
+
+      .reg a {
+        margin: 11px auto auto 32px;
+        padding: 5px 20px;
+      }
+    }
+
+    /* Navigation styles */
     nav ul.nav-list {
       list-style: none;
       display: flex;
       gap: 1rem;
+      margin: 0;
+      padding: 0;
+      align-items: center;
     }
 
     nav ul.nav-list li a {
@@ -60,7 +442,24 @@
     }
 
     nav ul.nav-list li a:hover {
-      color: #ff4500;
+      color: rgb(255, 204, 0);
+    }
+
+    nav ul.nav-list li img {
+      height: 16px;
+      width: 16px;
+      padding-left:4px;
+    }
+
+    nav ul.nav-list li img:hover {
+      height: 20px;
+      width: 20px;
+      padding-left: 0px;
+    }
+
+    .reg a {
+      padding: 5px 20px;
+      display: inline-block;
     }
 
     .nav-toggle {
@@ -71,23 +470,26 @@
     }
 
     .nav-toggle span {
-      width: 25px;
-      height: 3px;
+      width: 16px;
+      height: 1px;
       background: #fff;
-      margin: 4px 0;
+      margin: 2.5px 0;
       transition: 0.3s;
     }
 
     .nav-toggle.active span:nth-child(1) {
       transform: rotate(-45deg) translate(-5px, 6px);
     }
+
     .nav-toggle.active span:nth-child(2) {
       opacity: 0;
     }
+
     .nav-toggle.active span:nth-child(3) {
       transform: rotate(45deg) translate(-5px, -6px);
     }
 
+    /* Mobile navigation */
     @media (max-width: 768px) {
       .nav-toggle {
         display: flex;
@@ -97,7 +499,7 @@
         position: absolute;
         top: 100%;
         left: 0;
-        width: 100%;
+        /* width: 100%; */
       }
 
       nav ul.nav-list {
@@ -118,370 +520,746 @@
       nav ul.nav-list.show {
         transform: translateX(0);
       }
-    }
 
-    #hero {
-      height: 60vh;
-      background: url('images/stadium-night.png') no-repeat center center/cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
-    .hero-overlay {
-      padding: 2rem;
-    }
-
-    .hero-overlay h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .btn {
-      background: #ff4500;
-      color: #fff;
-      padding: 0.75rem 1.5rem;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 5px;
-    }
-
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    #countdown {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 1.5rem;
-    }
-
-    #how-to-join {
-      align-items: center;
-      text-align: center;
-  transition: padding-bottom 0.3s ease;
-}
-
-
-
-    section {
-      padding: 3rem 0;
-    }
-
-    .steps-section {
-      background-color: #141414;
-      padding: 3rem 0;
-    }
-
-    .steps {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin-top: 2rem;
-      overflow: visible;
-      /* gap: 1rem;  note */
-    }
-
-    .step {
-      flex: 1 1 22%;
-      /* background-color: #1a1a1a; */
-      padding: 1.5rem;
-      border-radius: 8px;
-      text-align: center;
-      transition: transform 0.7s ease;
-      transition: margin 0.4s ease;
-      /* position: relative; 
-      overflow: hidden; */
-      
-    }
-
-.step:hover {
-  margin-bottom: 5rem;
-}
-
-#how-to-join:hover {
-  height: 40rem;
-}
-
-#how-to-join .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 100%; /* ensures it takes full available height */
-  height: 100%; /* may help in some edge cases */
-}
-
-#how-to-join .content {
-  flex: 1;
-}
-
-
-    .step:hover {
-      transform: translateY(-10px);
-    }
-
-    .step .icon img {
-      width: 60px;
-      height: 60px;
-      margin-bottom: 1rem;
-    }
-
-    .step h3 {
-      color: #ff4500;
+      .title {
+      font-size: 2.5rem;
       margin-bottom: 0.5rem;
     }
 
-   .step {
-  position: relative;
-  text-align: center;
-}
+    .navbar {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      background: #1a1a1af3;
+    }
 
-/* .step-dropdown {
-  
-  } */
-  .step-dropdown {
-    padding: 0 0.75rem;
-    border-radius: 8px;
-    color: #fff;
-    background-color: #222222cc;
-    font-size: 0.9rem;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-    max-height: 0;
-    overflow: hidden;
-    /* transition: max-height 4s ease, opacity 1s ease; */
-  }
+    .main-header {
+      padding: 40% 7% 50% 7%;
+    }
 
+    .flex_container {
+      font-size: x-small;
+    }
 
-.step:hover .step-dropdown {
-  max-height: 200px;
-  opacity: 1;
-  visibility: visible;
-  padding: 0.75rem;
-  margin-top: 0.75rem;
-  pointer-events: auto;
-  /* transition: padding-bottom 0.3s ease; */
-}
+    .flex_buttons {
+      display: contents;      
+    }
 
+    .cta-button-media {
+      padding: 1rem 0rem;
+      width: 100%;
+      margin-bottom: 2rem;
+    }
 
-
-
-
-
-
-    /* .step:hover .step-dropdown {
-      max-height: 100px;
-      opacity: 1;
-      padding: 0.75rem;
-      transform: translateX(7%) translateY(-10px);
-      visibility: visible;
+    #cta-button2 {
+      padding: 1rem 0rem;
+      width: 100%;
+      margin: 0;
       
+    }
+    }
+
+    /* .main-content {
+      padding: 3rem 1rem;
+      background: linear-gradient(to left, rgba(0, 0, 0, 0) 5%, #1818189c 30%, #181818f6 90%), url('images/stadium1.jpeg') no-repeat center center/cover;
     } */
-
-@media (max-width: 768px) {
-  .step-dropdown {
-    max-width: 80vw;
-  }
-}
-
-
-
-
-    @media (max-width: 768px) {
-      .steps {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .step {
-        flex: 1 1 100%;
-        width: 90%;
-      }
-
-      .step-dropdown {
-        text-align: center;
-      }
-    }
-
-    .cta-button {
-      text-align: center;
-      margin-top: 2rem;
-    }
-
-    .player-cards, .brackets {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-    }
-
-    .players {
-      background: url('images/Efootball.png') no-repeat center center/cover;
-    }
-
-    .card {
-      background: #1a1a1a;
-      border: 1px solid #333;
-      padding: 1rem;
-      border-radius: 10px;
-      width: 200px;
-      text-align: center;
-    }
-
-    .card h3 {
-      color: #ff4500;
-      margin-bottom: 0.5rem;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: #111;
-    }
   </style>
 </head>
-<body>
-  <div class="preloader" id="preloader" style="opacity: 0; display: none;"></div>
 
-  <header>
-    <h1>PES Tournament</h1>
-    <div class="nav-toggle">
+<body id="body">
+  
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <img src="images/logo/pad-logo.png" alt="Logo" />
+      uPlay
+    </div>
+    <div style="display: flex; list-style: none; align-items: center;">
+      <ul class="nav-list">
+        <li><a href="#body">Home</a></li>
+        <li><a href="pages/about.html">About</a></li>
+        <li><a href="#how-to-join">How to Join</a></li>
+        <li><a href="#players">Players</a></li>
+        <li><a href="pages/leaderboard.html"><img src="images/icons/leaderboard-icon.png" alt=""></a></li>
+      </ul>
+      <li class="reg"><a class="cta-button" href="#register">Register</a></li>
+    </div>
+    <div class="nav-toggle" aria-label="Toggle navigation" role="button" tabindex="0">
       <span></span><span></span><span></span>
     </div>
-    <nav>
-      <ul class="nav-list">
-        <li><a href="">Home</a></li>
-        <li><a href="pages/about.html">About</a></li>
-        <li><a href="pages/register.html">Register</a></li>
-        <li><a href="pages/updates.html">Updates</a></li>
-        <li><a href="pages/contact.html">Contact</a></li>
-      </ul>
-    </nav>
+  </nav>
+  <header class="hero" id="header">
+
+    <div class="preloader" id="preloader" style="opacity: 0; display: none;"></div>
+
+
+    <div class="main-header">
+      <h1 class="title"><h style="color: rgb(0, 130, 255);">PES</h> CHAMPIONS <h style="color: var(--UPlay-yellow);">LEAGUE</h></h1>
+      <p class="tagline">Compete in the ultimate PES tournament and claim the grand prize of <h style="color: #ffcc00; font-weight: bold;">N10,000</h></p>
+      
+      <div class="flex_container">
+        <div id="countdown" class="fade-in"></div>
+        <div>
+          <h3 style="margin-bottom: 3px;">Registeration Ends</h3>
+          <p style="margin-top: 3px; color: rgb(255, 77, 0);">December 20th, 2025</p>
+        </div> 
+      </div>
+
+      <div class="flex_buttons">
+          <h class="cta-button-container">
+            <a href="#register" class="cta-button-media">Register Now</a>
+          </h>
+          <a href="#" class="flyer" id="cta-button2">
+          
+            <img style="height: 15px; width: 15px; padding-right: 10px;" src="images/icons/flyer.png" alt="Logo" />Flyer
+          </a>
+      </div>
+      
+        <!-- <div class="flyerPics">
+          <img src="images/balondor.png" alt="">
+        </div> -->
+    </div>
   </header>
 
-  <section id="hero">
-    <div class="container">
-      <div class="hero-overlay fade-in" data-aos="fade-up">
-        <h2>Join the Ultimate PES Battle!</h2>
-        <a href="pages/register.html" class="btn">Register Now</a>
+  <section id="how-to-join">
+    <h2>How to Join</h2>
+    <div class="steps">
+      <div class="step" data-aos="fade-up">
+        <div class="step-number">1</div>
+        <h3 class="step-title">Register</h3>
+        <p class="step-description">Fill out the form with your details to secure your spot in the tournament.</p>
       </div>
-      <div id="countdown" class="fade-in"></div>
+      <div class="step" data-aos="fade-up" data-aos-delay="100">
+        <div class="step-number">2</div>
+        <h3 class="step-title">Get Verified</h3>
+        <p class="step-description">Our team will verify your registration and confirm your participation.</p>
+      </div>
+      <div class="step" data-aos="fade-up" data-aos-delay="200">
+        <div class="step-number">3</div>
+        <h3 class="step-title">Compete</h3>
+        <p class="step-description">Show your skills on the virtual pitch and climb the ranks to victory!</p>
+      </div>
+    </div>
+    <div class="cta-button-container">
+      <a href="#register" class="cta-button">Register Now</a>
     </div>
   </section>
 
-  <section id="about">
-    <div class="container fade-in" data-aos="fade-right">
-      <h2>About the Tournament</h2>
-      <p>Welcome to the most exciting PES tournament of the year! Compete with top players, showcase your skills, and win amazing prizes.</p>
-    </div>
-  </section>
-
-<section id="how-to-join">
-  <div class="container fade-in" data-aos="fade-left">
-    <div class="content">
-      <h2>How to Join</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="icon">
-            <img src="images/icons/FC25.png" alt="Register Icon" loading="lazy">
-          </div>
-          <h3>Register</h3>
-          <div class="step-dropdown">
-            <p>Click on the Register button.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="icon">
-            <img src="images/icons/FC25.png" alt="Email Icon" loading="lazy">
-          </div>
-          <h3>Confirmation</h3>
-          <div class="step-dropdown">
-            <p>Wait for the confirmation email.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="icon">
-            <img src="images/icons/FC25.png" alt="Play Icon" loading="lazy">
-          </div>
-          <h3>Game Day</h3>
-          <div class="step-dropdown">
-            <p>Show up on game day and play!</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="icon">
-            <img src="images/icons/FC25.png" alt="Form Icon" loading="lazy">
-          </div>
-          <h3>Cash Out</h3>
-          <div class="step-dropdown">
-            <p>Win the tournament and go with amazing prizes</p>
-          </div>
-        </div>
+  <section id="section">
+    <h2 style="margin: 10px;">Tournament Overview</h2>
+    <div style="margin: 20px auto 15px auto;" class="steps">
+      <div style="border-radius: 1rem; border: 1px solid #ffcc0079; padding: auto 2rem;" class="step" data-aos="fade-up">
+        <img class="logos" src="images/logo/pad-logo.png" alt="Logo" />
+        <h3 style="color: var(--UPlay-yellow); font-weight: bolder; font-size: x-large;">16</h3>
+        <p style="color: #7f7f7f;">Total Players</p>
       </div>
-    </div>
-    <div class="cta-button">
-      <a href="pages/register.html" class="btn">Register Now</a>
-    </div>
-  </div>
-</section>
-
-  <section id="players" class="players">
-    <div class="container fade-in" data-aos="fade-up">
-      <h2>Top Players</h2>
-      <div class="player-cards">
-        <div class="card">
-          <h3>Player 1</h3>
-          <p>Level: Pro</p>
-        </div>
-        <div class="card">
-          <h3>Player 2</h3>
-          <p>Level: Semi-Pro</p>
-        </div>
+      <div style="border-radius: 1rem; border: 1px solid #ffcc0079; padding: auto 2rem;" class="step" data-aos="fade-up" data-aos-delay="100">
+        <img class="logos" src="images/logo/pad-logo.png" alt="Logo" />
+        <h3 style="color: var(--UPlay-yellow); font-weight: bolder; font-size: x-large;">N10,000</h3>
+        <p style="color: #7f7f7f;">Prize Pool</p>
+      </div>
+      <div style="border-radius: 1rem; border: 1px solid #ffcc0079; padding: auto 2rem;" class="step" data-aos="fade-up" data-aos-delay="200">
+        <img class="logos" src="images/logo/pad-logo.png" alt="Logo" />
+        <h3 style="color: var(--UPlay-yellow); font-weight: bolder; font-size: x-large;">15 Days</h3>
+        <p style="color: #7f7f7f;">Tournament Duration</p>
+      </div>
+      <div style="border-radius: 1rem; border: 1px solid #ffcc0079; padding: auto 2rem;" class="step" data-aos="fade-up" data-aos-delay="200">
+        <img class="logos" src="images/logo/pad-logo.png" alt="Logo" />
+        <h3 style="color: var(--UPlay-yellow); font-weight: bolder; font-size: x-large;">8 Rounds</h3>
+        <p style="color: #7f7f7f;">Knockout Stage</p>
       </div>
     </div>
   </section>
 
-  <section id="brackets">
-    <div class="container fade-in" data-aos="fade-up">
-      <h2>Tournament Brackets</h2>
-      <div class="brackets">
-        <div class="card">
-          <h3>Round 1</h3>
-          <p>Player A vs Player B</p>
-        </div>
-        <div class="card">
-          <h3>Round 2</h3>
-          <p>Winner vs Player C</p>
-        </div>
+  <section id="players">
+    <h2>Top Players</h2>
+    <div class="player-cards">
+      <div style="background: linear-gradient(to left, #2c2c2c,#2c2c2c, #5e5536); border: solid, #fbda56, 0.5px;" class="player-card" data-aos="fade-up">
+        <img class="logos" src="images/logo/pad-logo.png" alt="Logo" />
+        <p>Rank: #1</p>
+        <h3>Player One</h3>
+      </div>
+      <div style="background: linear-gradient(to left, #2c2c2c,#2c2c2c, #6b6a6a);" class="player-card" data-aos="fade-up" data-aos-delay="100">
+        <img class="logos" src="images/logo/pad-logo.png" alt="Logo" />
+        <p>Rank: #2</p>
+        <h3>Player Two</h3>
+      </div>
+      <div style="background: linear-gradient(to left, #2c2c2c,#2c2c2c, rgba(34, 45, 129, 0.954)); border: solid,rgb(54, 54, 213), 0.5px;" class="player-card" data-aos="fade-up" data-aos-delay="200">
+        <img class="logos" src="images/logo/pad-logo.png" alt="Logo" />
+        <p>Rank: #3</p>
+        <h3>Player Three</h3>
       </div>
     </div>
   </section>
 
-  <a href="#" class="scrollToTop" id="scrollToTop">
-    <img src="images/icons/scroll-to-top2.png" alt="Scroll to Top" />
+  <section id="register">
+    <h1>PES Tournament Registration</h1>
+    <p style="color: #ccc;">Secure your spot in the championship tournament</p>
+    <form id="regForm" method="POST" enctype="multipart/form-data">
+    <!-- <form action="https://api.web3forms.com/submit" method="POST"> -->
+    <!-- <form action="https://hooks.zapier.com/hooks/catch/24431614/uha7orx/" method="POST"> -->
+      <!-- <input type="hidden" name="access_key" value="560fb351-dfe6-49f4-acb8-2cfe1447ecee"> uplaygamzz@gmail.com -->
+      <!--input type="hidden" name="access_key" value="c31a9d61-842a-4048-9d56-622f6cfcac35"--> <!-- emmanuelovie2004@gmail.com -->
+      
+      <input type="hidden" name="redirect" value="https://fiofio24.github.io/pes_tournament/pages/thankyou.html">
+      <!-- <input type="hidden" name="auto_response" value="Thanks for registering for the PES Tournament! We'll contact you soon."> -->
+
+      <div class="form-inputs">
+        <label for="name">Username :</label>  
+        <input type="text" id="name" name="name" placeholder="player_x" required>
+      </div>
+
+      <div class="form-inputs">
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" placeholder="example@email.com" required>
+      </div>
+      
+      <div class="form-inputs">
+        <label for="playercode">Your Code :</label>
+        <div style="padding: 0.8rem; border: none; background: #2a2a2a; color: #fff; padding: 0; display: flex; justify-content: space-between; text-align: left;">
+          <select style="width: 97.5%;" id="playerCode" name="playerCode" required>
+            <option style="color: gray;" value="">-- wait a sec --</option>
+            <!-- <option value="player_01">player_01</option>
+            <option value="player_02">player_02</option>
+            <option value="player_03">player_03</option>
+            <option value="player_04">player_04</option>
+            <option value="player_05">player_05</option>
+            <option value="player_06">player_06</option>
+            <option value="player_07">player_07</option>
+            <option value="player_08">player_08</option>
+            <option value="player_09">player_09</option>
+            <option value="player_10">player_10</option>
+            <option value="player_11">player_11</option>
+            <option value="player_12">player_12</option>
+            <option value="player_13">player_13</option>
+            <option value="player_14">player_14</option>
+            <option value="player_15">player_15</option>
+            <option value="player_16">player_16</option> -->
+          </select>
+        </div>
+      </div>
+  
+      <div class="form-inputs">
+        <label for="opponentcode">Opponent Code :</label>
+        <div style="padding: 0.8rem; border: none; background: #2a2a2a; color: #fff; padding: 0; display: flex; justify-content: space-between; text-align: left;">
+          <select style="width: 97.5%;" id="opponentCode" name="opponentCode" required>
+            <option style="color: gray;" value="">-- wait a sec --</option>
+            <!-- <option value="player_01">player_01</option>
+            <option value="player_02">player_02</option>
+            <option value="player_03">player_03</option>
+            <option value="player_04">player_04</option>
+            <option value="player_05">player_05</option>
+            <option value="player_06">player_06</option>
+            <option value="player_07">player_07</option>
+            <option value="player_08">player_08</option>
+            <option value="player_09">player_09</option>
+            <option value="player_10">player_10</option>
+            <option value="player_11">player_11</option>
+            <option value="player_12">player_12</option>
+            <option value="player_13">player_13</option>
+            <option value="player_14">player_14</option>
+            <option value="player_15">player_15</option>
+            <option value="player_16">player_16</option> -->
+          </select>
+        </div>
+      </div>
+
+      <div class="form-inputs">
+        <label for="">Upload Payment Receipt</label>
+        <input type="file" id="receiptFile" name="receiptFile" accept="image/*,application/pdf" required>
+      </div>
+
+      <p style="font-size: 0.9rem; color: #ccc; margin-top: 1rem;">
+        By registering, you agree to the <a href="#" id="termsLink">Terms & Conditions</a>.
+      </p>
+
+      <!-- Terms & Conditions Modal -->
+       
+      <div id="termsModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2 style="color: white;">UPlay PES Tournament - Terms & Conditions</h2>
+          <p>By registering and participating in the UPlay PES Tournament, you acknowledge that you have read, understood, and agreed to the following:</p>
+          <ul>
+            <li>All players must register with accurate details.</li>
+            <li>Fair play is mandatory — cheating or misconduct leads to disqualification.</li>
+            <li>Players must attend scheduled matches on time or risk forfeiture.</li>
+            <li>Prizes will be awarded as announced by organizers.</li>
+            <li>Decisions of tournament officials are final and binding.</li>
+            <li>Organizers are not liable for ingame issues or personal losses.</li>
+            <li>Refunds after registration is not available</li>
+          </ul>
+          <p>By submitting your registration, you confirm agreement to these Terms & Conditions.</p>
+        </div>
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <a href="#" class="scrollToTop" id="scrollToTop" aria-label="Scroll to top">
+    <img src="images/icons/scroll-to-top3.svg" alt="Scroll to Top" />
   </a>
 
-  <footer>
-    <div class="container">
-      <p>&copy; 2025 PES Tournament. All rights reserved.</p>
-    </div>
+
+  
+<section class="bracket-container">
+  <header class="page-hero">
+    <h1><span style="color:var(--accent)">PES</span> Bracket <span style="color:var(--UPlay-yellow)">— 16 Players</span></h1>
+  </header>
+  <!-- Admin bar (local test) -->
+   <div id="admin-panel" style="display:none;">
+       <div class="admin-bar">
+         <span id="adminStatus" class="admin-badge">Viewer</span>
+         <button id="adminToggle" class="btn">Admin</button>
+         <button id="saveBracket" class="btn btn-primary" disabled>Save</button>
+         <button id="clearBracket" class="btn" disabled>Clear</button>
+       </div>
+   </div>
+   <!-- Bracket -->
+   <main class="bracket-wrap">
+     
+       <div id="bracket" class="bracket" data-aos="fade-up">
+   
+         <!-- Round of 16 (Left side: 4 matches) -->
+         <section class="round" id="r16-left">
+           <div class="round-title">Round of 16</div>
+   
+           <div class="match" data-match="m1" data-next="qf1" data-slot="home">
+             <div class="row">
+               <div class="team">
+                 <span class="seed">01</span>
+                 <span class="name" contenteditable="false">Player_01</span>
+               </div>
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+             </div>
+             <div class="row">
+               <div class="team">
+                 <span class="seed">02</span>
+                 <span class="name" contenteditable="false">Player_02</span>
+               </div>
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+             </div>
+           </div>
+   
+           <div class="match" data-match="m2" data-next="qf1" data-slot="away">
+             <div class="row">
+               <div class="team">
+                 <span class="seed">03</span>
+                 <span class="name" contenteditable="false">Player_03</span>
+               </div>
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+             </div>
+             <div class="row">
+               <div class="team">
+                 <span class="seed">04</span>
+                 <span class="name" contenteditable="false">Player_04</span>
+               </div>
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+             </div>
+           </div>
+   
+           <div class="match" data-match="m3" data-next="qf2" data-slot="home">
+             <div class="row">
+               <div class="team">
+                 <span class="seed">05</span>
+                 <span class="name" contenteditable="false">Player_05</span>
+               </div>
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+             </div>
+             <div class="row">
+               <div class="team">
+                 <span class="seed">06</span>
+                 <span class="name" contenteditable="false">Player_06</span>
+               </div>
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+             </div>
+           </div>
+   
+           <div class="match" data-match="m4" data-next="qf2" data-slot="away">
+             <div class="row">
+               <div class="team">
+                 <span class="seed">07</span>
+                 <span class="name" contenteditable="false">Player_07</span>
+               </div>
+               <input class="score"  type="number" min="0" placeholder="0" disabled />
+             </div>
+             <div class="row">
+               <div class="team">
+                 <span class="seed">08</span>
+                 <span class="name" contenteditable="false">Player_08</span>
+               </div>
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+             </div>
+           </div>
+         </section>
+   
+         <!-- Quarterfinals (Left) -->
+         <section class="round" id="qf-left">
+           <div class="round-title">Quarterfinals</div>
+   
+           <div class="match" data-match="qf1" data-next="sf1" data-slot="home">
+             <div class="row">
+               <div class="team">
+                 <span class="seed">L</span>
+                 <span class="name" contenteditable="false">Winner M1</span>
+               </div>
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+             </div>
+             <div class="row">
+               <div class="team">
+                 <span class="seed">L</span>
+                 <span class="name" contenteditable="false">Winner M2</span>
+               </div>
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+             </div>
+             <div class="connector"></div>
+           </div>
+   
+           <div class="match" data-match="qf2" data-next="sf1" data-slot="away">
+             <div class="row">
+               <div class="team">
+                 <span class="seed">L</span>
+                 <span class="name" contenteditable="false">Winner M3</span>
+               </div>
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+             </div>
+             <div class="row">
+               <div class="team">
+                 <span class="seed">L</span>
+                 <span class="name" contenteditable="false">Winner M4</span>
+               </div>
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+             </div>
+             <div class="connector"></div>
+           </div>
+         </section>
+   
+         <!-- Semifinal (Left) -->
+         <section class="round" id="sf-left">
+           <div class="round-title">Semifinal</div>
+   
+           <div class="match" data-match="sf1" data-next="final" data-slot="home">
+             <div class="row">
+               <div class="team">
+                 <span class="seed">L</span>
+                 <span class="name" contenteditable="false">Winner QF1</span>
+               </div>
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+             </div>
+             <div class="row">
+               <div class="team">
+                 <span class="seed">L</span>
+                 <span class="name" contenteditable="false">Winner QF2</span>
+               </div>
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+             </div>
+             <div class="connector"></div>
+           </div>
+         </section>
+   
+         <!-- FINAL (center) -->
+         <section class="round final" id="final-col">
+           <div class="round-title">Final</div>
+   
+           <div class="match" data-match="final" data-next="champion" data-slot="center">
+             <div class="row">
+               <div class="team">
+                 <span class="seed">F</span>
+                 <span class="name" contenteditable="false">Winner SF1</span>
+               </div>
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+             </div>
+             <div class="row">
+               <div class="team">
+                 <span class="seed">F</span>
+                 <span class="name" contenteditable="false">Winner SF2</span>
+               </div>
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+             </div>
+           </div>
+   
+           <a class="champ">
+             <img src="images/balondor.png" alt="trophy">
+             <div class="champion" id="championBox" style="margin-top: 16px;">
+                 <span class="cup">🏆</span>
+                 <span id="championName">Champion</span>
+               </div>
+           </a>
+         </section>
+   
+         <!-- Semifinal (Right) -->
+         <section class="round" id="sf-right">
+           <div class="round-title">Semifinal</div>
+   
+           <div class="match" data-match="sf2" data-next="final" data-slot="away">
+             <div class="row">
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+               <div class="team">
+                   <span class="name" contenteditable="false">Winner QF3</span>
+                   <span class="seed">R</span>
+               </div>
+             </div>
+             <div class="row">
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+               <div class="team">
+                   <span class="name" contenteditable="false">Winner QF4</span>
+                   <span class="seed">R</span>
+               </div>
+             </div>
+             <div class="connector"></div>
+           </div>
+         </section>
+   
+         <!-- Quarterfinals (Right) -->
+         <section class="round" id="qf-right">
+           <div class="round-title">Quarterfinals</div>
+   
+           <div class="match" data-match="qf3" data-next="sf2" data-slot="home">
+             <div class="row">
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+               <div class="team">
+                   <span class="name" contenteditable="false">Winner M5</span>
+                   <span class="seed">R</span>
+               </div>
+             </div>
+             <div class="row">
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+               <div class="team">
+                   <span class="name" contenteditable="false">Winner M6</span>
+                   <span class="seed">R</span>
+               </div>
+             </div>
+             <div class="connector"></div>
+           </div>
+   
+           <div class="match" data-match="qf4" data-next="sf2" data-slot="away">
+             <div class="row">
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+               <div class="team">
+                   <span class="name" contenteditable="false">Winner M7</span>
+                   <span class="seed">R</span>
+               </div>
+             </div>
+             <div class="row">
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+               <div class="team">
+                   <span class="name" contenteditable="false">Winner M8</span>
+                   <span class="seed">R</span>
+               </div>
+             </div>
+             <div class="connector"></div>
+           </div>
+         </section>
+   
+         <!-- Round of 16 (Right: 4 matches) -->
+         <section class="round" id="r16-right">
+           <div class="round-title">Round of 16</div>
+   
+           <div class="match" data-match="m5" data-next="qf3" data-slot="home">
+             <div class="row">
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+               <div class="team">
+                   <span class="name" contenteditable="false">Player_09</span>
+                   <span class="seed">09</span>
+               </div>
+             </div>
+             <div class="row">
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+               <div class="team">
+                   <span class="name" contenteditable="false">Player 10</span>
+                   <span class="seed">10</span>
+               </div>
+             </div>
+           </div>
+   
+           <div class="match" data-match="m6" data-next="qf3" data-slot="away">
+             <div class="row">
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+               <div class="team">
+                   <span class="name" contenteditable="false">Player 11</span>
+                   <span class="seed">11</span>
+               </div>
+             </div>
+             <div class="row">
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+               <div class="team">
+                   <span class="name" contenteditable="false">Player 12</span>
+                   <span class="seed">12</span>
+               </div>
+             </div>
+           </div>
+   
+           <div class="match" data-match="m7" data-next="qf4" data-slot="home">
+             <div class="row">
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+               <div class="team">
+                   <span class="name" contenteditable="false">Player 13</span>
+                   <span class="seed">13</span>
+               </div>
+             </div>
+             <div class="row">
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+               <div class="team">
+                   <span class="name" contenteditable="false">Player 14</span>
+                   <span class="seed">14</span>
+               </div>
+             </div>
+           </div>
+   
+           <div class="match" data-match="m8" data-next="qf4" data-slot="away">
+             <div class="row">
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+               <div class="team">
+                 <span class="name" contenteditable="false">Player 15</span>
+                 <span class="seed">15</span>
+               </div>
+             </div>
+             <div class="row">
+               <input class="score" type="number" min="0" placeholder="0" disabled />
+               <div class="team">
+                 <span class="name" contenteditable="false">Player 16</span>
+                 <span class="seed">16</span>
+               </div>
+             </div>
+           </div>
+   
+         </section>
+   
+   
+       </div>
+</section>  
+</main>
+
+<style>
+  /* .bracket-container {
+    font-size: xx-small;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    padding: 2rem 1rem;
+    overflow-x: auto; 
+    white-space: nowrap; 
+  } */
+
+/* .bracket-container img {
+  max-height: 100%;       
+  display: inline-block;
+} */
+
+  /* .bracket {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 40px;
+    } */
+
+  /* .round {
+     flex-direction: column;
+    gap: 30px;
+    display: flex;
+    justify-content: space-around;
+  } */
+
+  /* .match {
+    background-color: rgba(46, 46, 46, 0.199);
+    border-radius: 10px;
+    padding: 0.5rem;
+    min-width: 140px;
+  } */
+
+  /* .team {
+    background-color: #1a1a1a;
+    padding: 10px;
+    border: 1px solid #333;
+    margin-bottom: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.2s, border 0.2s;
+    display: flex;
+    justify-content: space-between;
+  } */
+
+  /* .team:hover {
+    background-color: rgba(255, 215, 0, 0.1);
+    border-color: var(--UPlay-yellow);
+  } */
+
+  /* .team.winner {
+    border-color: var(--UPlay-yellow);
+    background-color: rgba(255, 215, 0, 0.2);
+  } */
+
+  /* .final .match .team {
+    font-weight: bold;
+    background-color: #222;
+    border: 2px dashed var(--UPlay-yellow);
+  } */
+
+  /* Connector lines */
+    /* .match::after {
+        content: '';
+        position: absolute;
+        right: -20px;
+        top: 50%;
+        width: 20px;
+        height: 2px;
+        background: white;
+    }
+
+    .round:not(:last-child) .match::before {
+        content: '';
+        position: absolute;
+        right: -20px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: white;
+        margin: auto 0;
+    } */
+
+  /* @media (max-width: 768px) {
+    .bracket-container {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .team {
+            min-width: 80px;
+            font-size: 12px;
+        }
+
+    .bracket {
+        gap: 20px;
+    }
+  } */
+</style>
+
+<!-- <script>
+  function setWinner(el) {
+    const match = el.parentElement;
+    match.querySelectorAll('.team').forEach(team => {
+      team.classList.remove('winner');
+    });
+    el.classList.add('winner');
+    // You can add logic to pass this winner to next round dynamically if needed
+  }
+</script> -->
+
+
+
+
+<footer>
+    <p>&copy; 2025 PES Tournament. All rights reserved.</p>
   </footer>
 
+  <!-- Scripts -->
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init();
-
+    
     document.addEventListener('DOMContentLoaded', () => {
+      // Fade-in on scroll
       const faders = document.querySelectorAll('.fade-in');
       const appearOnScroll = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
@@ -491,77 +1269,120 @@
           }
         });
       });
-
       faders.forEach(el => appearOnScroll.observe(el));
 
-      const toggle = document.querySelector('.nav-toggle');
+      // Mobile nav toggle
+      const navToggle = document.querySelector('.nav-toggle');
       const navList = document.querySelector('.nav-list');
-      const navLinks = document.querySelectorAll('.nav-list a');
-
-      toggle.addEventListener('click', () => {
-        toggle.classList.toggle('active');
+      navToggle.addEventListener('click', () => {
         navList.classList.toggle('show');
-        document.body.classList.toggle('menu-open', navList.classList.contains('show'));
+        navToggle.classList.toggle('active');
       });
 
-      navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          toggle.classList.remove('active');
-          navList.classList.remove('show');
-          document.body.classList.remove('menu-open');
-        });
+      // Scroll to top button
+      const scrollToTopBtn = document.getElementById('scrollToTop');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+          scrollToTopBtn.classList.add('show');
+        } else {
+          scrollToTopBtn.classList.remove('show');
+        }
       });
-    });
+      scrollToTopBtn.addEventListener('click', e => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
 
-    const countdown = document.getElementById('countdown');
-    const eventDate = new Date("2025-08-01T18:00:00").getTime();
+      // Countdown timer
+      function countdownTimer() {
+        const countdownEl = document.getElementById('countdown');
+        const tournamentDate = new Date('oct 30, 2025 12:00:00').getTime();
+        const now = new Date().getTime();
+        const distance = tournamentDate - now;
 
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = eventDate - now;
-
-      if (distance < 0) {
-        countdown.innerHTML = "Tournament Started!";
-        return;
+        if (distance < 0) {
+          countdownEl.textContent = 'Tournament Started!';
+          return;
+        }
+        
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor(
+          (distance % (1000 * 60 * 60)) / (1000 * 60)
+        );
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        countdown.innerHTML = `
+        <h3 style="margin-bottom: 3px; color: rgb(0, 130, 255);">Game Starts In</h3>
+        <p style="margin-top: 3px; color: #ffb300;">${days}d : ${hours}h : ${minutes}m : ${seconds}s</p>
+        `;
       }
+      
+      countdownTimer();
+      setInterval(countdownTimer, 1000);
+    });
+    </script>
+<script src="javar/bracket.js"></script>
+<script src="javar/auto_submit_and_respond.js"></script>
 
-      const months = Math.floor(distance / (1000 * 60 * 60 * 24 * 30));
-      const days = Math.floor((distance / (1000 * 60 * 60 * 24)) % 30);
-      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((distance / (1000 * 60)) % 60);
-      const seconds = Math.floor((distance / 1000) % 60);
+<style>
+/* Modal styles for terms $ condition*/
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(58, 58, 58, 0.8);
+}
+.modal-content {
+  background: #111111e3;
+  color: #cccccc;
+  margin: auto;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 700px;
+  border: 1px solid #ffcc0090;
+}
+.close {
+  color: var(--UPlay-yellow);
+  float: right;
+  font-size: 28px;
+  cursor: pointer;
+}
+.close:hover { color: red; }
 
-      countdown.innerHTML = `
-        <h3>Starts In:</h3>
-        <p>${months}mth ${days}d ${hours}h ${minutes}m ${seconds}s</p>
-      `;
+.modal-content ul {
+  text-align: left;
+} 
+</style>
+
+<script>
+  // Modal script
+  const modal = document.getElementById("termsModal");
+  const link = document.getElementById("termsLink");
+  const span = document.getElementsByClassName("close")[0];
+
+  link.onclick = function(e) {
+    e.preventDefault();
+    modal.style.display = "block";
+  }
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
     }
+  }
+</script>
 
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
 
-    window.addEventListener('load', () => {
-      const preloader = document.getElementById('preloader');
-      preloader.style.opacity = '0';
-      setTimeout(() => {
-        preloader.style.display = 'none';
-      }, 500);
-    });
-
-    const scrollToTopBtn = document.getElementById("scrollToTop");
-
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 300) {
-        scrollToTopBtn.classList.add("active");
-      } else {
-        scrollToTopBtn.classList.remove("active");
-      }
-    });
-
-    scrollToTopBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  </script>
 </body>
 </html>
