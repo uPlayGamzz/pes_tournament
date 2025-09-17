@@ -379,23 +379,65 @@
     #register button, #register select  {
       padding: 0.8rem;
       border-radius: 0px;
-      border: none;
       font-size: 1rem;
     }
-
+    
     #register input, select {
       background: #2a2a2a;
       color: #fff;
+      border: none;
     }
 
-    #register button {
+    /* Payment button */
+    #payNowBtn {
+      background: #2a2a2a;
+      color: var(--UPlay-yellow);
+      border: 1px solid var(--UPlay-yellow);
+      padding: 10px 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .form-payment {
+      display: flex;
+      justify-content: space-between;
+    }
+     .copyBtn {
+      cursor: pointer;
+      margin-left: 8px;
+      padding: 0;
+      background: none;
+      border: none;
+     }
+
+     .copyIcon {
+      width: 18px;
+      height: 18px;
+      filter: invert(30%) sepia(95%) brightness(104%);
+      transition: 0.2s;
+     }
+
+     .copyBtn:hover {
+      filter: invert(40%) brightness(100%);
+     }
+
+    /* Terms */
+    .terms {
+      display: block;
+      font-size: 0.9rem;
+      color: #ccc;
+      margin: 15px auto;
+      text-align: center;
+    }
+
+    #register #submitBtn {
       background: #ffcc00;
       color: #000;
       font-weight: bold;
       cursor: pointer;
     }
 
-    #register button:hover {
+    #register #submitBtn:hover {
       background: rgb(230, 184, 0);
     }
 
@@ -522,40 +564,40 @@
       }
 
       .title {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
 
-    .navbar {
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-      background: #1a1a1af3;
-    }
+      .navbar {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        background: #1a1a1af3;
+      }
 
-    .main-header {
-      padding: 15% 7% 40% 7%;
-    }
+      .main-header {
+        padding: 15% 7% 40% 7%;
+      }
 
-    .flex_container {
-      font-size: x-small;
-    }
+      .flex_container {
+        font-size: x-small;
+      }
 
-    .flex_buttons {
-      display: contents;      
-    }
+      .flex_buttons {
+        display: contents;      
+      }
 
-    .cta-button-media {
-      padding: 1rem 0rem;
-      width: 100%;
-      margin-bottom: 2rem;
-    }
+      .cta-button-media {
+        padding: 1rem 0rem;
+        width: 100%;
+        margin-bottom: 2rem;
+      }
 
-    #cta-button2 {
-      padding: 1rem 0rem;
-      width: 100%;
-      margin: 0;
-      
-    }
+      #cta-button2 {
+        padding: 1rem 0rem;
+        width: 100%;
+        margin: 0;
+        
+      }
     }
 
     /* .main-content {
@@ -700,7 +742,8 @@
       <!--input type="hidden" name="access_key" value="c31a9d61-842a-4048-9d56-622f6cfcac35"--> <!-- emmanuelovie2004@gmail.com -->
       
       <input type="hidden" name="redirect" value="https://fiofio24.github.io/pes_tournament/pages/thankyou.html">
-      <!-- <input type="hidden" name="auto_response" value="Thanks for registering for the PES Tournament! We'll contact you soon."> -->
+      <!-- <input type="hidden" name="auto_response" value="Thanks for registering for the PES Tournament! We'll contact you soon."> -->   
+
 
       <div class="form-inputs">
         <label for="name">Username :</label>  
@@ -761,18 +804,35 @@
           </select>
         </div>
       </div>
+      
+      <div style="display: flex; flex-direction: column; gap: 2rem;">
+      <!-- Payment Button -->
+        <div class="form-inputs">
+          <label>Payment:</label>
+          <button type="button" id="payNowBtn">💳 Pay Now</button>
+          
+          <label style="font-size: 0.9rem; color: #ccc; margin-top: 1rem; text-align: left;">
+            <input type="checkbox" id="confirmPayment" required>
+            I've paid the sum of <strong>₦2,000</strong> for the tournament ticket.
+          </label>
+        </div>
+  
 
-      <div class="form-inputs">
-        <label for="">Upload Payment Receipt</label>
-        <input type="file" id="receiptFile" name="receiptFile" accept="image/*,application/pdf" required>
+        <!-- Receipt Upload -->  
+        <div class="form-inputs">
+          <label for="receiptFile">Upload Payment Receipt</label>
+          <input type="file" id="receiptFile" name="receiptFile" accept="image/*,application/pdf" required>
+        </div>
       </div>
 
-      <p style="font-size: 0.9rem; color: #ccc; margin-top: 1rem;">
+          
+  
+      <label style="font-size: 0.9rem; color: #ccc; margin-top: 1rem; text-align: left;">
+        <input type="checkbox" id="confirmPayment" required>
         By registering, you agree to the <a href="#" id="termsLink">Terms & Conditions</a>.
-      </p>
+      </label>
 
-      <!-- Terms & Conditions Modal -->
-       
+      <!-- Terms & Conditions Modal -->     
       <div id="termsModal" class="modal">
         <div class="modal-content">
           <span class="close">&times;</span>
@@ -791,7 +851,45 @@
         </div>
       </div>
 
-      <button type="submit">Submit</button>
+      <!-- Payment Modal -->
+      <div id="paymentModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2 style="color: white;">Complete Your Payment</h2>
+          <div class="form-payment">
+            <p>Ticket Fee :</p>  
+            <p>₦2,000</p>
+          </div>
+
+          <div class="form-payment">
+            <p>Pay To :</p>  
+            <div>
+              <span id="accName" style="color: #fce99a;">Emmanuel Ndidi Ovie</span>
+              <button type="button" class="copyBtn" data-target="accName">
+                <img src="images/icons/copy_icon.png" alt="Copy" class="copyIcon">
+              </button>
+            </div>
+          </div>
+
+          <div class="form-payment">
+            <p>Bank Name :</p>  
+            <p>Opay</p>
+          </div>
+
+          <div class="form-payment">
+            <p>Account Number :</p>  
+            <div>
+              <span id="accNumber" style="color: #fce99a;">8108280855</span>
+              <button type="button" class="copyBtn" data-target="accNumber">
+                <img src="images/icons/copy_icon.png" alt="Copy" class="copyIcon">
+              </button>
+            </div>
+          </div>
+          <p style="margin-top: 10px; font-size: 0.9rem; color: #ccc;">After payment, upload your receipt before submitting.</p>
+        </div>
+      </div>
+
+      <button type="submit" id="submitBtn">Submit</button>
     </form>
   </section>
 
@@ -1333,22 +1431,27 @@
   display: none;
   position: fixed;
   z-index: 9999;
-  padding-top: 100px;
+  padding: 100px 0;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   overflow: auto;
-  background: rgba(58, 58, 58, 0.8);
+  background: rgba(185, 185, 185, 0.8);
 }
 .modal-content {
   background: #111111e3;
   color: #cccccc;
   margin: auto;
   padding: 20px;
-  border-radius: 12px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
   max-width: 700px;
-  border: 1px solid #ffcc0090;
+  /* border: 1px solid #ffcc0090; */
+}
+.modal-content h2 {
+  border-bottom: 1px solid var(--UPlay-yellow);
+  padding-bottom: 1.2rem;
 }
 .close {
   color: var(--UPlay-yellow);
@@ -1360,7 +1463,7 @@
 
 .modal-content ul {
   text-align: left;
-} 
+}
 </style>
 
 <script>

@@ -239,3 +239,55 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+// Payment modal
+const payNowBtn = document.getElementById("payNowBtn");
+const paymentModal = document.getElementById("paymentModal");
+const modals = document.querySelectorAll(".modal");
+const closes = document.querySelectorAll(".modal .close");
+
+if (payNowBtn && paymentModal) {
+  payNowBtn.addEventListener("click", () => {
+    paymentModal.style.display = "block";
+  });
+}
+
+closes.forEach(c => {
+  c.addEventListener("click", () => {
+    c.closest(".modal").style.display = "none";
+  });
+});
+
+window.addEventListener("click", (e) => {
+  modals.forEach(m => {
+    if (e.target === m) m.style.display = "none";
+  });
+});
+
+
+// Copy to clipboard function
+document.querySelectorAll(".copyBtn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const targetId = btn.getAttribute("data-target");
+    const text = document.getElementById(targetId).innerText;
+
+    navigator.clipboard.writeText(text).then(() => {
+      const img = btn.querySelector("img");
+      img.src = "images/icons/white-tick.png";
+      setTimeout(() => img.src = "images/icons/copy_icon.png", 1500);
+    }).catch(() => {
+      alert("Failed to copy, please copy manually.");
+    });
+  });
+});
