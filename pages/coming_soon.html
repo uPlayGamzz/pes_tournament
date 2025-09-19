@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Uplay</title>
+  <link sizes="32x32" rel="icon" href="images/logo/pad-logo-title.png" type="image/png">
+
+  <!-- Fonts and icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- AOS animations -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <!-- Local stylesheets -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href=",,/css/preloader.css" />
+  <link rel="stylesheet" href="../css/scroll-to-top.css" />
+  <!-- If 'libs/aos/aos.css' is a duplicate, remove it to avoid duplication -->
+  <!-- <link rel="stylesheet" href="libs/aos/aos.css" /> -->
+
+  <!-- player bracket links -->
+   <link rel="stylesheet" href="../css/bracket.css" />
+
+  <style>
+
+    :root {
+      --UPlay-yellow: #ffcc00;
+      --UPlay-background-color: #1a1a1a;
+      --UPlay-text-color: white;
+      --UPlay-font: 'Orbitron', sans-serif;
+      --line: #3a3a3a;
+      --line2: #d6ab01;
+      --card: #1f1f1f;
+      --card-alt: #242424;
+      --accent: #0082ff;
+    }
+
+
+    /* Base styles */
+    /* html, body {
+      overflow-x: hidden;
+    } */
+    #title-icon {
+      height: 1px;
+    }
+
+    body {
+      font-family: var(--UPlay-font);
+      margin: 0;
+      padding: 0;
+      background: #181818;
+      color: #fff;
+      height: 100vh;
+    }
+
+    .logos {
+      height: 15px;
+      padding: 0;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: #1f1f1f;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: #1a1a1a00;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      border-bottom: 1px solid #ffffff34;
+    }
+
+    .nav-logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--UPay-yellow);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo img {
+      height: 15px;
+      padding: 0;
+      rotate: 24deg;
+    }
+
+    .hero {
+      height: fit-content;
+      background: linear-gradient(to left, #00000096 5%, #181818 90%), url('../images/stadium-night.png') no-repeat center center/cover;
+      text-align: center;
+      padding: 0px;
+    }
+
+    .main-header {
+      padding: 0% 7% 0% 7%;
+      height: 90dvh;
+      display: flex;
+      place-items: center;
+      justify-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .flex_container{
+      display: flex;
+      justify-content: space-between;
+      background: #181818c8;
+      margin: 20px auto;
+      padding: 10px 28px;
+      border: 1px solid rgb(94, 93, 93);
+      border-radius: 10px;
+      text-align: left;
+      color: #8a8a8a;
+
+    }
+
+    .flex_buttons {
+      display: flex;
+      /* justify-content: space-between; */
+    }
+
+    .title {
+      font-size: 4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .tagline {
+      font-size: 1.3rem;
+      color: #ccc;
+    }
+
+    #timer {
+      font-size: 2rem;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+
+
+    .cta-button-container {
+      margin-top: auto;
+      text-align: center;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: #ffcc00;
+      color: #000;
+      font-weight: bold;
+      border-radius: 0px;
+      text-decoration: none;
+      /* transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+      animation: breathe 1.3s infinite;
+      box-shadow: 0 0 10px rgba(255, 204, 0, 0.6); */
+    }
+
+    .cta-button:hover {
+      background: #cfa602;
+      /* background: #ff7300; */
+      /* transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 204, 0, 0.7);
+      animation: breathe1 4s infinite; */
+    }
+
+    .cta-button-media {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: #ffcc00;
+      color: #000;
+      font-weight: bold;
+      border-radius: 0px;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+      animation: breathe 1.3s infinite;
+      box-shadow: 0 0 10px rgba(255, 204, 0, 0.6);
+    }
+
+    .cta-button-media:hover {
+      /* background: #977900; */
+      /* background: #ff7300; */
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 204, 0, 0.7);
+      animation: breathe1 4s infinite;
+    }
+
+    #cta-button2 {
+      display: inline-block;
+      text-align: center;
+      margin-left: 20px;
+      padding: 1rem 2rem;
+      background: none;
+      color: #ffffff;
+      font-weight: bold;
+      border: 1.5px solid, white;
+      border-radius: 0px;
+      text-decoration: none;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      /* transition: background 0.3s, transform 0.3s, box-shadow 0.3s; */
+      /* animation: breathe 1.3s infinite; */
+      /* box-shadow: 0 0 10px rgba(255, 204, 0, 0.6); */
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 15px rgba(255, 204, 0, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(255, 204, 0, 0);
+      }
+    }
+
+    @keyframes breathe {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
+      }
+      60% {
+        background-color: #ffd83d;
+        transform: scale(1.03);
+        box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
+      }
+    }
+
+    @keyframes breathe1 {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 5px rgba(255, 115, 0, 0.5);
+      }
+      60% {
+        background-color: #ffd83d;
+        transform: scale(1.03);
+        box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
+      }
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #111;
+      color: #888;
+      font-size: 0.9rem;
+    }
+
+    #section {
+      text-align: center;
+      background: #111;
+      color: #888;
+      font-size: 0.9rem;
+      padding: 7rem 20rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 18rem;
+    }
+
+    #section h1{
+      margin: auto;
+      color: #c1c1c1;
+    }
+
+    /* Responsive */
+    @media (min-width: 768px) {
+
+      .reg a {
+        margin: 11px auto auto 32px;
+        padding: 5px 20px;
+      }
+    }
+
+    /* Navigation styles */
+    nav ul.nav-list {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+
+    nav ul.nav-list li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav ul.nav-list li a:hover {
+      color: rgb(255, 204, 0);
+    }
+
+    nav ul.nav-list li img {
+      height: 16px;
+      width: 16px;
+      padding-left:4px;
+    }
+
+    nav ul.nav-list li img:hover {
+      height: 20px;
+      width: 20px;
+      padding-left: 0px;
+    }
+
+    .reg a {
+      padding: 5px 20px;
+      display: inline-block;
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      z-index: 11;
+    }
+
+    .nav-toggle span {
+      width: 16px;
+      height: 1px;
+      background: #fff;
+      margin: 2.5px 0;
+      transition: 0.3s;
+    }
+
+    .nav-toggle.active span:nth-child(1) {
+      transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    .nav-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle.active span:nth-child(3) {
+      transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    /* Mobile navigation */
+    @media (max-width: 768px) {
+      .nav-toggle {
+        display: flex;
+      }
+
+      nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        /* width: 100%; */
+      }
+
+      nav ul.nav-list {
+        flex-direction: column;
+        align-items: center;
+        background-color: rgba(26, 26, 26, 0.95);
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 100%;
+        padding-top: 100px;
+        transform: translateX(100%);
+        transition: transform 0.4s ease;
+        z-index: 9;
+      }
+
+      nav ul.nav-list.show {
+        transform: translateX(0);
+      }
+
+      .title {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .navbar {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        background: #1a1a1af3;
+      }
+
+      .main-header {
+        padding: 0% 7% 0% 7%;
+        height: 95dvh;
+        display: grid;
+        align-content: center;
+        justify-items: stretch;
+      }
+
+      .flex_container {
+        font-size: x-small;
+      }
+
+      .flex_buttons {
+        display: contents;      
+      }
+
+      .cta-button-media {
+        padding: 1rem 0rem;
+        width: 100%;
+        margin-bottom: 2rem;
+      }
+
+      #cta-button2 {
+        padding: 1rem 0rem;
+        width: 100%;
+        margin: 0;
+        
+      }
+    }
+
+    /* .main-content {
+      padding: 3rem 1rem;
+      background: linear-gradient(to left, rgba(0, 0, 0, 0) 5%, #1818189c 30%, #181818f6 90%), url('images/stadium1.jpeg') no-repeat center center/cover;
+    } */
+  </style>
+</head>
+
+<body id="body">
+  
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <img src="../images/logo/pad-logo.png" alt="Logo" />
+      uPlay
+    </div>
+    <div style="display: flex; list-style: none; align-items: center;">
+      <!-- <ul class="nav-list">
+        <li><a href="#body">Home</a></li>
+        <li><a href="pages/about.html">About</a></li>
+        <li><a href="#how-to-join">How to Join</a></li>
+        <li><a href="#players">Players</a></li>
+        <li><a href="pages/leaderboard.html"><img src="images/icons/leaderboard-icon.png" alt=""></a></li>
+      </ul> -->
+      <li class="reg"><a class="cta-button" href="../index.html">Home</a></li>
+    </div>
+    <!-- <div class="nav-toggle" aria-label="Toggle navigation" role="button" tabindex="0">
+      <span></span><span></span><span></span>
+    </div> -->
+  </nav>
+  <header class="hero" id="header">
+
+    <div class="preloader" id="preloader" style="opacity: 0; display: none;"></div>
+
+
+    <div class="main-header">
+      <h1 class="title"><h style="color: rgb(0, 130, 255);">CO</h>MING <h style="color: var(--UPlay-yellow);">SOON</h></h1>
+      <!-- <p class="tagline">Compete in the ultimate PES tournament and claim the grand prize of <h style="color: #ffcc00; font-weight: bold;">N10,000</h></p> -->
+      
+      <!-- <div class="flex_container">
+        <div id="countdown" class="fade-in"></div>
+        <div>
+          <h3 style="margin-bottom: 3px;">Registeration Ends</h3>
+          <p style="margin-top: 3px; color: rgb(255, 77, 0);">December 20th, 2025</p>
+        </div> 
+      </div> -->
+
+      <div class="flex_buttons">
+          <h class="cta-button-container">
+            <a href="#register" class="cta-button-media">Register Now</a>
+          </h>
+          <a href="#" class="flyer" id="cta-button2">
+          
+            <img style="height: 15px; width: 15px; padding-right: 10px;" src="../images/icons/flyer.png" alt="Logo" />Flyer
+          </a>
+      </div>
+      
+        <!-- <div class="flyerPics">
+          <img src="images/balondor.png" alt="">
+        </div> -->
+    </div>
+  </header>
+
+  <a href="#" class="scrollToTop" id="scrollToTop" aria-label="Scroll to top">
+    <img src="../images/icons/scroll-to-top3.svg" alt="Scroll to Top" />
+  </a>
+
+</main>
+
+<section id="section">
+  <h1>About the PES Tournament</h1>
+  <p>Welcome to the ultimate PES gaming showdown! This competition gathers the best players from around the world to compete for glory, recognition, and amazing prizes. Whether you're a pro or a passionate gamer, this is your stage to shine.</p>
+  <h class="cta-button-container">
+    <a href="#register" class="cta-button-media">Register Now</a>
+  </h>
+</section>
+
+<footer>
+  <p>&copy; 2025 PES Tournament. All rights reserved.</p>
+</footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init();
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      // Fade-in on scroll
+      const faders = document.querySelectorAll('.fade-in');
+      const appearOnScroll = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      });
+      faders.forEach(el => appearOnScroll.observe(el));
+
+      // Mobile nav toggle
+      const navToggle = document.querySelector('.nav-toggle');
+      const navList = document.querySelector('.nav-list');
+      navToggle.addEventListener('click', () => {
+        navList.classList.toggle('show');
+        navToggle.classList.toggle('active');
+      });
+
+      // Scroll to top button
+      const scrollToTopBtn = document.getElementById('scrollToTop');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+          scrollToTopBtn.classList.add('show');
+        } else {
+          scrollToTopBtn.classList.remove('show');
+        }
+      });
+      scrollToTopBtn.addEventListener('click', e => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+    </script>
+</body>
+</html>
+
+
+
+
+
