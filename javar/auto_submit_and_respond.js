@@ -1,5 +1,5 @@
 /* ====== CONFIG: set your deployed web app URL here ====== */
-const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwpG4O-0gzOXKy-_y5EWfJh6c1X1ox14bJiCAPWb7LOUdng7MgU3PPr9NvR5BkM410/exec";
+const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbz8_ZVM6ra1qEiipUX-0PE0efAVjJzHVEoCGq12Gg_oiwPik-3CxHVF7C_Ne0BbRjlU/exec";
 
 let isSubmitting = false;
 
