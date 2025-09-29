@@ -1,5 +1,5 @@
 /* ====== CONFIG: set your deployed web app URL here ====== */
-const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbz8_ZVM6ra1qEiipUX-0PE0efAVjJzHVEoCGq12Gg_oiwPik-3CxHVF7C_Ne0BbRjlU/exec";
+const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbybqeokpVMmlx7kmFudrTOjUzZM1_7hfGlelUtBb5HvRjRv85gB56Bd23JbRt8XVk7s/exec";
 
 let isSubmitting = false;
 
@@ -220,7 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const submitJson = await submitRes.json();
 
       if (submitJson.success) {
-        alert("✅ Registration successful!\nYour ticket: " + (submitJson.ticket || ""));
+        alert("✅ Registration successful!\nYou'll receive an email shortly..." + (submitJson.ticket || ""));
         if (form.redirect && form.redirect.value) window.location = form.redirect.value;
         await loadAvailableCodes();
       } else {
