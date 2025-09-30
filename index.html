@@ -36,596 +36,13 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="css/preloader.css" />
   <link rel="stylesheet" href="css/scroll-to-top.css" />
+  <link rel="stylesheet" href="css/page_style.css">
   <!-- If 'libs/aos/aos.css' is a duplicate, remove it to avoid duplication -->
   <!-- <link rel="stylesheet" href="libs/aos/aos.css" /> -->
 
   <!-- player bracket links -->
-   <link rel="stylesheet" href="css/bracket.css" />
+  <link rel="stylesheet" href="css/bracket.css" />
 
-  <style>
-
-    :root {
-      --UPlay-yellow: #ffcc00;
-      --UPlay-background-color: #1a1a1a;
-      --UPlay-text-color: white;
-      --UPlay-font: 'Orbitron', sans-serif;
-      --line: #3a3a3a;
-      --line2: #d6ab01;
-      --card: #1f1f1f;
-      --card-alt: #242424;
-      --accent: #0082ff;
-    }
-
-
-    /* Base styles */
-    /* html, body {
-      overflow-x: hidden;
-    } */
-    #title-icon {
-      height: 1px;
-    }
-
-    body {
-      font-family: var(--UPlay-font);
-      margin: 0;
-      padding: 0;
-      background: #181818;
-      color: #fff;
-    }
-
-    .logos {
-      height: 15px;
-      padding: 0;
-    }
-
-    header {
-      text-align: center;
-      padding: 2rem 1rem;
-      background: #1f1f1f;
-    }
-
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      background: #1a1a1a00;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      border-bottom: 1px solid #ffffff34;
-    }
-
-    .nav-logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: var(--UPay-yellow);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .nav-logo img {
-      height: 15px;
-      padding: 0;
-      rotate: 24deg;
-    }
-
-    .hero {
-      height: fit-content;
-      background: linear-gradient(to left, rgba(0, 0, 0, 0) 5%, #181818 90%), url('images/stadium-night.png') no-repeat center center/cover;
-      text-align: left;
-      padding: 0px;
-    }
-
-    .main-header {
-      padding: 40px 20% 163px 7%;
-    }
-
-    .flex_container{
-      display: flex;
-      justify-content: space-between;
-      background: #181818c8;
-      margin: 20px auto;
-      padding: 10px 28px;
-      border: 1px solid rgb(94, 93, 93);
-      border-radius: 10px;
-      text-align: left;
-      color: #8a8a8a;
-
-    }
-
-    .flex_buttons {
-      display: flex;
-      /* justify-content: space-between; */
-    }
-
-    .title {
-      font-size: 4rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .tagline {
-      font-size: 1.3rem;
-      color: #ccc;
-    }
-
-    #timer {
-      font-size: 2rem;
-      margin-top: 1rem;
-      font-weight: bold;
-    }
-
-    #how-to-join {
-      padding: 3rem 1rem;
-      background: #181818;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 80vh;
-      position: relative;
-      align-items: center;
-      text-align: center;
-    }
-
-    #how-to-join h2{
-      margin: 50px auto;
-    }
-
-    #section {
-      padding: 20px 1rem 10px 1rem;
-      background: #201f1f;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      min-height: 18rem;
-      position: relative;
-      align-items: center;
-      text-align: center;
-      margin: 50px 10px; 
-      border: 1px solid var(--line); 
-      border-radius: 1rem;
-    }
-
-    #section h2{
-      margin: auto;
-    }
-
-    .steps {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      margin-bottom: 3rem;
-      width: 100%;
-      max-width: 900px;
-    }
-
-    .step {
-      text-align: center;
-      padding: 1rem;
-      border: 1px solid #333;
-      border-radius: 1rem;
-      background: #1f1f1f;
-      transition: transform 0.3s ease;
-    }
-
-    .step:hover {
-      transform: translateY(-5px);
-    }
-
-    .step-number {
-      font-size: 2rem;
-      color: #ffcc00;
-      margin-bottom: 0.5rem;
-    }
-
-    .step-title {
-      font-size: 1.5rem;
-      margin-bottom: 0.3rem;
-    }
-
-    .step-description {
-      font-size: 1rem;
-      color: #bbb;
-    }
-
-    .cta-button-container {
-      margin-top: auto;
-      text-align: center;
-    }
-
-    .cta-button {
-      display: inline-block;
-      padding: 1rem 2rem;
-      background: #ffcc00;
-      color: #000;
-      font-weight: bold;
-      border-radius: 0px;
-      text-decoration: none;
-      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
-      animation: breathe 1.3s infinite;
-      box-shadow: 0 0 10px rgba(255, 204, 0, 0.6);
-    }
-
-    .cta-button:hover {
-      /* background: #977900; */
-      /* background: #ff7300; */
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(255, 204, 0, 0.7);
-      animation: breathe1 4s infinite;
-    }
-
-    .cta-button-media {
-      display: inline-block;
-      padding: 1rem 2rem;
-      background: #ffcc00;
-      color: #000;
-      font-weight: bold;
-      border-radius: 0px;
-      text-decoration: none;
-      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
-      animation: breathe 1.3s infinite;
-      box-shadow: 0 0 10px rgba(255, 204, 0, 0.6);
-    }
-
-    .cta-button-media:hover {
-      /* background: #977900; */
-      /* background: #ff7300; */
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(255, 204, 0, 0.7);
-      animation: breathe1 4s infinite;
-    }
-
-    #cta-button2 {
-      display: inline-block;
-      text-align: center;
-      margin-left: 20px;
-      padding: 1rem 2rem;
-      background: none;
-      color: #ffffff;
-      font-weight: bold;
-      border: 1.5px solid, white;
-      border-radius: 0px;
-      text-decoration: none;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      /* transition: background 0.3s, transform 0.3s, box-shadow 0.3s; */
-      /* animation: breathe 1.3s infinite; */
-      /* box-shadow: 0 0 10px rgba(255, 204, 0, 0.6); */
-    }
-
-    @keyframes pulse {
-      0% {
-        box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.7);
-      }
-      70% {
-        box-shadow: 0 0 0 15px rgba(255, 204, 0, 0);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(255, 204, 0, 0);
-      }
-    }
-
-
-    
-
-    @keyframes breathe {
-      0%, 100% {
-        transform: scale(1);
-        box-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
-      }
-      60% {
-        background-color: #ffd83d;
-        transform: scale(1.03);
-        box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
-      }
-    }
-
-    @keyframes breathe1 {
-      0%, 100% {
-        transform: scale(1);
-        box-shadow: 0 0 5px rgba(255, 115, 0, 0.5);
-      }
-      60% {
-        background-color: #ffd83d;
-        transform: scale(1.03);
-        box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
-      }
-    }
-
-
-    #players {
-      padding: 3rem 1rem;
-      background: url('images/Efootball.png') no-repeat center center/cover;
-    }
-
-    #players h2 {
-      margin-top: 40px;
-    }
-
-    .player-cards {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-    }
-
-    .player-card {
-      background: #2c2c2c;
-      padding: 0 1.5rem;
-      padding-top: 20px;
-      border-radius: 1rem;
-      border: solid, rgb(147, 146, 146), 0.5px;
-      text-align: center;
-      width: 200px;
-      transition: transform 0.3s ease;
-    }
-
-    .player-card:hover {
-      transform: translateY(-5px);
-    }
-
-    #register {
-      padding: 3rem 1rem;
-      background: #191919;
-      text-align: center;
-    }
-
-    #register form{
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      max-width: 400px;
-      margin: 50px auto 20px auto;
-    }
-
-    .form-inputs {
-      text-align: left;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .form-inputs h {
-      margin: 0;
-      color: #ccc;
-      font-size: smaller;
-
-    }
-
-    #register input,
-    #register button, #register select  {
-      padding: 0.8rem;
-      border-radius: 0px;
-      font-size: 1rem;
-    }
-    
-    #register input, select {
-      background: #2a2a2a;
-      color: #fff;
-      border: none;
-    }
-
-    /* Payment button */
-    #payNowBtn {
-      background: #2a2a2a;
-      color: var(--UPlay-yellow);
-      border: 1px solid var(--UPlay-yellow);
-      padding: 10px 20px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .form-payment {
-      display: flex;
-      justify-content: space-between;
-    }
-     .copyBtn {
-      cursor: pointer;
-      margin-left: 8px;
-      padding: 0;
-      background: none;
-      border: none;
-     }
-
-     .copyIcon {
-      width: 18px;
-      height: 18px;
-      filter: invert(30%) sepia(95%) brightness(104%);
-      transition: 0.2s;
-     }
-
-     .copyBtn:hover {
-      filter: invert(40%) brightness(100%);
-     }
-
-    /* Terms */
-    .terms {
-      display: block;
-      font-size: 0.9rem;
-      color: #ccc;
-      margin: 15px auto;
-      text-align: center;
-    }
-
-    #register #submitBtn {
-      background: #ffcc00;
-      color: #000;
-      font-weight: bold;
-      cursor: pointer;
-      border: none;
-    }
-
-    #register #submitBtn:hover {
-      background: rgb(230, 184, 0);
-    }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: #111;
-      color: #888;
-      font-size: 0.9rem;
-    }
-
-    /* Responsive */
-    @media (min-width: 768px) {
-      .steps {
-        flex-direction: row;
-        justify-content: space-between;
-      }
-
-      .step {
-        flex: 1;
-        margin: 0 1rem;
-      }
-
-      .reg a {
-        margin: 11px auto auto 32px;
-        padding: 5px 20px;
-      }
-    }
-
-    /* Navigation styles */
-    nav ul.nav-list {
-      list-style: none;
-      display: flex;
-      gap: 1rem;
-      margin: 0;
-      padding: 0;
-      align-items: center;
-    }
-
-    nav ul.nav-list li a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    nav ul.nav-list li a:hover {
-      color: rgb(255, 204, 0);
-    }
-
-    nav ul.nav-list li img {
-      height: 16px;
-      width: 16px;
-      padding-left:4px;
-    }
-
-    nav ul.nav-list li img:hover {
-      height: 20px;
-      width: 20px;
-      padding-left: 0px;
-    }
-
-    .reg a {
-      padding: 5px 20px;
-      display: inline-block;
-    }
-
-    .nav-toggle {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      z-index: 11;
-    }
-
-    .nav-toggle span {
-      width: 16px;
-      height: 1px;
-      background: #fff;
-      margin: 2.5px 0;
-      transition: 0.3s;
-    }
-
-    .nav-toggle.active span:nth-child(1) {
-      transform: rotate(-45deg) translate(-5px, 6px);
-    }
-
-    .nav-toggle.active span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .nav-toggle.active span:nth-child(3) {
-      transform: rotate(45deg) translate(-5px, -6px);
-    }
-
-    /* Mobile navigation */
-    @media (max-width: 768px) {
-      .nav-toggle {
-        display: flex;
-      }
-
-      nav {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        /* width: 100%; */
-      }
-
-      nav ul.nav-list {
-        flex-direction: column;
-        align-items: center;
-        background-color: rgba(26, 26, 26, 0.95);
-        position: fixed;
-        top: 0;
-        right: 0;
-        height: 100vh;
-        width: 100%;
-        padding-top: 100px;
-        transform: translateX(100%);
-        transition: transform 0.4s ease;
-        z-index: 9;
-      }
-
-      nav ul.nav-list.show {
-        transform: translateX(0);
-      }
-
-      .title {
-        font-size: 2.5rem;
-        margin-bottom: 0.5rem;
-      }
-
-      .navbar {
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-        background: #1a1a1af3;
-      }
-
-      .main-header {
-        padding: 15% 7% 40% 7%;
-      }
-
-      .flex_container {
-        font-size: x-small;
-      }
-
-      .flex_buttons {
-        display: contents;      
-      }
-
-      .cta-button-media {
-        padding: 1rem 0rem;
-        width: 100%;
-        margin-bottom: 2rem;
-      }
-
-      #cta-button2 {
-        padding: 1rem 0rem;
-        width: 100%;
-        margin: 0;
-        
-      }
-    }
-
-    /* .main-content {
-      padding: 3rem 1rem;
-      background: linear-gradient(to left, rgba(0, 0, 0, 0) 5%, #1818189c 30%, #181818f6 90%), url('images/stadium1.jpeg') no-repeat center center/cover;
-    } */
-  </style>
 </head>
 
 <body id="body">
@@ -1255,112 +672,6 @@
 </section>  
 </main>
 
-<style>
-  /* .bracket-container {
-    font-size: xx-small;
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
-    padding: 2rem 1rem;
-    overflow-x: auto; 
-    white-space: nowrap; 
-  } */
-
-/* .bracket-container img {
-  max-height: 100%;       
-  display: inline-block;
-} */
-
-  /* .bracket {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        gap: 40px;
-    } */
-
-  /* .round {
-     flex-direction: column;
-    gap: 30px;
-    display: flex;
-    justify-content: space-around;
-  } */
-
-  /* .match {
-    background-color: rgba(46, 46, 46, 0.199);
-    border-radius: 10px;
-    padding: 0.5rem;
-    min-width: 140px;
-  } */
-
-  /* .team {
-    background-color: #1a1a1a;
-    padding: 10px;
-    border: 1px solid #333;
-    margin-bottom: 5px;
-    border-radius: 8px;
-    cursor: pointer;
-    text-align: center;
-    transition: background 0.2s, border 0.2s;
-    display: flex;
-    justify-content: space-between;
-  } */
-
-  /* .team:hover {
-    background-color: rgba(255, 215, 0, 0.1);
-    border-color: var(--UPlay-yellow);
-  } */
-
-  /* .team.winner {
-    border-color: var(--UPlay-yellow);
-    background-color: rgba(255, 215, 0, 0.2);
-  } */
-
-  /* .final .match .team {
-    font-weight: bold;
-    background-color: #222;
-    border: 2px dashed var(--UPlay-yellow);
-  } */
-
-  /* Connector lines */
-    /* .match::after {
-        content: '';
-        position: absolute;
-        right: -20px;
-        top: 50%;
-        width: 20px;
-        height: 2px;
-        background: white;
-    }
-
-    .round:not(:last-child) .match::before {
-        content: '';
-        position: absolute;
-        right: -20px;
-        top: 0;
-        bottom: 0;
-        width: 2px;
-        background: white;
-        margin: auto 0;
-    } */
-
-  /* @media (max-width: 768px) {
-    .bracket-container {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .team {
-            min-width: 80px;
-            font-size: 12px;
-        }
-
-    .bracket {
-        gap: 20px;
-    }
-  } */
-</style>
-
 <!-- <script>
   function setWinner(el) {
     const match = el.parentElement;
@@ -1376,80 +687,80 @@
 
 
 <footer>
-    <p>&copy; 2025 PES Tournament. All rights reserved.</p>
-  </footer>
+  <p>&copy; 2025 PES Tournament. All rights reserved.</p>
+</footer>
 
   <!-- Scripts -->
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script>
-    AOS.init();
-    
-    document.addEventListener('DOMContentLoaded', () => {
-      // Fade-in on scroll
-      const faders = document.querySelectorAll('.fade-in');
-      const appearOnScroll = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      });
-      faders.forEach(el => appearOnScroll.observe(el));
+<script>
+  AOS.init();
 
-      // Mobile nav toggle
-      const navToggle = document.querySelector('.nav-toggle');
-      const navList = document.querySelector('.nav-list');
-      navToggle.addEventListener('click', () => {
-        navList.classList.toggle('show');
-        navToggle.classList.toggle('active');
-      });
-
-      // Scroll to top button
-      const scrollToTopBtn = document.getElementById('scrollToTop');
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 500) {
-          scrollToTopBtn.classList.add('show');
-        } else {
-          scrollToTopBtn.classList.remove('show');
+  document.addEventListener('DOMContentLoaded', () => {
+    // Fade-in on scroll
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOnScroll = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
         }
       });
-      scrollToTopBtn.addEventListener('click', e => {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
+    });
+    faders.forEach(el => appearOnScroll.observe(el));
 
-      // Countdown timer
-      function countdownTimer() {
-        const countdownEl = document.getElementById('countdown');
-        const tournamentDate = new Date('oct 30, 2025 12:00:00').getTime();
-        const now = new Date().getTime();
-        const distance = tournamentDate - now;
+    // Mobile nav toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const navList = document.querySelector('.nav-list');
+    navToggle.addEventListener('click', () => {
+      navList.classList.toggle('show');
+      navToggle.classList.toggle('active');
+    });
 
-        if (distance < 0) {
-          countdownEl.textContent = 'Tournament Started!';
-          return;
-        }
-        
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor(
-          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-        );
-        const minutes = Math.floor(
-          (distance % (1000 * 60 * 60)) / (1000 * 60)
-        );
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        
-        countdown.innerHTML = `
-        <h3 style="margin-bottom: 3px; color: rgb(0, 130, 255);">Game Starts In</h3>
-        <p style="margin-top: 3px; color: #ffb300;">${days}d : ${hours}h : ${minutes}m : ${seconds}s</p>
-        `;
+    // Scroll to top button
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) {
+        scrollToTopBtn.classList.add('show');
+      } else {
+        scrollToTopBtn.classList.remove('show');
+      }
+    });
+    scrollToTopBtn.addEventListener('click', e => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Countdown timer
+    function countdownTimer() {
+      const countdownEl = document.getElementById('countdown');
+      const tournamentDate = new Date('oct 30, 2025 12:00:00').getTime();
+      const now = new Date().getTime();
+      const distance = tournamentDate - now;
+
+      if (distance < 0) {
+        countdownEl.textContent = 'Tournament Started!';
+        return;
       }
       
-      countdownTimer();
-      setInterval(countdownTimer, 1000);
-    });
-    </script>
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor(
+        (distance % (1000 * 60 * 60)) / (1000 * 60)
+      );
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+      countdown.innerHTML = `
+      <h3 style="margin-bottom: 3px; color: rgb(0, 130, 255);">Game Starts In</h3>
+      <p style="margin-top: 3px; color: #ffb300;">${days}d : ${hours}h : ${minutes}m : ${seconds}s</p>
+      `;
+    }
+    
+    countdownTimer();
+    setInterval(countdownTimer, 1000);
+  });
+</script>
 <script src="javar/bracket.js"></script>
 <script src="javar/auto_submit_and_respond.js"></script>
 
