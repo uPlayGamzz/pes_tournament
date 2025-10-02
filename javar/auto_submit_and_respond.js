@@ -291,3 +291,17 @@ document.querySelectorAll(".copyBtn").forEach(btn => {
     });
   });
 });
+
+
+
+
+//Submittion Effect
+document.getElementById("regForm").addEventListener("submit", function (e) {
+  const btn = document.getElementById("submitBtn");
+  const spinner = document.getElementById("loadingSpinner");
+
+  // Disable button + show spinner
+  btn.disabled = true;
+  btn.textContent = "Submitting...";
+  spinner.style.display = "block";
+});

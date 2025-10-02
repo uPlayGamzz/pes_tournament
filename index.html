@@ -81,7 +81,7 @@
         <div id="countdown" class="fade-in"></div>
         <div>
           <h3 style="margin-bottom: 3px;">Registeration Ends</h3>
-          <p style="margin-top: 3px; color: rgb(255, 77, 0);">December 20th, 2025</p>
+          <p style="margin-top: 3px; color: rgb(255, 77, 0);">October 20th, 2025</p>
         </div> 
       </div>
 
@@ -335,6 +335,9 @@
       </div>
 
       <button type="submit" id="submitBtn">Submit</button>
+      <div id="loadingSpinner" style="display: none; margin-top: 10px; color: #fff;">
+        ⏳ Submitting... Please wait
+      </div>
     </form>
   </section>
 
@@ -733,7 +736,7 @@
     // Countdown timer
     function countdownTimer() {
       const countdownEl = document.getElementById('countdown');
-      const tournamentDate = new Date('oct 30, 2025 12:00:00').getTime();
+      const tournamentDate = new Date('oct 24, 2025 18:00:00').getTime();
       const now = new Date().getTime();
       const distance = tournamentDate - now;
 
