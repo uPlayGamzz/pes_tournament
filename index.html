@@ -11,19 +11,19 @@
 
   <!-- Open Graph / Facebook / WhatsApp -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://fiofio24.github.io/pes_tournament/index.html">
+  <meta property="og:url" content="https://uplaygamzz.github.io/pes_tournament/index.html">
   <meta property="og:title" content="UPlay - PES Tournament">
   <meta property="og:description" content="Join the ultimate PES Tournament on UPlay. Compete, win, and rise to the top of the leaderboard!">
-  <meta property="og:image" content="https://fiofio24.github.io/pes_tournament/images/PES_flyer.png">
+  <meta property="og:image" content="https://uplaygamzz.github.io/pes_tournament/images/PES_flyer.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="UPlay - PES Tournament">
-  <meta name="twitter:url" content="https://fiofio24.github.io/pes_tournament/index.html">
+  <meta name="twitter:url" content="https://uplaygamzz.github.io/pes_tournament/index.html">
   <meta name="twitter:title" content="UPlay - PES Tournament">
   <meta name="twitter:description" content="Join the ultimate PES Tournament on UPlay. Compete, win, and rise to the top of the leaderboard!">
-  <meta name="twitter:image" content="https://fiofio24.github.io/pes_tournament/images/PES_flyer.png">
+  <meta name="twitter:image" content="https://uplaygamzz.github.io/pes_tournament/images/PES_flyer.png">
   
 
   <!-- Fonts and icons -->
@@ -62,7 +62,13 @@
         <!-- <li><a href="pages/leaderboard.html"><img src="images/icons/leaderboard-icon.png" alt=""></a></li> -->
         <li><a href="pages/coming_soon.html"><img src="images/icons/leaderboard-icon.png" alt=""></a></li>
       </ul>
-      <li class="reg"><a class="cta-button" href="#register">Register</a></li>
+      <!-- <li class="reg"><a class="cta-button" href="#register">Register</a></li> -->
+      <li class="reg">
+        <a class="cta-button3" href="#register" style="display: flex; align-items: center;">
+          Live Score
+          <img style="height: 15px; width: 15px; padding-left: 6px;" src="images/icons/circle.png" alt="Logo" />
+        </a>
+      </li>
     </div>
     <div class="nav-toggle" aria-label="Toggle navigation" role="button" tabindex="0">
       <span></span><span></span><span></span>
@@ -81,7 +87,7 @@
         <div id="countdown" class="fade-in"></div>
         <div>
           <h3 style="margin-bottom: 3px;">Registeration Ends</h3>
-          <p style="margin-top: 3px; color: rgb(255, 77, 0);">October 20th, 2025</p>
+          <p style="margin-top: 3px; color: rgb(255, 77, 0);">October 23th, 2025</p>
         </div> 
       </div>
 
@@ -89,7 +95,7 @@
           <h class="cta-button-container">
             <a href="#register" class="cta-button-media">Register Now</a>
           </h>
-          <a href="#" class="flyer" id="cta-button2">
+          <a href="https://uplaygamzz.github.io/pes_tournament/images/PES_flyer.png" class="flyer" id="cta-button2">
           
             <img style="height: 15px; width: 15px; padding-right: 10px;" src="images/icons/flyer.png" alt="Logo" />Flyer
           </a>
@@ -736,7 +742,7 @@
     // Countdown timer
     function countdownTimer() {
       const countdownEl = document.getElementById('countdown');
-      const tournamentDate = new Date('oct 24, 2025 18:00:00').getTime();
+      const tournamentDate = new Date('oct 25, 2025 18:00:00').getTime();
       const now = new Date().getTime();
       const distance = tournamentDate - now;
 
