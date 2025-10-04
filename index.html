@@ -37,6 +37,7 @@
   <link rel="stylesheet" href="css/preloader.css" />
   <link rel="stylesheet" href="css/scroll-to-top.css" />
   <link rel="stylesheet" href="css/page_style.css">
+  <link rel="stylesheet" href="css/live_score.css">
   <!-- If 'libs/aos/aos.css' is a duplicate, remove it to avoid duplication -->
   <!-- <link rel="stylesheet" href="libs/aos/aos.css" /> -->
 
@@ -62,13 +63,43 @@
         <!-- <li><a href="pages/leaderboard.html"><img src="images/icons/leaderboard-icon.png" alt=""></a></li> -->
         <li><a href="pages/coming_soon.html"><img src="images/icons/leaderboard-icon.png" alt=""></a></li>
       </ul>
-      <li class="reg"><a class="cta-button" href="#register">Register</a></li>
+      <!-- <li class="reg"><a class="cta-button" href="#register">Register</a></li> -->
       <!-- <li class="reg">
-        <a class="cta-button3" href="#register" style="display: flex; align-items: center;">
+        <a id="liveScoreBtn" class="cta-button3" href="#register" style="display: flex; align-items: center;">
           Live Score
           <img style="height: 15px; width: 15px; padding-left: 6px;" src="images/icons/circle.png" alt="Logo" />
         </a>
       </li> -->
+
+      <!-- Live Score Button in Navbar -->
+      <button id="liveScoreBtn" class="live-score-btn">Live Score</button>
+
+      <!-- Live Score Panel -->
+      <div id="liveScorePanel" class="live-score-panel">
+        <div class="match-header">
+          <span class="status" id="matchStatus">Upcoming Match</span>
+        </div>
+        <div class="teams">
+          <div class="team">
+            <img id="homeLogo" src="images/logos/chelsea.png" alt="Home Team Logo">
+            <p id="homeUser">Chelsea</p>
+          </div>
+          <div class="score" id="scoreBoard">0 : 0</div>
+          <div class="team">
+            <img id="awayLogo" src="images/logos/manchester_united.png" alt="Away Team Logo">
+            <p id="awayUser">Man Utd</p>
+          </div>
+        </div>
+        <div class="match-time" id="matchTime">00:00</div>
+        <div id="adminControls" style="">
+          <button onclick="startMatch(1)">Start Match</button>
+          <button onclick="continueMatch()">Continue</button>
+          <button onclick="endMatch()">End Match</button>
+          <button onclick="editTeams()">Edit Teams</button>
+        </div>
+
+      </div>
+
     </div>
     <div class="nav-toggle" aria-label="Toggle navigation" role="button" tabindex="0">
       <span></span><span></span><span></span>
@@ -330,7 +361,7 @@
           <div class="form-payment">
             <p>Account Number :</p>  
             <div>
-              <span id="accNumber" style="color: #fce99a;">8108280855</span>
+              <span id="accNumber" style="color: #fce99a;">9151001655</span>
               <button type="button" class="copyBtn" data-target="accNumber">
                 <img src="images/icons/copy_icon.png" alt="Copy" class="copyIcon">
               </button>
@@ -772,6 +803,7 @@
 </script>
 <script src="javar/bracket.js"></script>
 <script src="javar/auto_submit_and_respond.js"></script>
+<script src="javar/live_score.js"></script>
 
 <style>
 /* Modal styles for terms $ condition*/
