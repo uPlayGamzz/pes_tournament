@@ -4,6 +4,74 @@
     const adminStatus = document.getElementById('adminStatus');
     const saveBtn = document.getElementById('saveBracket');
     const clearBtn = document.getElementById('clearBracket');
+    const GOOGLE_SHEET_API = "https://script.google.com/macros/s/AKfycbzlUpH13_C8tFx3eQu2dtCSSqHBEsaWIleb9puh8vWBRO_yfQsE47FNRPjuL380zJjD/exec";
+
+    // ===== Google Sheet Sync =====
+
+    function serializeForGoogle() {
+      const matches = [];
+      document.querySelectorAll('.match').forEach((m, i) => {
+        const rows = m.querySelectorAll('.row');
+        const r1 = rows[0];
+        const r2 = rows[1];
+        const p1 = r1.querySelector('.name').textContent.trim();
+        const p2 = r2.querySelector('.name').textContent.trim();
+        const s1 = r1.querySelector('.score').value.trim();
+        const s2 = r2.querySelector('.score').value.trim();
+        matches.push({
+          MatchID: m.dataset.match,
+          Player1: p1,
+          Player2: p2,
+          Score1: s1,
+          Score2: s2,
+          Status: "Pending"
+        });
+      });
+      return matches;
+    }
+
+    async function saveToGoogleSheet() {
+      const data = serializeForGoogle();
+      try {
+        const res = await fetch(GOOGLE_SHEET_API, {
+          method: "POST",
+          body: JSON.stringify(data)
+        });
+        const text = await res.text();
+        console.log("Saved to Google Sheet:", text);
+        alert("Bracket saved online ✅");
+      } catch (err) {
+        console.error("Failed to save online:", err);
+        alert("❌ Error saving to Google Sheet");
+      }
+    }
+
+    async function loadFromGoogleSheet() {
+      try {
+        const res = await fetch(GOOGLE_SHEET_API);
+        const data = await res.json();
+
+        data.forEach(match => {
+          const m = document.querySelector(`.match[data-match="${match.MatchID}"]`);
+          if (!m) return;
+          const rows = m.querySelectorAll('.row');
+          if (rows[0]) {
+            rows[0].querySelector('.name').textContent = match.Player1;
+            rows[0].querySelector('.score').value = match.Score1;
+          }
+          if (rows[1]) {
+            rows[1].querySelector('.name').textContent = match.Player2;
+            rows[1].querySelector('.score').value = match.Score2;
+          }
+        });
+
+        console.log("Loaded from Google Sheet ✅");
+      } catch (err) {
+        console.error("Failed to load from Google Sheet:", err);
+      }
+    }
+
+
 
     function setAdminMode(on) {
       const inputs = document.querySelectorAll('.score');
@@ -157,12 +225,21 @@
     const STORAGE_KEY = 'uplay_bracket_v1';
     // Load
     try { deserialize(JSON.parse(localStorage.getItem(STORAGE_KEY))); } catch(e){}
+    loadFromGoogleSheet(); // always fetch latest from online
 
-    saveBtn.addEventListener('click', () => {
+
+    saveBtn.addEventListener('click', async () => {
+      // Save locally (optional backup)
       localStorage.setItem(STORAGE_KEY, JSON.stringify(serialize()));
+
+      // Save online
+      await saveToGoogleSheet();
+
+      // Show UI feedback
       saveBtn.textContent = 'Saved';
       setTimeout(() => saveBtn.textContent = 'Save', 1200);
     });
+
 
     clearBtn.addEventListener('click', () => {
       if (!confirm('Clear all scores and names (keeps structure)?')) return;
