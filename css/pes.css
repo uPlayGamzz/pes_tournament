@@ -1,0 +1,35 @@
+.main-header {
+  padding: 40px 20% 163px 7%;
+}
+
+  .main-header {
+    padding: 15% 7% 40% 7%;
+  }
+
+.hero {
+  height: fit-content;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0) 5%, #181818 90%), url('../images/stadium-night.png') no-repeat center center/cover;
+  text-align: left;
+  padding: 0px;
+}
+
+.hero_dark {
+  height: fit-content;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.756) 5%, #181818 90%), url('../images/stadium-night.png') no-repeat center center/cover;
+  text-align: left;
+  padding: 0px;
+}
+
+.title {
+  margin-bottom: 0.5rem;
+}
+
+.tagline {
+  font-size: 1.3rem;
+  color: #ccc;
+}
+
+#players {
+  padding: 3rem 1rem;
+  background: url('../images/Efootball.png') no-repeat center center/cover;
+}
