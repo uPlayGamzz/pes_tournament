@@ -20,6 +20,10 @@
   margin: 20px 0;
 }
 
+.team {
+  justify-content: center;
+}
+
 .team img {
   width: 60px;
   height: 60px;
