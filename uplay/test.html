@@ -1,0 +1,48 @@
+<div class="scroll-section">
+  <div class="item">1</div>
+  <div class="item">2</div>
+  <div class="item">3</div>
+  <div class="item">4</div>
+  <div class="item">5</div>
+  <div class="item">1</div>
+  <div class="item">2</div>
+  <div class="item">3</div>
+  <div class="item">4</div>
+  <div class="item">5</div>
+  <div class="item">1</div>
+  <div class="item">2</div>
+  <div class="item">3</div>
+  <div class="item">4</div>
+  <div class="item">5</div>
+</div>
+
+<style>
+.scroll-section {
+  display: flex;
+  overflow-x: auto; /* horizontal scroll */
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  gap: 20px;
+  padding: 20px;
+  background: #111;
+  color: white;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+/* Hide scroll bar (optional) */
+.scroll-section::-webkit-scrollbar {
+  display: none;
+}
+
+.item {
+  min-width: 200px;
+  height: 150px;
+  background: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  font-size: 24px;
+}
+</style>

@@ -192,7 +192,7 @@ header {
 
 .cta-button-media {
   display: inline-block;
-  padding: 1rem 2rem;
+  padding: 10px 2rem;
   margin-right: 20px;
   background: #ffcc00;
   color: #000;
@@ -216,7 +216,7 @@ header {
   display: inline-block;
   text-align: center;
   margin-right: 20px;
-  padding: 1rem 2rem;
+  padding: 10px 2rem;
   background: none;
   color: #ffffff;
   font-weight: bold;

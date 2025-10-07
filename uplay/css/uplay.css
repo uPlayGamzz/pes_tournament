@@ -1,0 +1,109 @@
+.main-header {
+  padding: 0% 7% 0% 7%;
+  height: 80dvh;
+  display: flex;
+  place-items: center;
+  justify-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /* text-align: center; */
+}
+
+.hero {
+  height: fit-content;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 1%, #181818 90%), url('../images/cod1.jpeg') no-repeat center center/cover;
+  text-align: left;
+  padding: 0px;
+}
+
+.hero_dark {
+  height: fit-content;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.756) 5%, #181818 90%), url('../images/stadium-night.png') no-repeat center center/cover;
+  text-align: left;
+  padding: 0px;
+}
+
+.left-border {
+  border-left: 2px solid var(--UPlay-yellow);
+  
+  padding-left: 1rem;
+  margin-bottom: 5rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.tagline {
+  font-size: 2.5rem;
+  color: #ccc;
+}
+
+#tournament {
+  padding: 3rem 1rem;
+}
+
+#tournament h2 {
+  margin-top: 40px;
+}
+
+.tournament-cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto; /* horizontal scroll */
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  gap: 1.5rem;
+  white-space: nowrap;
+  height: 20rem;
+}
+
+@media (max-width: 768px) {
+  .tournament-cards {
+    justify-content: normal;
+  }
+}
+
+/* .tournament-cards::-webkit-scrollbar {
+  display: none;
+} */
+
+.tournament-card {
+  padding: 1.5rem;
+  /* border: solid, rgb(147, 146, 146), 0.5px; */
+  background: rgba(104, 104, 104, 0.144);
+  text-align: center;
+  height: 13rem;
+  width: 8rem;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.tournament-card:hover {
+  transform: translateY(-5rem);
+  transition: 50s;
+  height: 15rem;
+  width: 8rem;
+}
+
+#pes {
+  background: url(../images/PES2024.png) no-repeat center center/cover;
+}
+
+#cod {
+  background: url(../images/cod.png) no-repeat center center/cover;
+}
+
+#see-more {
+  display: flex;
+  place-items: center;
+  font-size: 0.6rem;
+  justify-content: space-around;
+  color: #ccc;
+}
+
+a {
+  text-decoration: none;
+}
