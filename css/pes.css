@@ -1,3 +1,11 @@
+body {
+  font-family: var(--UPlay-font);
+  margin: 0;
+  padding: 0;
+  background: #181818;
+  color: #fff;
+}
+
 .main-header {
   padding: 40px 20% 163px 7%;
 }
@@ -37,6 +45,10 @@
 }
 
 #players {
-  padding: 3rem 1rem;
-  background: url('../images/Efootball.png') no-repeat center center/cover;
+  padding: 3rem 3rem;
+  /* background: linear-gradient(to top, #ff0b0b 5%, #0b0b0b 90%), url('../images/blurry-stadium.png') no-repeat center center/cover; */
+  background: linear-gradient(to top, #191919c0 5%, #0b0b0b00 90%), url('../images/medals.png') no-repeat center center/cover;
+  position: relative;
+  background-position: -50px 1px;
+  background-size: 360px;
 }

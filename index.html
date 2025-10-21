@@ -73,41 +73,42 @@
         <li><a href="#how-to-join">How to Join</a></li>
         <li><a href="#players">Players</a></li>
         <!-- <li><a href="pages/leaderboard.html"><img src="images/icons/leaderboard-icon.png" alt=""></a></li> -->
-        <li><a href="pages/coming_soon.html"><img src="images/icons/leaderboard-icon.png" alt=""></a></li>
+        <li><a href="pages/leaderboard.html"><img src="images/icons/leaderboard-icon.png" alt=""></a></li>
       </ul>
-      <li class="reg"><a class="cta-button" href="#register">Register</a></li>
       
+      
+      
+    </div>
+    <a class="cta-button" href="#register">Register</a>
+    <!-- Live Score Button in Navbar -->
+    <!-- <button id="liveScoreBtn" class="live-score-btn">Live Score</button> -->
 
-      <!-- Live Score Button in Navbar -->
-      <!-- <button id="liveScoreBtn" class="live-score-btn">Live Score</button> -->
-
-      <!-- Live Score Panel -->
-      <div id="liveScorePanel" class="live-score-panel">
-        <div class="match-header">
-          <span class="status" id="matchStatus">Upcoming Match</span>
+    <!-- Live Score Panel -->
+    <div id="liveScorePanel" class="live-score-panel">
+      <div class="match-header">
+        <span class="status" id="matchStatus">Upcoming Match</span>
+      </div>
+      <div class="teams">
+        <div class="team">
+          <img id="homeLogo" src="images/logos/chelsea.png" alt="Home Team Logo">
+          <p id="homeUser">Chelsea</p>
         </div>
-        <div class="teams">
-          <div class="team">
-            <img id="homeLogo" src="images/logos/chelsea.png" alt="Home Team Logo">
-            <p id="homeUser">Chelsea</p>
-          </div>
-          <div class="score" id="scoreBoard">0 : 0</div>
-          <div class="team">
-            <img id="awayLogo" src="images/logos/manchester_united.png" alt="Away Team Logo">
-            <p id="awayUser">Man Utd</p>
-          </div>
+        <div class="score" id="scoreBoard">0 : 0</div>
+        <div class="team">
+          <img id="awayLogo" src="images/logos/manchester_united.png" alt="Away Team Logo">
+          <p id="awayUser">Man Utd</p>
         </div>
-        <div class="match-time" id="matchTime">00:00</div>
-        <div id="adminControls">
-          <button onclick="startMatch(1)">Start Match</button>
-          <button onclick="continueMatch()">Continue</button>
-          <button onclick="endMatch()">End Match</button>
-          <button onclick="editTeams()">Edit Teams</button>
-        </div>
-
+      </div>
+      <div class="match-time" id="matchTime">00:00</div>
+      <div id="adminControls">
+        <button onclick="startMatch(1)">Start Match</button>
+        <button onclick="continueMatch()">Continue</button>
+        <button onclick="endMatch()">End Match</button>
+        <button onclick="editTeams()">Edit Teams</button>
       </div>
 
     </div>
+
     <div class="nav-toggle" aria-label="Toggle navigation" role="button" tabindex="0">
       <span></span><span></span><span></span>
     </div>
@@ -173,22 +174,22 @@
   <section id="section">
     <h2 style="margin: 10px;">Tournament Overview</h2>
     <div style="margin: 20px auto 15px auto;" class="steps">
-      <div style="border-radius: 1rem; border: 1px solid #ffcc0079; padding: auto 2rem;" class="step" data-aos="fade-up">
+      <div style="border-radius: 1rem; padding: auto 2rem;" class="step" data-aos="fade-up">
         <img class="logos" src="images/logo/pad-logo.png" alt="Logo" />
         <h3 style="color: var(--UPlay-yellow); font-weight: bolder; font-size: x-large;">16</h3>
         <p style="color: #7f7f7f;">Total Players</p>
       </div>
-      <div style="border-radius: 1rem; border: 1px solid #ffcc0079; padding: auto 2rem;" class="step" data-aos="fade-up" data-aos-delay="100">
+      <div style="border-radius: 1rem; padding: auto 2rem;" class="step" data-aos="fade-up" data-aos-delay="100">
         <img class="logos" src="images/logo/pad-logo.png" alt="Logo" />
         <h3 style="color: var(--UPlay-yellow); font-weight: bolder; font-size: x-large;">N10,000</h3>
         <p style="color: #7f7f7f;">Prize Pool</p>
       </div>
-      <div style="border-radius: 1rem; border: 1px solid #ffcc0079; padding: auto 2rem;" class="step" data-aos="fade-up" data-aos-delay="200">
+      <div style="border-radius: 1rem; padding: auto 2rem;" class="step" data-aos="fade-up" data-aos-delay="200">
         <img class="logos" src="images/logo/pad-logo.png" alt="Logo" />
         <h3 style="color: var(--UPlay-yellow); font-weight: bolder; font-size: x-large;">30 Days</h3>
         <p style="color: #7f7f7f;">Tournament Duration</p>
       </div>
-      <div style="border-radius: 1rem; border: 1px solid #ffcc0079; padding: auto 2rem;" class="step" data-aos="fade-up" data-aos-delay="200">
+      <div style="border-radius: 1rem; padding: auto 2rem;" class="step" data-aos="fade-up" data-aos-delay="200">
         <img class="logos" src="images/logo/pad-logo.png" alt="Logo" />
         <h3 style="color: var(--UPlay-yellow); font-weight: bolder; font-size: x-large;">4 Rounds</h3>
         <p style="color: #7f7f7f;">Knockout Stage H&A</p>
@@ -199,20 +200,105 @@
   <section id="players">
     <h2>Top Players</h2>
     <div class="player-cards">
-      <div style="background: linear-gradient(to left, #2c2c2c,#2c2c2c, #5e5536); border: solid, #fbda56, 0.5px;" class="player-card" data-aos="fade-up">
-        <img class="logos" src="images/logo/pad-logo.png" alt="Logo" />
-        <p>Rank: #1</p>
-        <h3>Player One</h3>
+      <div id="first" style="background: linear-gradient(to left, #2c2c2c,#2c2c2c, #615940d9); border: solid, #fbda568e, 2px;" class="player-card" data-aos="fade-up">
+        <div>
+          <div class="flex-row" style="gap: 1rem;">
+            <img class="logos" src="images/profile1.png" alt="Logo" />
+            <div>
+              <h3>Player One</h3>
+              <p>Rank: #1</p>
+            </div>
+          </div>
+          <div class="flex-row">
+            <div>
+              <p>Wins</p>
+              <h3>34</h3>
+            </div>
+            <div>
+              <p>Matches</p>
+              <h3>10</h3>
+            </div>
+            <div>
+              <p>Points</p>
+              <h3>100</h3>
+            </div>
+          </div>
+          <div>
+            <p style="color: #d2d2d2;">Achievements</p>
+            <div class="flex-row">
+              <img src="images/icons/circle.png" id="achievement" alt="">
+              <img src="images/icons/circle.png" id="achievement" alt="">
+              <img src="images/icons/circle.png" id="achievement" alt="">
+            </div>
+          </div>
+        </div>
+        <img src="images/1st-medal.png" class="medal" alt="">
       </div>
-      <div style="background: linear-gradient(to left, #2c2c2c,#2c2c2c, #6b6a6a);" class="player-card" data-aos="fade-up" data-aos-delay="100">
-        <img class="logos" src="images/logo/pad-logo.png" alt="Logo" />
-        <p>Rank: #2</p>
-        <h3>Player Two</h3>
+      <div id="second" class="player-card" data-aos="fade-up" data-aos-delay="100">
+        <div>
+          <div class="flex-row" style="gap: 1rem;">
+            <img class="logos" src="images/profile1.png" alt="Logo" />
+            <div>
+              <h3>Player Two</h3>
+              <p>Rank: #2</p>
+            </div>
+          </div>
+          <div class="flex-row">
+            <div>
+              <p>Wins</p>
+              <h3>34</h3>
+            </div>
+            <div>
+              <p>Matches</p>
+              <h3>10</h3>
+            </div>
+            <div>
+              <p>Points</p>
+              <h3>100</h3>
+            </div>
+          </div>
+          <div>
+            <p style="color: #d2d2d2;">Achievements</p>
+            <div class="flex-row">
+              <img src="images/icons/circle.png" id="achievement" alt="">
+              <img src="images/icons/circle.png" id="achievement" alt="">
+              <img src="images/icons/circle.png" id="achievement" alt="">
+            </div>
+          </div>
+        </div>
       </div>
-      <div style="background: linear-gradient(to left, #2c2c2c,#2c2c2c, rgba(34, 45, 129, 0.954)); border: solid,rgb(54, 54, 213), 0.5px;" class="player-card" data-aos="fade-up" data-aos-delay="200">
-        <img class="logos" src="images/logo/pad-logo.png" alt="Logo" />
-        <p>Rank: #3</p>
-        <h3>Player Three</h3>
+      <div id="third" class="player-card" data-aos="fade-up" data-aos-delay="200">
+        <div>
+          <div class="flex-row" style="gap: 1rem;">
+            <img class="logos" src="images/profile1.png" alt="Logo" />
+            <div>
+              <h3>Player Three</h3>
+              <p>Rank: #3</p>
+            </div>
+          </div>
+          <div class="flex-row">
+            <div>
+              <p>Wins</p>
+              <h3>34</h3>
+            </div>
+            <div>
+              <p>Matches</p>
+              <h3>10</h3>
+            </div>
+            <div>
+              <p>Points</p>
+              <h3>100</h3>
+            </div>
+          </div>
+          <div>
+            <p style="color: #d2d2d2;">Achievements</p>
+            <div class="flex-row">
+              <img src="images/icons/circle.png" id="achievement" alt="">
+              <img src="images/icons/circle.png" id="achievement" alt="">
+              <img src="images/icons/circle.png" id="achievement" alt="">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -734,7 +820,7 @@
 
 
 <footer>
-  <p>&copy; 2025 PES Tournament. All rights reserved.</p>
+  <p>&copy; 2025 uPlayGamzz. All rights reserved.</p>
 </footer>
 
   <!-- Scripts -->
