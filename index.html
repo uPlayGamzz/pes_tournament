@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Uplay</title>
+  <title>uPlay</title>
   <link sizes="32x32" rel="icon" href="images/logo/pad-logo-title.png" type="image/png">
 
   <meta name="title" content="UPlay - PES Tournament">
@@ -203,7 +203,10 @@
       <div id="first" style="background: linear-gradient(to left, #2c2c2c,#2c2c2c, #615940d9); border: solid, #fbda568e, 2px;" class="player-card" data-aos="fade-up">
         <div>
           <div class="flex-row" style="gap: 1rem;">
-            <img class="logos" src="images/profile1.png" alt="Logo" />
+            <div class="image-container">
+              <img id="legendary" class="profile" src="images/profile1.png" alt="Logo" />
+              <img src="images/legendary.png" alt="Badge" class="badge-img">
+            </div>
             <div>
               <h3>Player One</h3>
               <p>Rank: #1</p>
@@ -226,9 +229,9 @@
           <div>
             <p style="color: #d2d2d2;">Achievements</p>
             <div class="flex-row">
-              <img src="images/icons/circle.png" id="achievement" alt="">
-              <img src="images/icons/circle.png" id="achievement" alt="">
-              <img src="images/icons/circle.png" id="achievement" alt="">
+              <div class="achievement" id="first-kick"></div>
+              <div class="achievement" id="clean-sheet"></div>
+              <div class="achievement" id="goal-getter"></div>
             </div>
           </div>
         </div>
@@ -237,7 +240,10 @@
       <div id="second" class="player-card" data-aos="fade-up" data-aos-delay="100">
         <div>
           <div class="flex-row" style="gap: 1rem;">
-            <img class="logos" src="images/profile1.png" alt="Logo" />
+            <div class="image-container">
+              <img id="elite" class="profile" src="images/profile1.png" alt="Logo" />
+              <img src="images/elite.png" alt="Badge" class="badge-img">
+            </div>
             <div>
               <h3>Player Two</h3>
               <p>Rank: #2</p>
@@ -260,9 +266,9 @@
           <div>
             <p style="color: #d2d2d2;">Achievements</p>
             <div class="flex-row">
-              <img src="images/icons/circle.png" id="achievement" alt="">
-              <img src="images/icons/circle.png" id="achievement" alt="">
-              <img src="images/icons/circle.png" id="achievement" alt="">
+              <div class="achievement" id="goal-getter"></div>
+              <div class="achievement" id="golden-boot"></div>
+              <div class="achievement" id="clean-sheet"></div>
             </div>
           </div>
         </div>
@@ -270,7 +276,10 @@
       <div id="third" class="player-card" data-aos="fade-up" data-aos-delay="200">
         <div>
           <div class="flex-row" style="gap: 1rem;">
-            <img class="logos" src="images/profile1.png" alt="Logo" />
+            <div class="image-container">
+              <img id="beginner" class="profile" src="images/profile1.png" alt="Logo" />
+              <img src="images/beginner.png" alt="Badge" class="badge-img">
+            </div>
             <div>
               <h3>Player Three</h3>
               <p>Rank: #3</p>
@@ -293,9 +302,9 @@
           <div>
             <p style="color: #d2d2d2;">Achievements</p>
             <div class="flex-row">
-              <img src="images/icons/circle.png" id="achievement" alt="">
-              <img src="images/icons/circle.png" id="achievement" alt="">
-              <img src="images/icons/circle.png" id="achievement" alt="">
+              <div class="achievement" id="hat-trick-hero"></div>
+              <div class="achievement" id="first-kick"></div>
+              <div class="achievement" id="sharp-shooter"></div>
             </div>
           </div>
         </div>

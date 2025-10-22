@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>uPlay Signup</title>
+  <link sizes="32x32" rel="icon" href="../images/logo/pad-logo-title.png" type="image/png">
+
+  <meta name="title" content="UPlay - PES Tournament">
+  <meta name="decription" content="Join the ultimate PES Tournament on UPlay. Compete, win, and rise to the top of the leaderboard!">
+
+  <!-- Open Graph / Facebook / WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://uplaygamzz.github.io/pes_tournament/index.html">
+  <meta property="og:title" content="UPlay - PES Tournament">
+  <meta property="og:description" content="Join the ultimate PES Tournament on UPlay. Compete, win, and rise to the top of the leaderboard!">
+  <meta property="og:image" content="https://uplaygamzz.github.io/pes_tournament/images/PES_flyer.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="UPlay - PES Tournament">
+  <meta name="twitter:url" content="https://uplaygamzz.github.io/pes_tournament/index.html">
+  <meta name="twitter:title" content="UPlay - PES Tournament">
+  <meta name="twitter:description" content="Join the ultimate PES Tournament on UPlay. Compete, win, and rise to the top of the leaderboard!">
+  <meta name="twitter:image" content="https://uplaygamzz.github.io/pes_tournament/images/PES_flyer.png">
+  
+
+  <!-- Fonts and icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+  <h2>Sign Up</h2>
+  <input id="signupEmail" type="email" placeholder="Email" required>
+  <input id="signupPassword" type="password" placeholder="Password" required>
+  <input id="signupUsername" type="text" placeholder="Username" required>
+  <button id="signupBtn">Create Account</button>
+  <p>Already have an account? <a href="login.html">Login</a></p>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
+    import { getFirestore, setDoc, doc } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAo0U5rtXvJN25m71s3rxvpDhFy5Uyn75U",
+      authDomain: "uplay-auth.firebaseapp.com",
+      projectId: "uplay-auth",
+      storageBucket: "uplay-auth.firebasestorage.app",
+      messagingSenderId: "93490920321",
+      appId: "1:93490920321:web:9ae1312634d4bfca20c680"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    async function signup() {
+      const email = document.getElementById("signupEmail").value.trim();
+      const password = document.getElementById("signupPassword").value.trim();
+      const username = document.getElementById("signupUsername").value.trim();
+
+      if (!email || !password || !username) {
+        alert("Please fill in all fields");
+        return;
+      }
+
+      try {
+        // === Create account in Firebase Auth ===
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        // === Save in Firestore ===
+        await setDoc(doc(db, "users", user.uid), {
+          username,
+          email,
+          createdAt: new Date(),
+          role: "user"
+        });
+
+        // === Send to Google Sheets ===
+        console.log("Sending signup data to Google Sheets...");
+        await fetch("https://script.google.com/macros/s/AKfycbyEzFd1Stg50TR_jYY7w5uxGxj_L9j6KPCgnS5yc9NW1f1pPSaYDCfVrhsrmyjIRVCL8A/exec", {
+          method: "POST",
+          mode: "no-cors", // required for Google Apps Script
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            user: {
+              username,
+              email,
+              uid: user.uid,
+              role: "user"
+            }
+          })
+        });
+
+        console.log("✅ Sent to Google Sheet!");
+        alert("Account created successfully!");
+        window.location = "profile.html";
+
+      } catch (error) {
+        alert(error.message);
+        console.error("Signup error:", error);
+      }
+    }
+
+    document.getElementById("signupBtn").addEventListener("click", signup);
+  </script>
+</body>
+</html>

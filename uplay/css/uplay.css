@@ -1,3 +1,7 @@
+body {
+  background: #181818;    
+}
+
 .main-header {
   padding: 0% 7% 0% 7%;
   height: 80dvh;
@@ -97,7 +101,7 @@
 }
 
 #fifa {
-  background: url(../images/e-football.png) no-repeat center center/cover;
+  background: url(../images/eFootball_icon.png) no-repeat center center/cover;
 }
 
 #see-more {

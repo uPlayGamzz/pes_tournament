@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>uPlay</title>
+  <link sizes="32x32" rel="icon" href="../images/logo/pad-logo-title.png" type="image/png">
+
+  <meta name="title" content="UPlay - PES Tournament">
+  <meta name="decription" content="Join the ultimate PES Tournament on UPlay. Compete, win, and rise to the top of the leaderboard!">
+
+  <!-- Open Graph / Facebook / WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://uplaygamzz.github.io/pes_tournament/index.html">
+  <meta property="og:title" content="UPlay - PES Tournament">
+  <meta property="og:description" content="Join the ultimate PES Tournament on UPlay. Compete, win, and rise to the top of the leaderboard!">
+  <meta property="og:image" content="https://uplaygamzz.github.io/pes_tournament/images/PES_flyer.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="UPlay - PES Tournament">
+  <meta name="twitter:url" content="https://uplaygamzz.github.io/pes_tournament/index.html">
+  <meta name="twitter:title" content="UPlay - PES Tournament">
+  <meta name="twitter:description" content="Join the ultimate PES Tournament on UPlay. Compete, win, and rise to the top of the leaderboard!">
+  <meta name="twitter:image" content="https://uplaygamzz.github.io/pes_tournament/images/PES_flyer.png">
+  
+
+  <!-- Fonts and icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+  <h2>Welcome, <span id="username"></span></h2>
+  <p>Email: <span id="email"></span></p>
+  <button id="logoutBtn">Logout</button>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
+    import { getFirestore, getDoc, doc } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAo0U5rtXvJN25m71s3rxvpDhFy5Uyn75U",
+      authDomain: "uplay-auth.firebaseapp.com",
+      projectId: "uplay-auth",
+      storageBucket: "uplay-auth.firebasestorage.app",
+      messagingSenderId: "93490920321",
+      appId: "1:93490920321:web:9ae1312634d4bfca20c680"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Check auth state
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const userRef = doc(db, "users", user.uid);
+        const userSnap = await getDoc(userRef);
+        if (userSnap.exists()) {
+          document.getElementById("username").textContent = userSnap.data().username;
+          document.getElementById("email").textContent = userSnap.data().email;
+        } else {
+          document.getElementById("username").textContent = "(No username found)";
+        }
+      } else {
+        window.location = "login.html"; // redirect if not logged in
+      }
+    });
+
+    // Logout
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+      await signOut(auth);
+      window.location = "login.html";
+    });
+  </script>
+</body>
+</html>

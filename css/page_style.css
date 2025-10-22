@@ -23,15 +23,56 @@ body {
   font-family: var(--UPlay-font);
   margin: 0;
   padding: 0;
-  /* background: #181818; */
   color: #fff;
 }
-
+y87u9i8i98u
 .logos {
   height: 70px; 
   width: 70px;
-  padding: 0;
+  padding: 5px;
   border-radius: 50%;
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+  /* width: 300px; adjust to your image size */
+}
+
+.profile {
+  height: 70px; 
+  width: 70px;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.badge-img {
+  position: absolute;
+  bottom: 10px;   /* distance from bottom */
+  right: 5px;    /* distance from right */
+  width: 20px;    /* size of badge */
+  height: auto;
+}
+
+
+#beginner {
+  border-left: 5px dotted rgb(106, 255, 47);
+}
+
+#intermediate {
+  border-left: 5px dotted var(--UPlay-yellow);
+}
+
+#advanced {
+  border-left: 5px dotted rgb(51, 51, 255);
+}
+
+#elite {
+  border-left: 5px dotted red;
+}
+
+#legendary {
+  border-left: 5px dotted rgb(228, 0, 228);
 }
 
 header {
@@ -384,14 +425,41 @@ header {
 
 
 .player-card:hover {
-  transform: translateY(-50px);
+  transform: translateY(-10px);
 }
 
-#achievement {
+.achievement {
   height: 35px; 
   width: 35px;
   padding: 0;
   border-radius: 50%;
+}
+
+#first-kick {
+  background: url(../images/golden-ball.png) no-repeat center center/cover;
+  height: 32px;
+}
+
+#goal-getter {
+  background: url(../images/score-net\,ball.png) no-repeat center center/cover;
+  /* height: 35px; */
+}
+
+#clean-sheet {
+  background: url(../images/save.png) no-repeat center center/cover;
+  /* height: 35px; */
+}
+
+#sharp-shooter {
+  background: url(../images/dart-board.png) no-repeat center center/cover;
+}
+
+#hat-trick-hero {
+  background: url(../images/scorer.png) no-repeat center center/cover;
+}
+
+#golden-boot {
+  background: url(../images/golden-boot.png) no-repeat center center/cover;
 }
 
 #register {

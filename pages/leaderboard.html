@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Uplay</title>
+  <title>uPlay</title>
   <link sizes="32x32" rel="icon" href="../images/logo/pad-logo-title.png" type="image/png">
 
   <meta name="title" content="UPlay - PES Tournament">
@@ -75,14 +75,17 @@
       <span></span><span></span><span></span>
     </div>
   </nav>
-  <div style="padding: 0 50px;">
+  <div style="padding: 0 50px; margin-bottom: 50px;">
     <section id="players">
       <h2>Top Players</h2>
       <div class="player-cards">
         <div id="first" style="background: linear-gradient(to left, #2c2c2c,#2c2c2c, #615940d9); border: solid, #fbda568e, 2px;" class="player-card" data-aos="fade-up">
           <div>
             <div class="flex-row" style="gap: 1rem;">
-              <img class="logos" src="../images/profile1.png" alt="Logo" />
+              <div class="image-container">
+                <img id="legendary" class="profile" src="../images/profile1.png" alt="Logo" />
+                <img src="../images/legendary.png" alt="Badge" class="badge-img">
+              </div>
               <div>
                 <h3>Player One</h3>
                 <p>Rank: #1</p>
@@ -105,9 +108,9 @@
             <div>
               <p style="color: #d2d2d2;">Achievements</p>
               <div class="flex-row">
-                <img src="../images/icons/circle.png" id="achievement" alt="">
-                <img src="../images/icons/circle.png" id="achievement" alt="">
-                <img src="../images/icons/circle.png" id="achievement" alt="">
+                <div class="achievement" id="first-kick"></div>
+                <div class="achievement" id="clean-sheet"></div>
+                <div class="achievement" id="goal-getter"></div>
               </div>
             </div>
           </div>
@@ -116,7 +119,10 @@
         <div id="second" class="player-card" data-aos="fade-up" data-aos-delay="100">
           <div>
             <div class="flex-row" style="gap: 1rem;">
-              <img class="logos" src="../images/profile1.png" alt="Logo" />
+              <div class="image-container">
+                <img id="elite" class="profile" src="../images/profile1.png" alt="Logo" />
+                <img src="../images/elite.png" alt="Badge" class="badge-img">
+              </div>
               <div>
                 <h3>Player Two</h3>
                 <p>Rank: #2</p>
@@ -139,9 +145,9 @@
             <div>
               <p style="color: #d2d2d2;">Achievements</p>
               <div class="flex-row">
-                <img src="../images/icons/circle.png" id="achievement" alt="">
-                <img src="../images/icons/circle.png" id="achievement" alt="">
-                <img src="../images/icons/circle.png" id="achievement" alt="">
+                <div class="achievement" id="goal-getter"></div>
+                <div class="achievement" id="golden-boot"></div>
+                <div class="achievement" id="clean-sheet"></div>
               </div>
             </div>
           </div>
@@ -149,7 +155,10 @@
         <div id="third" class="player-card" data-aos="fade-up" data-aos-delay="200">
           <div>
             <div class="flex-row" style="gap: 1rem;">
-              <img class="logos" src="../images/profile1.png" alt="Logo" />
+              <div class="image-container">
+                <img id="beginner" class="profile" src="../images/profile1.png" alt="Logo" />
+                <img src="../images/beginner.png" alt="Badge" class="badge-img">
+              </div>
               <div>
                 <h3>Player Three</h3>
                 <p>Rank: #3</p>
@@ -172,9 +181,9 @@
             <div>
               <p style="color: #d2d2d2;">Achievements</p>
               <div class="flex-row">
-                <img src="../images/icons/circle.png" id="achievement" alt="">
-                <img src="../images/icons/circle.png" id="achievement" alt="">
-                <img src="../images/icons/circle.png" id="achievement" alt="">
+                <div class="achievement" id="hat-trick-hero"></div>
+                <div class="achievement" id="first-kick"></div>
+                <div class="achievement" id="sharp-shooter"></div>
               </div>
             </div>
           </div>
@@ -198,12 +207,13 @@
             <tr>
               <th>Rank</th>
               <th>Player</th>
-              <th>Country</th>
-              <th>Team</th>
+              <!-- <th>Country</th>
+              <th>Team</th> -->
               <th>Matches</th>
               <th>Wins</th>
               <th>Losses</th>
               <th>Points</th>
+              <th>Achievements</th>
             </tr>
           </thead>
           <tbody id="leaderboardBody">
@@ -217,14 +227,24 @@
   
     <div id="playerModal" class="modal-overlay">
       <div class="popup">
-        <h2 id="modalName" class="modal-heading"></h2>
-        <p><strong>Country:</strong> <span id="modalCountry"></span></p>
-        <p><strong>Team:</strong> <span id="modalTeam"></span></p>
-        <p><strong>Matches:</strong> <span id="modalMatches"></span></p>
-        <p><strong>Wins:</strong> <span id="modalWins"></span></p>
-        <p><strong>Losses:</strong> <span id="modalLosses"></span></p>
-        <p><strong>Points:</strong> <span id="modalPoints"></span></p>
-        <button onclick="closeModal()" class="close-btn">Close</button>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <h2 id="modalName" class="modal-heading"></h2>
+          <button onclick="closeModal()" class="close-btn">Close</button>
+        </div>
+        <div class="popup-content">
+          <div style="padding-right: 2rem;">
+            <!-- <p><strong>Country:</strong> <span id="modalCountry"></span></p>
+            <p><strong>Team:</strong> <span id="modalTeam"></span></p> -->
+            <p><strong>Matches:</strong> <span id="modalMatches"></span></p>
+            <p><strong>Wins:</strong> <span id="modalWins"></span></p>
+            <p><strong>Losses:</strong> <span id="modalLosses"></span></p>
+            <p><strong>Points:</strong> <span id="modalPoints"></span></p>
+          </div>
+          <div style=" border-right: 1px solid rgba(255, 255, 255, 0.511);"></div>
+          <div style="height: 100%; padding-left: 2rem;">
+            <p><strong>Achievements:</strong> <span id="modalAchievements"></span></span></p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -232,23 +252,23 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     const players = [
-      { name: 'Ali K', country: 'Egypt', team: 'Cairo FC', matches: 10, wins: 7, losses: 3, points: 21 },
-      { name: 'Zane R', country: 'Kenya', team: 'Nairobi Stars', matches: 12, wins: 9, losses: 3, points: 27 },
-      { name: 'Liam S', country: 'USA', team: 'NY Titans', matches: 9, wins: 6, losses: 3, points: 18 },
-      { name: 'Yuki T', country: 'Japan', team: 'Tokyo Blitz', matches: 11, wins: 8, losses: 3, points: 24 },
-      { name: 'Omar B', country: 'Morocco', team: 'Atlas Lions', matches: 8, wins: 5, losses: 3, points: 15 },
-      { name: 'Noah D', country: 'Germany', team: 'Berlin Eagles', matches: 10, wins: 6, losses: 4, points: 18 },
-      { name: 'Kai M', country: 'Brazil', team: 'Rio Warriors', matches: 14, wins: 11, losses: 3, points: 33 },
-      { name: 'Ayaan V', country: 'India', team: 'Delhi Dynamos', matches: 9, wins: 7, losses: 2, points: 21 },
-      { name: 'Tom R', country: 'UK', team: 'London Spurs', matches: 13, wins: 9, losses: 4, points: 27 },
-      { name: 'Ivan K', country: 'Russia', team: 'Moscow Bears', matches: 12, wins: 7, losses: 5, points: 21 },
-      { name: 'Yuki T', country: 'Japan', team: 'Tokyo Blitz', matches: 11, wins: 8, losses: 3, points: 24 },
-      { name: 'Omar B', country: 'Morocco', team: 'Atlas Lions', matches: 8, wins: 5, losses: 3, points: 15 },
-      { name: 'Noah D', country: 'Germany', team: 'Berlin Eagles', matches: 10, wins: 6, losses: 4, points: 18 },
-      { name: 'Kai M', country: 'Brazil', team: 'Rio Warriors', matches: 14, wins: 11, losses: 3, points: 33 },
-      { name: 'Ayaan V', country: 'India', team: 'Delhi Dynamos', matches: 9, wins: 7, losses: 2, points: 21 },
-      { name: 'Tom R', country: 'UK', team: 'London Spurs', matches: 13, wins: 9, losses: 4, points: 27 },
-      { name: 'Ivan K', country: 'Russia', team: 'Moscow Bears', matches: 12, wins: 7, losses: 5, points: 21 },
+      { name: 'Ali K', matches: 10, wins: 7, losses: 3, points: 21, achievements: 3},
+      { name: 'Zane R', matches: 12, wins: 9, losses: 3, points: 27 },
+      { name: 'Liam S', matches: 9, wins: 6, losses: 3, points: 18 },
+      { name: 'Yuki T', matches: 11, wins: 8, losses: 3, points: 24 },
+      { name: 'Omar B', matches: 8, wins: 5, losses: 3, points: 15 },
+      { name: 'Noah D', matches: 10, wins: 6, losses: 4, points: 18 },
+      { name: 'Kai M', matches: 14, wins: 11, losses: 3, points: 33 },
+      { name: 'Ayaan V', matches: 9, wins: 7, losses: 2, points: 21 },
+      { name: 'Tom R', matches: 13, wins: 9, losses: 4, points: 27 },
+      { name: 'Ivan K', matches: 12, wins: 7, losses: 5, points: 21 },
+      { name: 'Yuki T', matches: 11, wins: 8, losses: 3, points: 24 },
+      { name: 'Omar B', matches: 8, wins: 5, losses: 3, points: 15 },
+      { name: 'Noah D', matches: 10, wins: 6, losses: 4, points: 18 },
+      { name: 'Kai M', matches: 14, wins: 11, losses: 3, points: 33 },
+      { name: 'Ayaan V', matches: 9, wins: 7, losses: 2, points: 21 },
+      { name: 'Tom R', matches: 13, wins: 9, losses: 4, points: 27 },
+      { name: 'Ivan K', matches: 12, wins: 7, losses: 5, points: 21 },
     ];
 
     let currentPage = 1;
@@ -268,12 +288,11 @@
         tr.innerHTML = `
           <td>#${start + index + 1}</td>
           <td>${player.name}</td>
-          <td>${player.country}</td>
-          <td>${player.team}</td>
           <td>${player.matches}</td>
           <td>${player.wins}</td>
           <td>${player.losses}</td>
           <td>${player.points}</td>
+          <td>${player.achievements}</td>
         `;
         tbody.appendChild(tr);
       });
@@ -299,12 +318,13 @@
 
     function openModal(player) {
       document.getElementById("modalName").textContent = player.name;
-      document.getElementById("modalCountry").textContent = player.country;
-      document.getElementById("modalTeam").textContent = player.team;
+      // document.getElementById("modalCountry").textContent = player.country;
+      // document.getElementById("modalTeam").textContent = player.team;
       document.getElementById("modalMatches").textContent = player.matches;
       document.getElementById("modalWins").textContent = player.wins;
       document.getElementById("modalLosses").textContent = player.losses;
       document.getElementById("modalPoints").textContent = player.points;
+      document.getElementById("modalAchievements").textContent = player.achievements;
       document.getElementById("playerModal").classList.add("show");
     }
 
@@ -317,9 +337,9 @@
     document.getElementById("searchInput").addEventListener("input", function () {
       const value = this.value.toLowerCase();
       filteredPlayers = players.filter(p =>
-        p.name.toLowerCase().includes(value) ||
-        p.country.toLowerCase().includes(value) ||
-        p.team.toLowerCase().includes(value)
+        p.name.toLowerCase().includes(value)
+        // p.country.toLowerCase().includes(value) ||
+        // p.team.toLowerCase().includes(value)
       );
       currentPage = 1;
       displayPlayers(filteredPlayers);
