@@ -806,6 +806,10 @@ nav ul.nav-list li img:hover {
   margin-top: 11px;
 }
 
+.profile-nav h2 {
+  margin: 0;
+}
+
 .profile-body {
   padding-top: 50px;
 }
