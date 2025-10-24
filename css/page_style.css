@@ -798,6 +798,11 @@ nav ul.nav-list li img:hover {
   display: block;
 }
 
+.profile-list ul {
+  padding: 0;
+  margin: 0;
+}
+
 .profile-nav {
   display: flex;
   justify-content: space-between;
@@ -822,6 +827,7 @@ nav ul.nav-list li img:hover {
   display: flex;
   align-items: center;
   margin-top: 25px;
+  gap: 5px;
 }
 
 /* ===== Overlay Base ===== */
