@@ -74,10 +74,10 @@
       <input id="signupEmail" type="email" placeholder="example@gmail.com" required>
     </div>
 
-    <div class="form-inputs">
-      <label for="signupPhone">WhatsApp No :</label>
-      <input type="tel" id="signupPhone" name="whatsapp" placeholder="+123..." required>
-    </div>
+    <!-- <div class="form-inputs">
+      <label for="whatsapp">WhatsApp No :</label>
+      <input type="tel" id="whatsapp" name="whatsapp" placeholder="+123 4567 890..." required>
+    </div> -->
 
     <div class="form-inputs">
       <label for="password">Password :</label>
@@ -127,7 +127,7 @@
     const password = document.getElementById("signupPassword").value.trim();
     const username = document.getElementById("signupUsername").value.trim();
 
-    if (!email || !password || !username || !phone) {
+    if (!email || !password || !username) {
       alert("Please fill in all fields");
       return;
     }
@@ -143,12 +143,8 @@
       await setDoc(doc(db, "users", user.uid), {
         username,
         email,
-        phone,
         createdAt: new Date(),
-        role: "user",
-        level: 1,
-        achievements: [],
-        avatar: "default-avatar.png"
+        role: "user"
       });
 
       // Send to Google Sheets
@@ -157,7 +153,7 @@
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          user: { username, email, phone, uid: user.uid, role: "user" }
+          user: { username, email, uid: user.uid, role: "user" }
         })
       });
 
