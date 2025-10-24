@@ -305,3 +305,14 @@ document.getElementById("regForm").addEventListener("submit", function (e) {
   btn.textContent = "Submitting...";
   spinner.style.display = "block";
 });
+
+
+  // ===== Loading Overlay Control =====
+  function showLoading(text = "Processing...") {
+    document.getElementById("loadingText").textContent = text;
+    document.getElementById("loadingOverlay").style.display = "flex";
+  }
+
+  function hideLoading() {
+    document.getElementById("loadingOverlay").style.display = "none";
+  }

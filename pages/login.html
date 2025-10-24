@@ -29,14 +29,77 @@
   <!-- Fonts and icons -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-</head>
-<body>
-  <h2>Login</h2>
-  <input id="loginEmail" type="email" placeholder="Email">
-  <input id="loginPassword" type="password" placeholder="Password">
-  <button id="loginBtn">Login</button>
-  <p>Don't have an account? <a href="signup.html">Sign up</a></p>
 
+  <link rel="stylesheet" href="../css/page_style.css">
+</head>
+<body style="background: #191919">
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <img src="../images/logo/pad-logo.png" alt="Logo" />
+      uPlay<br>
+    </div>
+    
+    <div style="display: flex; list-style: none; align-items: center;">
+      <ul class="nav-list">
+        <li><a href="../uplay/home.html">Home</a></li>
+        <!-- <li><a href="pages/about.html">About</a></li> -->
+        <li><a href="pages/coming_soon.html">About</a></li>
+        <li><a href="pages/leaderboard.html">Contact</a></li>
+      </ul>
+      
+      
+      
+    </div>
+    <a class="cta-button4" href="../pages/signup.html">Sign Up</a>
+    
+    <div class="nav-toggle" aria-label="Toggle navigation" role="button" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <section id="register">
+  <h1>Login</h1>
+  <p style="color: #ccc;">Login to continue uPlay</p>
+  <div class="form">
+
+    <div class="form-inputs">
+      <label for="email">Email :</label>
+      <input id="loginEmail" type="email" placeholder="example@gmail.com">
+    </div>
+
+    <!-- <div class="form-inputs">
+      <label for="whatsapp">WhatsApp No :</label>
+      <input type="tel" id="whatsapp" name="whatsapp" placeholder="+123 4567 890..." required>
+    </div> -->
+
+    <div class="form-inputs">
+      <label for="password">Password :</label>
+      <input id="loginPassword" type="password" placeholder="xxxxxx">
+    </div>
+
+    <button class="" id="loginBtn">Login</button>
+    <!-- <div id="loadingSpinner" style="display: none; margin-top: 10px; color: #fff;">
+      ⏳ Submitting... Please wait
+    </div> -->
+    <!-- ===== Loading Overlay ===== -->
+    <div id="loadingOverlay">
+      <div class="loader-container">
+        <img src="../images/loading6.png" alt="Loading..." id="loadingIcon">
+        <!-- <p id="loadingText">Processing...</p> -->
+      </div>
+    </div>
+
+
+    <div class="form-inputs">
+      <p>Don't have an account? <a style="color: var(--UPlay-yellow);" href="signup.html">Sign up</a></p>
+    </div>
+  </div>
+</section>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="../javar/page.js"></script>
+<script src="../javar/auto_submit_and_respond.js"></script>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
@@ -62,17 +125,39 @@
         return;
       }
 
+      showLoading();
+
       try {
         await signInWithEmailAndPassword(auth, email, password);
         alert("Login successful!");
         window.location = "profile.html";
       } catch (error) {
         alert(error.message);
-        console.error(error);
+        console.error("Login error:", error);
+      } finally {
+        hideLoading();
       }
     }
 
-    document.getElementById("loginBtn").addEventListener("click", login);
+    document.getElementById("loginBtn").addEventListener("click", (e) => {
+      e.preventDefault();
+      login();
+    });
   </script>
+
+  <script>
+  function showLoading() {
+    const overlay = document.getElementById('loadingOverlay');
+    overlay.style.display = 'flex';
+    // auto-hide after 10s if stuck
+    // clearTimeout(window.loadingTimeout);
+    // window.loadingTimeout = setTimeout(hideLoading, 100);
+  }
+
+  function hideLoading() {
+    document.getElementById('loadingOverlay').style.display = 'none';
+    clearTimeout(window.loadingTimeout);
+  }
+</script>
 </body>
 </html>

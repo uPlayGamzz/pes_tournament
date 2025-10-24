@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>uPlay</title>
   <link sizes="32x32" rel="icon" href="../images/logo/pad-logo-title.png" type="image/png">
@@ -29,51 +29,208 @@
   <!-- Fonts and icons -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- AOS animations -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <!-- Local stylesheets -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../css/preloader.css" />
+  <link rel="stylesheet" href="../css/scroll-to-top.css" />
+  <link rel="stylesheet" href="../uplay/css/uplay.css">
+  <link rel="stylesheet" href="../css/page_style.css">
+  <link rel="stylesheet" href="../css/live_score.css">
+  <link rel="stylesheet" href="../css/hide-content.css">
+  <!-- If 'libs/aos/aos.css' is a duplicate, remove it to avoid duplication -->
+  <!-- <link rel="stylesheet" href="libs/aos/aos.css" /> -->
+
+  <!-- player bracket links -->
+  <link rel="stylesheet" href="../css/bracket.css" />
+
+  <script>
+
+  </script>
 </head>
-<body>
-  <h2>Welcome, <span id="username"></span></h2>
-  <p>Email: <span id="email"></span></p>
-  <button id="logoutBtn">Logout</button>
+<body id="body">
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
-    import { getFirestore, getDoc, doc } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+  
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <img src="../images/logo/pad-logo.png" alt="Logo" />
+      uPlay
+    </div>
 
-    const firebaseConfig = {
+    <!-- <div style="display: flex; list-style: none; align-items: center;">
+      <li class="reg">
+        <a id="liveScoreBtn" class="cta-button3" style="display: flex; align-items: center;">
+          Live Score
+          <img style="height: 15px; width: 15px; padding-left: 6px;" src="images/icons/circle.png" alt="Logo" />
+        </a>
+      </li>
+    </div> -->
+    <div style="display: flex; list-style: none; align-items: center;">
+      <div class="profile-list">
+        <div class="profile-nav">
+          <a class="" href=""><img style="width: 20px;" src="../images/setting.png" alt=""></a>
+          <h2>My Profile</h2>
+          <li></li>
+        </div>
+        <div class="profile-top">
+          <img class="profile-pic" src="../images/profile1.png" alt="profile">
+          <ul>
+            <li><h3 style="margin: 0;"><span id="username"></span></h3></li>
+            <li><span id="email"></span></li>
+            <button id="editProfileBtn" style="position: absolute;">Edit Profile</button>
+            <p style="position: absolute; left: 1px;" id="profileLevel">Level 1</p>
+          </ul>
+        </div>
+        <div class="profile-body">
+          <div class="profile-details">
+            <p><strong>Phone:</strong> <span id="profilePhone"></span></p>
+            <p><strong>Achievements:</strong></p>
+            <ul id="profileAchievements"></ul>
+          </div>
+          <button id="logoutBtn">Logout</button>
+        </div>
+      </div>
+    </div>
+    <div style="display: flex; list-style: none; align-items: center;">
+      <ul class="nav-list">
+        <li><span style="color: var(--UPlay-yellow); font-weight: bold;">Home</span></li>
+        <!-- <li><a href="pages/about.html">About</a></li> -->
+        <li><a href="../pages/coming_soon.html">About</a></li>
+        <li><a href="#tournament">Tournaments</a></li>
+        <li><a href="../index.html#players">Players</a></li>
+        <!-- <li><a href="pages/leaderboard.html"><img src="images/icons/leaderboard-icon.png" alt=""></a></li> -->
+        <li><a href="../pages/login.html"><img src="../images/icons/leaderboard-icon.png" alt=""></a></li>
+      </ul>
+
+    </div>
+
+    <div id="editProfileModal" class="modal">
+      <h3>Edit Profile</h3>
+      <input id="editUsername" type="text" placeholder="Username">
+      <input id="editPhone" type="tel" placeholder="Phone">
+      <input id="editAvatar" type="file" accept="image/*">
+      <button id="saveProfileBtn">Save Changes</button>
+    </div>
+
+
+    
+    <div class="profile-toggle">
+      <li class="cta-button5"><img class="small-size" src="../images/icons/profile4.1.png" alt="">
+      <img class="smaller-size" src="../images/icons/close.png" alt=""></li>
+    </div>
+    
+    <div class="nav-toggle" aria-label="Toggle navigation" role="button" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+  <header class="hero" id="header">
+    
+    <div class="preloader" id="preloader" style="opacity: 0; display: none;"></div>
+    
+    
+    <div class="main-header">
+      <div>
+        <div class="left-border">
+            <h2 data-aos="fade-left"  style="transition: 1s; margin-bottom: 0;">Welcome, <span id="username"></span></h2>
+            <div data-aos="fade-right" data-aos-delay="700" >
+              <h class="title" style="font-size: 2.5rem;">COMPETE FOR CASH</h><br>
+              <H class="tagline" style="font-size: 2.5rem;">START YOUR JOURNEY</H>
+            </div>
+        </div>
+        <div class="flex_buttons">
+            <h class="cta-button-container" data-aos="fade-up" style="transition: 1s;">
+                <a href="https://chat.whatsapp.com/LT7yMKAj4nTJSfm6RBj4aU" id="cta-button2" style="color: #dedede; padding: 10px 32;">Join Community</a>
+            </h>
+        </div>
+      </div>  
+    </div>
+    <section id="tournament">
+      <h4>Featured Games</h4>
+      <div class="tournament-cards">
+        <a href="../index.html">
+            <div class="tournament-card" id="pes" data-aos="fade-up" data-aos-delay="100">
+            </div>
+        </a>
+        <a href="../pages/coming_soon.html">
+            <div class="tournament-card" id="cod" data-aos="fade-up" data-aos-delay="200">
+            </div>
+        </a>
+        <a href="../pages/coming_soon.html">
+            <div class="tournament-card" id="fifa" data-aos="fade-up" data-aos-delay="300">
+            </div>
+        </a>
+        <a href="">
+            <div class="tournament-card" id="see-more" data-aos="fade-up" data-aos-delay="400">
+                SEE MORE GAMES
+            </div>
+        </a>
+      </div>
+    </section>
+  </header>
+
+
+  <a href="#" class="scrollToTop" id="scrollToTop" aria-label="Scroll to top">
+    <img src="../images/icons/scroll-to-top3.svg" alt="Scroll to Top" />
+  </a>
+
+
+
+
+
+<footer>
+  <p>&copy; 2025 PES Tournament. All rights reserved.</p>
+</footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="../javar/page.js"></script>
+<script src="../javar/bracket.js"></script>
+<script src="../auto_submit_and_respond.js"></script>
+<script src="../javar/live_score.js"></script>
+<script src="../javar/hide-content.js"></script>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
+  import { getFirestore, getDoc, doc } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+
+  const firebaseConfig = {
       apiKey: "AIzaSyAo0U5rtXvJN25m71s3rxvpDhFy5Uyn75U",
       authDomain: "uplay-auth.firebaseapp.com",
       projectId: "uplay-auth",
       storageBucket: "uplay-auth.firebasestorage.app",
       messagingSenderId: "93490920321",
       appId: "1:93490920321:web:9ae1312634d4bfca20c680"
-    };
+  };
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
 
-    // Check auth state
-    onAuthStateChanged(auth, async (user) => {
+  // Check auth state
+  onAuthStateChanged(auth, async (user) => {
       if (user) {
-        const userRef = doc(db, "users", user.uid);
-        const userSnap = await getDoc(userRef);
-        if (userSnap.exists()) {
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+      if (userSnap.exists()) {
           document.getElementById("username").textContent = userSnap.data().username;
           document.getElementById("email").textContent = userSnap.data().email;
-        } else {
-          document.getElementById("username").textContent = "(No username found)";
-        }
       } else {
-        window.location = "login.html"; // redirect if not logged in
+          document.getElementById("username").textContent = "(No username found)";
       }
-    });
+      } else {
+      window.location = "login.html"; // redirect if not logged in
+      }
+  });
 
-    // Logout
-    document.getElementById("logoutBtn").addEventListener("click", async () => {
+  // Logout
+  document.getElementById("logoutBtn").addEventListener("click", async () => {
       await signOut(auth);
       window.location = "login.html";
-    });
-  </script>
+});
+</script>
+
 </body>
 </html>

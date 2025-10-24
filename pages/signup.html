@@ -29,83 +29,170 @@
   <!-- Fonts and icons -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="../css/preloader.css">
+  <link rel="stylesheet" href="../css/scroll-to-top.css">
+  <link rel="stylesheet" href="../css/page_style.css">
+  <link rel="stylesheet" href="../css/hide-content.css">
 </head>
-<body>
-  <h2>Sign Up</h2>
-  <input id="signupEmail" type="email" placeholder="Email" required>
-  <input id="signupPassword" type="password" placeholder="Password" required>
-  <input id="signupUsername" type="text" placeholder="Username" required>
-  <button id="signupBtn">Create Account</button>
-  <p>Already have an account? <a href="login.html">Login</a></p>
+<body style="background: #191919">
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
-    import { getFirestore, setDoc, doc } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <img src="../images/logo/pad-logo.png" alt="Logo" />
+      uPlay<br>
+    </div>
+    
+    <div style="display: flex; list-style: none; align-items: center;">
+      <ul class="nav-list">
+        <li><a href="../pnguplay/home.html">Home</a></li>
+        <!-- <li><a href="pages/about.html">About</a></li> -->
+        <li><a href="pages/coming_soon.html">About</a></li>
+        <li><a href="pages/leaderboard.html">Contact</a></li>
+      </ul>
+      
+      
+    </div>
+    <a class="cta-button4" href="../pages/login.html">Login</a>
+    
+    <div class="nav-toggle" aria-label="Toggle navigation" role="button" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyAo0U5rtXvJN25m71s3rxvpDhFy5Uyn75U",
-      authDomain: "uplay-auth.firebaseapp.com",
-      projectId: "uplay-auth",
-      storageBucket: "uplay-auth.firebasestorage.app",
-      messagingSenderId: "93490920321",
-      appId: "1:93490920321:web:9ae1312634d4bfca20c680"
-    };
+<section id="register">
+  <h1>Sign Up</h1>
+  <p style="color: #ccc;">Sign up to participate in various tournaments</p>
+  <div class="form">
+    <div class="form-inputs">
+      <label for="name">Username :</label>  
+      <input id="signupUsername" type="text" placeholder="player_x" required>
+    </div>
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
+    <div class="form-inputs">
+      <label for="email">Email :</label>
+      <input id="signupEmail" type="email" placeholder="example@gmail.com" required>
+    </div>
 
-    async function signup() {
-      const email = document.getElementById("signupEmail").value.trim();
-      const password = document.getElementById("signupPassword").value.trim();
-      const username = document.getElementById("signupUsername").value.trim();
+    <div class="form-inputs">
+      <label for="signupPhone">WhatsApp No :</label>
+      <input type="tel" id="signupPhone" name="whatsapp" placeholder="+123..." required>
+    </div>
 
-      if (!email || !password || !username) {
-        alert("Please fill in all fields");
-        return;
-      }
+    <div class="form-inputs">
+      <label for="password">Password :</label>
+      <input id="signupPassword" type="password" placeholder="xxxxxx" required>
+    </div>
 
-      try {
-        // === Create account in Firebase Auth ===
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
+    <button id="signupBtn">Create Account</button>
+    <!-- <div id="loadingSpinner" style="display: none; margin-top: 10px; color: #fff;">
+      ⏳ Submitting... Please wait
+    </div> -->
+    <div id="loadingOverlay">
+      <div class="loader-container">
+        <img src="../images/loading6.png" alt="Loading..." id="loadingIcon">
+        <!-- <p id="loadingText">Processing...</p> -->
+      </div>
+    </div>
 
-        // === Save in Firestore ===
-        await setDoc(doc(db, "users", user.uid), {
-          username,
-          email,
-          createdAt: new Date(),
-          role: "user"
-        });
+    <div class="form-inputs">
+      <p>Already have an account? <a style="color: var(--UPlay-yellow);" href="login.html">Login</a></p>
+    </div>
+  </div>
+</section>
 
-        // === Send to Google Sheets ===
-        console.log("Sending signup data to Google Sheets...");
-        await fetch("https://script.google.com/macros/s/AKfycbyEzFd1Stg50TR_jYY7w5uxGxj_L9j6KPCgnS5yc9NW1f1pPSaYDCfVrhsrmyjIRVCL8A/exec", {
-          method: "POST",
-          mode: "no-cors", // required for Google Apps Script
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            user: {
-              username,
-              email,
-              uid: user.uid,
-              role: "user"
-            }
-          })
-        });
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="../javar/page.js"></script>
 
-        console.log("✅ Sent to Google Sheet!");
-        alert("Account created successfully!");
-        window.location = "profile.html";
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
+  import { getFirestore, setDoc, doc } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
 
-      } catch (error) {
-        alert(error.message);
-        console.error("Signup error:", error);
-      }
+  const firebaseConfig = {
+    apiKey: "AIzaSyAo0U5rtXvJN25m71s3rxvpDhFy5Uyn75U",
+    authDomain: "uplay-auth.firebaseapp.com",
+    projectId: "uplay-auth",
+    storageBucket: "uplay-auth.firebasestorage.app",
+    messagingSenderId: "93490920321",
+    appId: "1:93490920321:web:9ae1312634d4bfca20c680"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  async function signup() {
+    const email = document.getElementById("signupEmail").value.trim();
+    const password = document.getElementById("signupPassword").value.trim();
+    const username = document.getElementById("signupUsername").value.trim();
+
+    if (!email || !password || !username || !phone) {
+      alert("Please fill in all fields");
+      return;
     }
 
-    document.getElementById("signupBtn").addEventListener("click", signup);
-  </script>
+    showLoading();
+
+    try {
+      // Create account in Firebase
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Save to Firestore
+      await setDoc(doc(db, "users", user.uid), {
+        username,
+        email,
+        phone,
+        createdAt: new Date(),
+        role: "user",
+        level: 1,
+        achievements: [],
+        avatar: "default-avatar.png"
+      });
+
+      // Send to Google Sheets
+      await fetch("https://script.google.com/macros/s/AKfycbyEzFd1Stg50TR_jYY7w5uxGxj_L9j6KPCgnS5yc9NW1f1pPSaYDCfVrhsrmyjIRVCL8A/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          user: { username, email, phone, uid: user.uid, role: "user" }
+        })
+      });
+
+      alert("Account created successfully!");
+      window.location = "profile.html";
+
+    } catch (error) {
+      alert(error.message);
+      console.error("Signup error:", error);
+    } finally {
+      hideLoading();
+    }
+  }
+
+  document.getElementById("signupBtn").addEventListener("click", (e) => {
+    e.preventDefault();
+    signup();
+  });
+</script>
+
+<script>
+  function showLoading() {
+    const overlay = document.getElementById('loadingOverlay');
+    overlay.style.display = 'flex';
+    // auto-hide after 10s if stuck
+    // clearTimeout(window.loadingTimeout);
+    // window.loadingTimeout = setTimeout(hideLoading, 100);
+  }
+
+  function hideLoading() {
+    document.getElementById('loadingOverlay').style.display = 'none';
+    clearTimeout(window.loadingTimeout);
+  }
+</script>
+
+
 </body>
 </html>

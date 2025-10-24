@@ -39,6 +39,7 @@
   <link rel="stylesheet" href="css/uplay.css">
   <link rel="stylesheet" href="../css/page_style.css">
   <link rel="stylesheet" href="../css/live_score.css">
+  <link rel="stylesheet" href="../css/hide-content.css">
   <!-- If 'libs/aos/aos.css' is a duplicate, remove it to avoid duplication -->
   <!-- <link rel="stylesheet" href="libs/aos/aos.css" /> -->
 
@@ -70,12 +71,13 @@
         <!-- <li><a href="pages/about.html">About</a></li> -->
         <li><a href="../pages/coming_soon.html">About</a></li>
         <li><a href="#tournament">Tournaments</a></li>
-        <li><a href="../index.html#players">Players</a></li>
+        <!-- <li><a href="../index.html#players">Players</a></li> -->
         <!-- <li><a href="pages/leaderboard.html"><img src="images/icons/leaderboard-icon.png" alt=""></a></li> -->
-        <li><a href="../coming_soon.html"><img src="../images/icons/leaderboard-icon.png" alt=""></a></li>
+        <li><a href="../pages/login.html"><img src="../images/icons/leaderboard-icon.png" alt=""></a></li>
       </ul>
 
     </div>
+    <a class="cta-button5" href="../pages/login.html"><img class="small-size" src="images/icons/profile4.1.png" alt=""></a>
     <div class="nav-toggle" aria-label="Toggle navigation" role="button" tabindex="0">
       <span></span><span></span><span></span>
     </div>
@@ -103,15 +105,15 @@
     <section id="tournament">
       <h4>Featured Games</h4>
       <div class="tournament-cards">
-        <a href="../index.html">
+        <a href="../pages/login.html">
             <div class="tournament-card" id="pes" data-aos="fade-up" data-aos-delay="100">
             </div>
         </a>
-        <a href="">
+        <a href="../pages/login.html">
             <div class="tournament-card" id="cod" data-aos="fade-up" data-aos-delay="200">
             </div>
         </a>
-        <a href="">
+        <a href="../pages/login.html">
             <div class="tournament-card" id="fifa" data-aos="fade-up" data-aos-delay="300">
             </div>
         </a>
@@ -139,137 +141,11 @@
 
   <!-- Scripts -->
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-<script>
-  AOS.init();
-
-  document.addEventListener('DOMContentLoaded', () => {
-    // Fade-in on scroll
-    const faders = document.querySelectorAll('.fade-in');
-    const appearOnScroll = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    });
-    faders.forEach(el => appearOnScroll.observe(el));
-
-    // Mobile nav toggle
-    const navToggle = document.querySelector('.nav-toggle');
-    const navList = document.querySelector('.nav-list');
-    navToggle.addEventListener('click', () => {
-      navList.classList.toggle('show');
-      navToggle.classList.toggle('active');
-    });
-
-    // Scroll to top button
-    const scrollToTopBtn = document.getElementById('scrollToTop');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 500) {
-        scrollToTopBtn.classList.add('show');
-      } else {
-        scrollToTopBtn.classList.remove('show');
-      }
-    });
-    scrollToTopBtn.addEventListener('click', e => {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // Countdown timer
-    function countdownTimer() {
-      const countdownEl = document.getElementById('countdown');
-      const tournamentDate = new Date('oct 25, 2025 18:00:00').getTime();
-      const now = new Date().getTime();
-      const distance = tournamentDate - now;
-
-      if (distance < 0) {
-        countdownEl.textContent = 'Tournament Started!';
-        return;
-      }
-      
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor(
-        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      const minutes = Math.floor(
-        (distance % (1000 * 60 * 60)) / (1000 * 60)
-      );
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      
-      countdown.innerHTML = `
-      <h3 style="margin-bottom: 3px; color: rgb(0, 130, 255);">Game Starts In</h3>
-      <p style="margin-top: 3px; color: #ffb300;">${days}d : ${hours}h : ${minutes}m : ${seconds}s</p>
-      `;
-    }
-    
-    countdownTimer();
-    setInterval(countdownTimer, 1000);
-  });
-</script>
+<script src="../javar/page.js"></script>
 <script src="../javar/bracket.js"></script>
 <script src="../auto_submit_and_respond.js"></script>
 <script src="../javar/live_score.js"></script>
-
-<style>
-/* Modal styles for terms $ condition*/
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  padding: 30px 0;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background: rgba(69, 69, 69, 0.8);
-}
-.modal-content {
-  background: #111111e3;
-  color: #cccccc;
-  margin: auto;
-  padding: 20px;
-  max-width: 700px;
-  /* border: 1px solid #ffcc0090; */
-}
-.modal-content h2 {
-  border-bottom: 1px solid var(--UPlay-yellow);
-  padding-bottom: 1.2rem;
-}
-.close {
-  color: var(--UPlay-yellow);
-  float: right;
-  font-size: 28px;
-  cursor: pointer;
-}
-.close:hover { color: red; }
-
-.modal-content ul {
-  text-align: left;
-}
-</style>
-
-<script>
-  // Modal script
-  const modal = document.getElementById("termsModal");
-  const link = document.getElementById("termsLink");
-  const span = document.getElementsByClassName("close")[0];
-
-  link.onclick = function(e) {
-    e.preventDefault();
-    modal.style.display = "block";
-  }
-  span.onclick = function() {
-    modal.style.display = "none";
-  }
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }
-</script>
+<script src="../javar/hide-content.js"></script>
 
 <!-- Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js"></script>

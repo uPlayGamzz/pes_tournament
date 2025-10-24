@@ -1,48 +1,39 @@
-<div class="scroll-section">
-  <div class="item">1</div>
-  <div class="item">2</div>
-  <div class="item">3</div>
-  <div class="item">4</div>
-  <div class="item">5</div>
-  <div class="item">1</div>
-  <div class="item">2</div>
-  <div class="item">3</div>
-  <div class="item">4</div>
-  <div class="item">5</div>
-  <div class="item">1</div>
-  <div class="item">2</div>
-  <div class="item">3</div>
-  <div class="item">4</div>
-  <div class="item">5</div>
-</div>
+<section id="register">
+  <h1>Sign Up</h1>
+  <p style="color: #ccc;">Sign up to participate in various tournaments</p>
+  <form id="regForm" method="POST" enctype="multipart/form-data">
 
-<style>
-.scroll-section {
-  display: flex;
-  overflow-x: auto; /* horizontal scroll */
-  overflow-y: hidden;
-  scroll-behavior: smooth;
-  gap: 20px;
-  padding: 20px;
-  background: #111;
-  color: white;
-  border-radius: 10px;
-  white-space: nowrap;
-}
 
-/* Hide scroll bar (optional) */
-.scroll-section::-webkit-scrollbar {
-  display: none;
-}
+    <div class="form-inputs">
+      <label for="name">Username :</label>  
+      <input id="signupUsername" type="text" placeholder="Username" required>
+    </div>
 
-.item {
-  min-width: 200px;
-  height: 150px;
-  background: #333;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 12px;
-  font-size: 24px;
-}
-</style>
+    <div class="form-inputs">
+      <label for="email">Email :</label>
+      <input id="signupEmail" type="email" placeholder="Email" required>
+    </div>
+
+    <!-- <div class="form-inputs">
+      <label for="whatsapp">WhatsApp No :</label>
+      <input type="tel" id="whatsapp" name="whatsapp" placeholder="+123 4567 890..." required>
+    </div> -->
+
+    <div class="form-inputs">
+      <label for="password">Password :</label>
+      <input id="signupPassword" type="password" placeholder="*******" required>
+    </div>
+
+    <button id="signupBtn">Create Account</button>
+    <!-- <div id="loadingSpinner" style="display: none; margin-top: 10px; color: #fff;">
+      ⏳ Submitting... Please wait
+    </div> -->
+
+    <div class="form-inputs">
+      <p>Already have an account? <a href="login.html">Login</a></p>
+    </div>
+  </form>
+</section>
+
+
+  if (!username || !email || whatsapp || !password) {
