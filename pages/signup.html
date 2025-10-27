@@ -74,10 +74,10 @@
       <input id="signupEmail" type="email" placeholder="example@gmail.com" required>
     </div>
 
-    <!-- <div class="form-inputs">
-      <label for="whatsapp">WhatsApp No :</label>
-      <input type="tel" id="whatsapp" name="whatsapp" placeholder="+123 4567 890..." required>
-    </div> -->
+    <div class="form-inputs">
+      <label for="phone">WhatsApp No :</label>
+      <input type="tel" id="signupPhone" placeholder="+123 4567 890..." required>
+    </div>
 
     <div class="form-inputs">
       <label for="password">Password :</label>
@@ -143,6 +143,9 @@
       await setDoc(doc(db, "users", user.uid), {
         username,
         email,
+        phone,
+        level: 1,
+        achievements: [],
         createdAt: new Date(),
         role: "user"
       });
@@ -153,12 +156,12 @@
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          user: { username, email, uid: user.uid, role: "user" }
+          user: { username, email, phone, uid: user.uid, role: "user" }
         })
       });
 
       alert("Account created successfully!");
-      window.location = "profile.html";
+      window.location = "home.html";
 
     } catch (error) {
       alert(error.message);
