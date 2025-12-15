@@ -101,7 +101,7 @@ body {
 header {
   text-align: center;
   padding: 2rem 1rem;
-  background: #1f1f1f;
+  background: #191919;
 }
 
 .navbar {
@@ -527,8 +527,14 @@ header {
 
 #register {
   padding: 3rem 1rem;
-  background: #191919;
   text-align: center;
+  width: 500px;
+  border: solid 1px #ffffff0f;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(10px);
+  background: #19191961;
+  border-radius: 40px;
 }
 
 #register form {
@@ -545,6 +551,13 @@ header {
   gap: 2rem;
   max-width: 400px;
   margin: 50px auto 20px auto;
+}
+
+@media (max-width: 768px) {
+  #register {
+    width: 90%;
+    padding: 2rem 1rem;
+  }
 }
 
 .form-inputs {

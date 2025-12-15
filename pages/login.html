@@ -26,11 +26,14 @@
   <meta name="twitter:image" content="https://uplaygamzz.github.io/pes_tournament/images/PES_flyer.png">
   
 
-  <!-- Fonts and icons -->
+    <!-- Fonts and icons -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
+  <link rel="stylesheet" href="../uplay/css/uplay.css">
+  <link rel="stylesheet" href="../css/preloader.css">
+  <link rel="stylesheet" href="../css/scroll-to-top.css">
   <link rel="stylesheet" href="../css/page_style.css">
+  <link rel="stylesheet" href="../css/hide-content.css">
 </head>
 <body style="background: #191919">
 
@@ -58,44 +61,46 @@
     </div>
   </nav>
 
-  <section id="register">
-  <h1>Login</h1>
-  <p style="color: #ccc;">Login to continue uPlay</p>
-  <div class="form">
-
-    <div class="form-inputs">
-      <label for="email">Email :</label>
-      <input id="loginEmail" type="email" placeholder="example@gmail.com">
-    </div>
-
-    <!-- <div class="form-inputs">
-      <label for="whatsapp">WhatsApp No :</label>
-      <input type="tel" id="whatsapp" name="whatsapp" placeholder="+123 4567 890..." required>
-    </div> -->
-
-    <div class="form-inputs">
-      <label for="password">Password :</label>
-      <input id="loginPassword" type="password" placeholder="xxxxxx">
-    </div>
-
-    <button class="" id="loginBtn">Login</button>
-    <!-- <div id="loadingSpinner" style="display: none; margin-top: 10px; color: #fff;">
-      ⏳ Submitting... Please wait
-    </div> -->
-    <!-- ===== Loading Overlay ===== -->
-    <div id="loadingOverlay">
-      <div class="loader-container">
-        <img src="../images/loading6.png" alt="Loading..." id="loadingIcon">
-        <!-- <p id="loadingText">Processing...</p> -->
+  <header class="hero" id="heroo">
+    <section id="register">
+    <h1>Login</h1>
+    <p style="color: #ccc;">Login to continue uPlay</p>
+    <div class="form">
+  
+      <div class="form-inputs">
+        <label for="email">Email :</label>
+        <input id="loginEmail" type="email" placeholder="example@gmail.com">
+      </div>
+  
+      <!-- <div class="form-inputs">
+        <label for="whatsapp">WhatsApp No :</label>
+        <input type="tel" id="whatsapp" name="whatsapp" placeholder="+123 4567 890..." required>
+      </div> -->
+  
+      <div class="form-inputs">
+        <label for="password">Password :</label>
+        <input id="loginPassword" type="password" placeholder="xxxxxx">
+      </div>
+  
+      <button class="" id="loginBtn">Login</button>
+      <!-- <div id="loadingSpinner" style="display: none; margin-top: 10px; color: #fff;">
+        ⏳ Submitting... Please wait
+      </div> -->
+      <!-- ===== Loading Overlay ===== -->
+      <div id="loadingOverlay">
+        <div class="loader-container">
+          <img src="../images/loading6.png" alt="Loading..." id="loadingIcon">
+          <!-- <p id="loadingText">Processing...</p> -->
+        </div>
+      </div>
+  
+  
+      <div class="form-inputs">
+        <p>Don't have an account? <a style="color: var(--UPlay-yellow);" href="signup.html">Sign up</a></p>
       </div>
     </div>
-
-
-    <div class="form-inputs">
-      <p>Don't have an account? <a style="color: var(--UPlay-yellow);" href="signup.html">Sign up</a></p>
-    </div>
-  </div>
-</section>
+  </section>
+  </header>
 
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script src="../javar/page.js"></script>

@@ -313,177 +313,179 @@
     </div>
   </section>
 
-  <section id="register">
-    <h1>PES Tournament Registration</h1>
-    <p style="color: #ccc;">Secure your spot in the championship tournament</p>
-    <form id="regForm" method="POST" enctype="multipart/form-data">
-    <!-- <form action="https://api.web3forms.com/submit" method="POST"> -->
-    <!-- <form action="https://hooks.zapier.com/hooks/catch/24431614/uha7orx/" method="POST"> -->
-      <!-- <input type="hidden" name="access_key" value="560fb351-dfe6-49f4-acb8-2cfe1447ecee"> uplaygamzz@gmail.com -->
-      <!--input type="hidden" name="access_key" value="c31a9d61-842a-4048-9d56-622f6cfcac35"--> <!-- emmanuelovie2004@gmail.com -->
-      
-      <input type="hidden" name="redirect" value="https://uplaygamzz.github.io/pes_tournament/pages/thankyou.html">
-      <!-- <input type="hidden" name="auto_response" value="Thanks for registering for the PES Tournament! We'll contact you soon."> -->   
-
-
-      <div class="form-inputs">
-        <label for="name">Username :</label>  
-        <input type="text" id="name" name="name" placeholder="player_x" required>
-      </div>
-
-      <div class="form-inputs">
-        <label for="email">Email :</label>
-        <input type="email" id="email" name="email" placeholder="example@email.com" required>
-      </div>
-
-      <div class="form-inputs">
-        <label for="email">WhatsApp No :</label>
-        <input type="tel" id="whatsapp" name="whatsapp" placeholder="+123 4567 890..." required>
-      </div>
-      
-      <div class="form-inputs">
-        <label for="playercode">Your Code :</label>
-        <div style="padding: 0.8rem; border: none; background: #2a2a2a; color: #fff; padding: 0; display: flex; justify-content: space-between; text-align: left;">
-          <select style="width: 97.5%;" id="playerCode" name="playerCode" required>
-            <option style="color: gray;" value="">-- wait a sec --</option>
-            <!-- <option value="player_01">player_01</option>
-            <option value="player_02">player_02</option>
-            <option value="player_03">player_03</option>
-            <option value="player_04">player_04</option>
-            <option value="player_05">player_05</option>
-            <option value="player_06">player_06</option>
-            <option value="player_07">player_07</option>
-            <option value="player_08">player_08</option>
-            <option value="player_09">player_09</option>
-            <option value="player_10">player_10</option>
-            <option value="player_11">player_11</option>
-            <option value="player_12">player_12</option>
-            <option value="player_13">player_13</option>
-            <option value="player_14">player_14</option>
-            <option value="player_15">player_15</option>
-            <option value="player_16">player_16</option> -->
-          </select>
-        </div>
-      </div>
+  <header style="display: flex; align-items: center; flex-direction: column;">
+    <section id="register" style="background: #191919;">
+      <h1>PES Tournament Registration</h1>
+      <p style="color: #ccc;">Secure your spot in the championship tournament</p>
+      <form id="regForm" method="POST" enctype="multipart/form-data">
+      <!-- <form action="https://api.web3forms.com/submit" method="POST"> -->
+      <!-- <form action="https://hooks.zapier.com/hooks/catch/24431614/uha7orx/" method="POST"> -->
+        <!-- <input type="hidden" name="access_key" value="560fb351-dfe6-49f4-acb8-2cfe1447ecee"> uplaygamzz@gmail.com -->
+        <!--input type="hidden" name="access_key" value="c31a9d61-842a-4048-9d56-622f6cfcac35"--> <!-- emmanuelovie2004@gmail.com -->
+        
+        <input type="hidden" name="redirect" value="https://uplaygamzz.github.io/pes_tournament/pages/thankyou.html">
+        <!-- <input type="hidden" name="auto_response" value="Thanks for registering for the PES Tournament! We'll contact you soon."> -->   
   
-      <div class="form-inputs">
-        <label for="opponentcode">Opponent Code :</label>
-        <div style="padding: 0.8rem; border: none; background: #2a2a2a; color: #fff; padding: 0; display: flex; justify-content: space-between; text-align: left;">
-          <select style="width: 97.5%;" id="opponentCode" name="opponentCode" required>
-            <option style="color: gray;" value="">-- wait a sec --</option>
-            <!-- <option value="player_01">player_01</option>
-            <option value="player_02">player_02</option>
-            <option value="player_03">player_03</option>
-            <option value="player_04">player_04</option>
-            <option value="player_05">player_05</option>
-            <option value="player_06">player_06</option>
-            <option value="player_07">player_07</option>
-            <option value="player_08">player_08</option>
-            <option value="player_09">player_09</option>
-            <option value="player_10">player_10</option>
-            <option value="player_11">player_11</option>
-            <option value="player_12">player_12</option>
-            <option value="player_13">player_13</option>
-            <option value="player_14">player_14</option>
-            <option value="player_15">player_15</option>
-            <option value="player_16">player_16</option> -->
-          </select>
-        </div>
-      </div>
-      
-      <div style="display: flex; flex-direction: column; gap: 2rem;">
-      <!-- Payment Button -->
+  
         <div class="form-inputs">
-          <label>Payment:</label>
-          <button type="button" id="payNowBtn">💳 Pay Now</button>
-          
-          <label style="font-size: 0.9rem; color: #ccc; margin-top: 1rem; text-align: left;">
-            <input type="checkbox" id="confirmPayment" required>
-            I've paid the sum of <strong>₦2,000</strong> for the tournament ticket.
-          </label>
+          <label for="name">Username :</label>  
+          <input type="text" id="name" name="name" placeholder="player_x" required>
         </div>
   
-
-        <!-- Receipt Upload -->  
         <div class="form-inputs">
-          <label for="receiptFile">Upload Payment Receipt</label>
-          <input type="file" id="receiptFile" name="receiptFile" accept="image/*,application/pdf" required>
+          <label for="email">Email :</label>
+          <input type="email" id="email" name="email" placeholder="example@email.com" required>
         </div>
-      </div>
-
-          
   
-      <label style="font-size: 0.9rem; color: #ccc; margin-top: 1rem; text-align: left;">
-        <input type="checkbox" id="confirmPayment" required>
-        By registering, you agree to the <a href="#" id="termsLink">Terms & Conditions</a>.
-      </label>
-
-      <!-- Terms & Conditions Modal -->     
-      <div id="termsModal" class="modal">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <h2 style="color: white;">UPlay PES Tournament - Terms & Conditions</h2>
-          <p>By registering and participating in the UPlay PES Tournament, you acknowledge that you have read, understood, and agreed to the following:</p>
-          <ul>
-            <li>All players must register with accurate details.</li>
-            <li>Fair play is mandatory — cheating or misconduct leads to disqualification.</li>
-            <li>Players must attend scheduled matches on time or risk forfeiture.</li>
-            <li>Prizes will be awarded as announced by organizers.</li>
-            <li>Decisions of tournament officials are final and binding.</li>
-            <li>Organizers are not liable for ingame issues or personal losses.</li>
-            <li>Player would take full responsibility for any careless or intentional damage of uPlay properties</li>
-            <li>Refunds after registration is not available</li>
-            <li>Players have the right to change specific options of rules listed by uPlay only with the agreement of opposing sides</li>
-            <li>More than one players are not allowed to choose same team</li>
-          </ul>
-          <p>By submitting your registration, you confirm agreement to these Terms & Conditions.</p>
+        <div class="form-inputs">
+          <label for="email">WhatsApp No :</label>
+          <input type="tel" id="whatsapp" name="whatsapp" placeholder="+123 4567 890..." required>
         </div>
-      </div>
-
-      <!-- Payment Modal -->
-      <div id="paymentModal" class="modal">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <h2 style="color: white;">Complete Your Payment</h2>
-          <div class="form-payment">
-            <p>Ticket Fee :</p>  
-            <p>₦2,000</p>
+        
+        <div class="form-inputs">
+          <label for="playercode">Your Code :</label>
+          <div style="padding: 0.8rem; border: none; background: #2a2a2a; color: #fff; padding: 0; display: flex; justify-content: space-between; text-align: left;">
+            <select style="width: 97.5%;" id="playerCode" name="playerCode" required>
+              <option style="color: gray;" value="">-- wait a sec --</option>
+              <!-- <option value="player_01">player_01</option>
+              <option value="player_02">player_02</option>
+              <option value="player_03">player_03</option>
+              <option value="player_04">player_04</option>
+              <option value="player_05">player_05</option>
+              <option value="player_06">player_06</option>
+              <option value="player_07">player_07</option>
+              <option value="player_08">player_08</option>
+              <option value="player_09">player_09</option>
+              <option value="player_10">player_10</option>
+              <option value="player_11">player_11</option>
+              <option value="player_12">player_12</option>
+              <option value="player_13">player_13</option>
+              <option value="player_14">player_14</option>
+              <option value="player_15">player_15</option>
+              <option value="player_16">player_16</option> -->
+            </select>
           </div>
-
-          <div class="form-payment">
-            <p>Pay To :</p>  
-            <div>
-              <span id="accName" style="color: #fce99a;">Emmanuel Ndidi Ovie </span>
-              <button type="button" class="copyBtn" data-target="accName">
-                <img src="images/icons/copy_icon.png" alt="Copy" class="copyIcon">
-              </button>
-            </div>
-          </div>
-
-          <div class="form-payment">
-            <p>Bank Name :</p>  
-            <p>Opay</p>
-          </div>
-
-          <div class="form-payment">
-            <p>Account Number :</p>  
-            <div>
-              <span id="accNumber" style="color: #fce99a;">9151001655</span>
-              <button type="button" class="copyBtn" data-target="accNumber">
-                <img src="images/icons/copy_icon.png" alt="Copy" class="copyIcon">
-              </button>
-            </div>
-          </div>
-          <p style="margin-top: 10px; font-size: 0.9rem; color: #908f8f;">After payment, upload your receipt before submitting.</p>
         </div>
-      </div>
-
-      <button type="submit" id="submitBtn">Submit</button>
-      <div id="loadingSpinner" style="display: none; margin-top: 10px; color: #fff;">
-        ⏳ Submitting... Please wait
-      </div>
-    </form>
-  </section>
+    
+        <div class="form-inputs">
+          <label for="opponentcode">Opponent Code :</label>
+          <div style="padding: 0.8rem; border: none; background: #2a2a2a; color: #fff; padding: 0; display: flex; justify-content: space-between; text-align: left;">
+            <select style="width: 97.5%;" id="opponentCode" name="opponentCode" required>
+              <option style="color: gray;" value="">-- wait a sec --</option>
+              <!-- <option value="player_01">player_01</option>
+              <option value="player_02">player_02</option>
+              <option value="player_03">player_03</option>
+              <option value="player_04">player_04</option>
+              <option value="player_05">player_05</option>
+              <option value="player_06">player_06</option>
+              <option value="player_07">player_07</option>
+              <option value="player_08">player_08</option>
+              <option value="player_09">player_09</option>
+              <option value="player_10">player_10</option>
+              <option value="player_11">player_11</option>
+              <option value="player_12">player_12</option>
+              <option value="player_13">player_13</option>
+              <option value="player_14">player_14</option>
+              <option value="player_15">player_15</option>
+              <option value="player_16">player_16</option> -->
+            </select>
+          </div>
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 2rem;">
+        <!-- Payment Button -->
+          <div class="form-inputs">
+            <label>Payment:</label>
+            <button type="button" id="payNowBtn">💳 Pay Now</button>
+            
+            <label style="font-size: 0.9rem; color: #ccc; margin-top: 1rem; text-align: left;">
+              <input type="checkbox" id="confirmPayment" required>
+              I've paid the sum of <strong>₦2,000</strong> for the tournament ticket.
+            </label>
+          </div>
+    
+  
+          <!-- Receipt Upload -->  
+          <div class="form-inputs">
+            <label for="receiptFile">Upload Payment Receipt</label>
+            <input type="file" id="receiptFile" name="receiptFile" accept="image/*,application/pdf" required>
+          </div>
+        </div>
+  
+            
+    
+        <label style="font-size: 0.9rem; color: #ccc; margin-top: 1rem; text-align: left;">
+          <input type="checkbox" id="confirmPayment" required>
+          By registering, you agree to the <a href="#" id="termsLink">Terms & Conditions</a>.
+        </label>
+  
+        <!-- Terms & Conditions Modal -->     
+        <div id="termsModal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 style="color: white;">UPlay PES Tournament - Terms & Conditions</h2>
+            <p>By registering and participating in the UPlay PES Tournament, you acknowledge that you have read, understood, and agreed to the following:</p>
+            <ul>
+              <li>All players must register with accurate details.</li>
+              <li>Fair play is mandatory — cheating or misconduct leads to disqualification.</li>
+              <li>Players must attend scheduled matches on time or risk forfeiture.</li>
+              <li>Prizes will be awarded as announced by organizers.</li>
+              <li>Decisions of tournament officials are final and binding.</li>
+              <li>Organizers are not liable for ingame issues or personal losses.</li>
+              <li>Player would take full responsibility for any careless or intentional damage of uPlay properties</li>
+              <li>Refunds after registration is not available</li>
+              <li>Players have the right to change specific options of rules listed by uPlay only with the agreement of opposing sides</li>
+              <li>More than one players are not allowed to choose same team</li>
+            </ul>
+            <p>By submitting your registration, you confirm agreement to these Terms & Conditions.</p>
+          </div>
+        </div>
+  
+        <!-- Payment Modal -->
+        <div id="paymentModal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 style="color: white;">Complete Your Payment</h2>
+            <div class="form-payment">
+              <p>Ticket Fee :</p>  
+              <p>₦2,000</p>
+            </div>
+  
+            <div class="form-payment">
+              <p>Pay To :</p>  
+              <div>
+                <span id="accName" style="color: #fce99a;">Emmanuel Ndidi Ovie </span>
+                <button type="button" class="copyBtn" data-target="accName">
+                  <img src="images/icons/copy_icon.png" alt="Copy" class="copyIcon">
+                </button>
+              </div>
+            </div>
+  
+            <div class="form-payment">
+              <p>Bank Name :</p>  
+              <p>Opay</p>
+            </div>
+  
+            <div class="form-payment">
+              <p>Account Number :</p>  
+              <div>
+                <span id="accNumber" style="color: #fce99a;">9151001655</span>
+                <button type="button" class="copyBtn" data-target="accNumber">
+                  <img src="images/icons/copy_icon.png" alt="Copy" class="copyIcon">
+                </button>
+              </div>
+            </div>
+            <p style="margin-top: 10px; font-size: 0.9rem; color: #908f8f;">After payment, upload your receipt before submitting.</p>
+          </div>
+        </div>
+  
+        <button type="submit" id="submitBtn">Submit</button>
+        <div id="loadingSpinner" style="display: none; margin-top: 10px; color: #fff;">
+          ⏳ Submitting... Please wait
+        </div>
+      </form>
+    </section>
+  </header>
 
   <a href="#" class="scrollToTop" id="scrollToTop" aria-label="Scroll to top">
     <img src="images/icons/scroll-to-top3.svg" alt="Scroll to Top" />

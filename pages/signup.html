@@ -29,7 +29,7 @@
   <!-- Fonts and icons -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
+  <link rel="stylesheet" href="../uplay/css/uplay.css">
   <link rel="stylesheet" href="../css/preloader.css">
   <link rel="stylesheet" href="../css/scroll-to-top.css">
   <link rel="stylesheet" href="../css/page_style.css">
@@ -45,7 +45,7 @@
     
     <div style="display: flex; list-style: none; align-items: center;">
       <ul class="nav-list">
-        <li><a href="../pnguplay/home.html">Home</a></li>
+        <li><a href="../uplay/home.html">Home</a></li>
         <!-- <li><a href="pages/about.html">About</a></li> -->
         <li><a href="pages/coming_soon.html">About</a></li>
         <li><a href="pages/leaderboard.html">Contact</a></li>
@@ -59,47 +59,48 @@
       <span></span><span></span><span></span>
     </div>
   </nav>
-
-<section id="register">
-  <h1>Sign Up</h1>
-  <p style="color: #ccc;">Sign up to participate in various tournaments</p>
-  <div class="form">
-    <div class="form-inputs">
-      <label for="name">Username :</label>  
-      <input id="signupUsername" type="text" placeholder="player_x" required>
-    </div>
-
-    <div class="form-inputs">
-      <label for="email">Email :</label>
-      <input id="signupEmail" type="email" placeholder="example@gmail.com" required>
-    </div>
-
-    <div class="form-inputs">
-      <label for="phone">WhatsApp No :</label>
-      <input type="tel" id="signupPhone" placeholder="+123 4567 890..." required>
-    </div>
-
-    <div class="form-inputs">
-      <label for="password">Password :</label>
-      <input id="signupPassword" type="password" placeholder="xxxxxx" required>
-    </div>
-
-    <button id="signupBtn">Create Account</button>
-    <!-- <div id="loadingSpinner" style="display: none; margin-top: 10px; color: #fff;">
-      ⏳ Submitting... Please wait
-    </div> -->
-    <div id="loadingOverlay">
-      <div class="loader-container">
-        <img src="../images/loading6.png" alt="Loading..." id="loadingIcon">
-        <!-- <p id="loadingText">Processing...</p> -->
+<header class="hero" id="heroo">
+  <section id="register">
+    <h1>Sign Up</h1>
+    <p style="color: #ccc;">Sign up to participate in various tournaments</p>
+    <div class="form">
+      <div class="form-inputs">
+        <label for="signupUsername">Username :</label>
+        <input id="signupUsername" type="text" placeholder="player_x" required>
+      </div>
+  
+      <div class="form-inputs">
+        <label for="signupEmail">Email :</label>
+        <input id="signupEmail" type="email" placeholder="example@gmail.com" required>
+      </div>
+  
+      <div class="form-inputs">
+        <label for="signupPhone">WhatsApp No :</label>
+        <input type="tel" id="signupPhone" placeholder="+123 4567 890..." required>
+      </div>
+  
+      <div class="form-inputs">
+        <label for="signupPassword">Password :</label>
+        <input id="signupPassword" type="password" placeholder="xxxxxx" required>
+      </div>
+  
+      <button id="signupBtn">Create Account</button>
+      <!-- <div id="loadingSpinner" style="display: none; margin-top: 10px; color: #fff;">
+        ⏳ Submitting... Please wait
+      </div> -->
+      <div id="loadingOverlay">
+        <div class="loader-container">
+          <img src="../images/loading6.png" alt="Loading..." id="loadingIcon">
+          <!-- <p id="loadingText">Processing...</p> -->
+        </div>
+      </div>
+  
+      <div class="form-inputs">
+        <p>Already have an account? <a style="color: var(--UPlay-yellow);" href="login.html">Login</a></p>
       </div>
     </div>
-
-    <div class="form-inputs">
-      <p>Already have an account? <a style="color: var(--UPlay-yellow);" href="login.html">Login</a></p>
-    </div>
-  </div>
-</section>
+  </section>
+</header>
 
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script src="../javar/page.js"></script>
@@ -107,7 +108,7 @@
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
   import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
-  import { getFirestore, setDoc, doc } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+  import { getFirestore, setDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyAD-c2pJEyqyIIkkCVC2SGRt8a7hI73HE4",
@@ -126,8 +127,9 @@
     const email = document.getElementById("signupEmail").value.trim();
     const password = document.getElementById("signupPassword").value.trim();
     const username = document.getElementById("signupUsername").value.trim();
+    const phone = document.getElementById("signupPhone").value.trim();
 
-    if (!email || !password || !username) {
+    if (!email || !password || !username || !phone) {
       alert("Please fill in all fields");
       return;
     }
@@ -139,16 +141,17 @@
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      // Save to Firestore
-      await setDoc(doc(db, "users", user.uid), {
+      // Save to Firestore (log uid + payload for debugging)
+      const userDoc = {
         username,
         email,
         phone,
         level: 1,
         achievements: [],
-        createdAt: new Date(),
+        createdAt: serverTimestamp(),
         role: "user"
-      });
+      };
+      await setDoc(doc(db, "users", user.uid), userDoc);
 
       // Send to Google Sheets
       await fetch("https://script.google.com/macros/s/AKfycbyEzFd1Stg50TR_jYY7w5uxGxj_L9j6KPCgnS5yc9NW1f1pPSaYDCfVrhsrmyjIRVCL8A/exec", {
@@ -181,6 +184,11 @@
   function showLoading() {
     const overlay = document.getElementById('loadingOverlay');
     overlay.style.display = 'flex';
+    const btn = document.getElementById('signupBtn');
+    if (btn) {
+      btn.disabled = true;
+      btn.setAttribute('aria-busy', 'true');
+    }
     // auto-hide after 10s if stuck
     // clearTimeout(window.loadingTimeout);
     // window.loadingTimeout = setTimeout(hideLoading, 100);
@@ -188,6 +196,11 @@
 
   function hideLoading() {
     document.getElementById('loadingOverlay').style.display = 'none';
+    const btn = document.getElementById('signupBtn');
+    if (btn) {
+      btn.disabled = false;
+      btn.removeAttribute('aria-busy');
+    }
     clearTimeout(window.loadingTimeout);
   }
 </script>
